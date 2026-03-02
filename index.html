@@ -117,11 +117,8 @@
     .book-page { position:absolute; background:linear-gradient(160deg,#F7EDD0 0%,#F0E3C0 45%,#E8D8AA 100%); border-radius:1px; box-shadow: 3px 3px 20px rgba(0,0,0,.6), -1px 0 5px rgba(0,0,0,.2); overflow:hidden; display:flex; flex-direction:column; }
     .book-page::before { content:''; position:absolute; left:0; top:0; bottom:0; width:22px; background:linear-gradient(90deg,rgba(0,0,0,.13),transparent); pointer-events:none; z-index:2; }
 
-    /* Ruled lines */
-    .page-rules { position:absolute; inset:56px 36px 48px 44px; background-image:repeating-linear-gradient(transparent, transparent 27px, rgba(139,100,60,.1) 27px, rgba(139,100,60,.1) 28px); pointer-events:none; }
-
     /* Content — NO overflow/scroll */
-    .page-body { position:absolute; inset:0; padding:18px 22px 44px 30px; overflow:hidden; }
+    .page-body { position:absolute; inset:0; padding:20px 24px 48px 28px; overflow:hidden; }
 
     /* Page number footer */
     .page-foot { position:absolute; bottom:0; left:0; right:0; height:40px; display:flex; align-items:center; justify-content:center; gap:10px; }
@@ -129,20 +126,24 @@
     .pf-num { font-family:'Crimson Pro',serif; font-size:11px; color:rgba(100,70,30,.45); letter-spacing:.04em; }
 
     /* Section header on first page */
-    .sec-hdr { text-align:center; padding:14px 8px 18px; border-bottom:1px solid rgba(139,26,26,.25); margin-bottom:14px; }
+    .sec-hdr { text-align:center; padding:12px 8px 16px; border-bottom:1px solid rgba(139,26,26,.25); margin-bottom:16px; }
     .sec-roman { font-family:'Cinzel',serif; font-size:10px; color:rgba(139,26,26,.45); letter-spacing:.22em; margin-bottom:6px; }
-    .sec-icon { font-size:32px; display:block; margin-bottom:8px; }
-    .sec-ttl { font-family:'Cinzel',serif; font-size:clamp(14px,3.8vw,19px); font-weight:700; color:var(--crimson); letter-spacing:.05em; line-height:1.25; }
+    .sec-icon { font-size:34px; display:block; margin-bottom:8px; }
+    .sec-ttl { font-family:'Cinzel',serif; font-size:clamp(15px,4vw,20px); font-weight:700; color:var(--crimson); letter-spacing:.05em; line-height:1.25; }
     .sec-rule { width:50px; height:2px; margin:10px auto 0; background:linear-gradient(90deg,transparent,var(--crimson),transparent); }
 
+    /* Liturgical exchange paragraphs */
+    .liturg { line-height:1.6; margin-bottom:12px; }
+
     /* Text typography */
-    .pg-text { font-family:'Crimson Pro',serif; font-size:clamp(13.5px,3.6vw,16.5px); color:var(--ink); line-height:1.72; text-align:justify; }
-    .pg-text p { margin-bottom:10px; }
-    .h2 { font-family:'Cinzel',serif; font-size:clamp(11px,2.8vw,13.5px); color:var(--crimson); text-align:center; margin:14px 0 8px; letter-spacing:.08em; }
-    .h3 { font-family:'Crimson Pro',serif; font-weight:600; font-style:italic; color:rgba(139,26,26,.8); font-size:clamp(12px,3.2vw,14.5px); margin:11px 0 6px; }
+    .pg-text { font-family:'Crimson Pro',serif; font-size:clamp(17px,4.5vw,21px); color:var(--ink); line-height:1.65; text-align:left; }
+    .pg-text p { margin-bottom:12px; }
+    .pg-text .line-block { display:block; margin-bottom:14px; white-space:pre-wrap; }
+    .h2 { font-family:'Cinzel',serif; font-size:clamp(13px,3.2vw,16px); color:var(--crimson); text-align:center; margin:16px 0 10px; letter-spacing:.08em; }
+    .h3 { font-family:'Crimson Pro',serif; font-weight:600; font-style:italic; color:rgba(139,26,26,.8); font-size:clamp(15px,3.8vw,18px); margin:12px 0 7px; }
     .lbl-l { font-weight:700; color:var(--crimson); }
     .lbl-t { font-weight:700; color:rgba(30,50,110,.8); }
-    .ref { font-size:.84em; color:rgba(100,70,30,.58); font-style:italic; }
+    .ref { font-size:.85em; color:rgba(100,70,30,.58); font-style:italic; }
 
     /* ─── PAGE-CURL CANVAS ──────────────────────── */
     #curl-canvas { position:absolute; inset:0; z-index:20; pointer-events:none; }
@@ -258,23 +259,59 @@ let neighborEl   = null;
 // ══════════════════════════════════════════
 // TEXT FORMATTING
 // ══════════════════════════════════════════
-const ALL_CAPS_RE = /^[A-ZÁÉÍÓÚÜÑ\s\d\(\)\.,;:!?¿¡"]+$/;
-const ROMAN_RE    = /^[IVXivx\s]+$/;
+
 
 function formatParagraph(raw) {
   const t = raw.trim();
-  if (!t || ROMAN_RE.test(t)) return '';
+  if (!t || /^[IVX]+\s*$/.test(t)) return '';
 
-  let s = t
-    .replace(/\((Lucas|Juan|Mateo|Marcos|Hechos|Romanos|Daniel|Apocalipsis|Ezequiel|Isaías|Salmo[s]?)[^)]+\)/g,
-             '<span class="ref">$&</span>')
-    .replace(/^(Lector:|Todos:|Coro [AB]:)\s*/g, '<span class="lbl-l">$1</span> ');
-
-  if (/^\s*\d+\.\s+[A-ZÁÉÍÓÚ]/.test(raw)) return `<div class="h3">${s}</div>`;
-
-  if (ALL_CAPS_RE.test(t) && t.length >= 3 && t.length < 80) {
-    return `<div class="h2">${s}</div>`;
+  // All-caps short heading
+  const isAllCaps = /^[A-ZÁÉÍÓÚÜÑ\s\d\(\)\.,;:!?¿¡"]+$/.test(t);
+  if (isAllCaps && t.length >= 3 && t.length < 70) {
+    return `<div class="h2">${t}</div>`;
   }
+
+  // Numbered item heading like "   1. TÍTULO"
+  if (/^\s*\d+\.\s+[A-ZÁÉÍÓÚ]/.test(raw)) {
+    return `<div class="h3">${t.replace(/\n/g,' ')}</div>`;
+  }
+
+  // Liturgical block: contains Lector:/Todos:/Coro lines
+  // Render each role-line as its own line within a block
+  if (/^(Lector:|Todos:|Coro [AB]:)/m.test(t)) {
+    const lines = t.split('\n').map(l => l.trim()).filter(Boolean);
+    let html = '';
+    for (const line of lines) {
+      // Scripture references in parentheses
+      const fLine = line.replace(/\((Lucas|Juan|Mateo|Marcos|Hechos|Romanos|Daniel|Apocalipsis|Ezequiel|Isaías|Salmo[s]?)[^)]+\)/g,
+        '<span class="ref">$&</span>');
+      if (/^(Lector:|Todos:|Coro [AB]:)/.test(line)) {
+        html += `<span class="lbl-l">${fLine}</span><br>`;
+      } else {
+        html += `${fLine}<br>`;
+      }
+    }
+    return `<p class="liturg">${html}</p>`;
+  }
+
+  // Multi-line block (e.g. poetry, instructions) — preserve line breaks
+  if (t.includes('\n')) {
+    const lines = t.split('\n').map(l => l.trim()).filter(Boolean);
+    const fLines = lines.map(l =>
+      l.replace(/\((Lucas|Juan|Mateo|Marcos|Hechos|Romanos|Daniel|Apocalipsis|Ezequiel|Isaías|Salmo[s]?)[^)]+\)/g,
+        '<span class="ref">$&</span>')
+    );
+    // If first line is a standalone heading, style it
+    if (isAllCaps && lines[0].toUpperCase() === lines[0] && lines[0].length < 60) {
+      const [first, ...rest] = fLines;
+      return `<div class="h3">${first}</div><p>${rest.join('<br>')}</p>`;
+    }
+    return `<p>${fLines.join('<br>')}</p>`;
+  }
+
+  // Plain paragraph — scripture refs
+  const s = t.replace(/\((Lucas|Juan|Mateo|Marcos|Hechos|Romanos|Daniel|Apocalipsis|Ezequiel|Isaías|Salmo[s]?)[^)]+\)/g,
+    '<span class="ref">$&</span>');
   return `<p>${s}</p>`;
 }
 
@@ -302,9 +339,9 @@ function paginate(secData) {
   const W = wrap.clientWidth;
   const H = wrap.clientHeight;
 
-  // page-body padding: top=18, right=22, bottom=44(foot), left=30
-  const bodyW = W - 30 - 22;
-  const bodyH = H - 18 - 44;
+  // page-body padding: top=20, right=24, bottom=48(foot), left=28
+  const bodyW = W - 28 - 24;
+  const bodyH = H - 20 - 48;
 
   const secI = BOOK_DATA.indexOf(secData);
 
@@ -382,7 +419,6 @@ function makePageEl(html, gNum) {
   el.style.width  = W + 'px';
   el.style.height = H + 'px';
   el.innerHTML = `
-    <div class="page-rules"></div>
     <div class="page-body">${html}</div>
     <div class="page-foot">
       <div class="pf-rule"></div>
