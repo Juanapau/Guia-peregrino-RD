@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#8B1A1A" />
+  <meta name="description" content="Guía del Peregrino - Movimiento de Cursillos de Cristiandad, República Dominicana" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Guía del Peregrino" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <title>Guía del Peregrino – MCC República Dominicana</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --crimson: #8B1A1A;
+      --gold: #C9A84C;
+      --gold-light: #E8C96A;
+      --parchment: #F5EDD6;
+      --parchment-dark: #E8D9B5;
+      --ink: #1A1208;
+      --ink-soft: #2C2010;
+      --shadow-deep: rgba(0,0,0,0.7);
+      --shadow-medium: rgba(0,0,0,0.4);
+      --cover-dark: #0d0a05;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: #0d0a05;
+      font-family: 'Crimson Pro', Georgia, serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ========== COVER SCREEN ========== */
+    #cover {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, #1a0d05 0%, #0a0703 60%, #050302 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      overflow: hidden;
+    }
+
+    #cover.hidden {
+      opacity: 0;
+      transform: scale(1.05);
+      pointer-events: none;
+    }
+
+    .cover-texture {
+      position: absolute;
+      inset: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23000'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%23ffffff08'/%3E%3Ccircle cx='3' cy='3' r='0.5' fill='%23ffffff05'/%3E%3C/svg%3E");
+    }
+
+    .cover-gold-border {
+      position: absolute;
+      inset: 12px;
+      border: 2px solid;
+      border-image: linear-gradient(135deg, #C9A84C, #6B4C1A, #C9A84C, #6B4C1A, #C9A84C) 1;
+      pointer-events: none;
+    }
+    .cover-gold-border::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border: 1px solid rgba(201,168,76,0.3);
+    }
+
+    /* Corner ornaments */
+    .cover-corner {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.7;
+    }
+    .cover-corner.tl { top: 18px; left: 18px; border-width: 2px 0 0 2px; }
+    .cover-corner.tr { top: 18px; right: 18px; border-width: 2px 2px 0 0; }
+    .cover-corner.bl { bottom: 18px; left: 18px; border-width: 0 0 2px 2px; }
+    .cover-corner.br { bottom: 18px; right: 18px; border-width: 0 2px 2px 0; }
+
+    .cover-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      padding: 20px;
+      max-width: 380px;
+      width: 100%;
+    }
+
+    .cover-logo {
+      width: min(220px, 60vw);
+      height: auto;
+      filter: drop-shadow(0 4px 20px rgba(201,168,76,0.3));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .cover-divider {
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .cover-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(28px, 8vw, 40px);
+      font-weight: 700;
+      color: var(--gold);
+      text-align: center;
+      letter-spacing: 0.08em;
+      text-shadow: 0 2px 20px rgba(201,168,76,0.4);
+      line-height: 1.2;
+    }
+
+    .cover-subtitle {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      color: rgba(245,237,214,0.7);
+      font-size: clamp(13px, 3.5vw, 16px);
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+
+    .cover-verse {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      color: rgba(245,237,214,0.55);
+      font-size: clamp(11px, 3vw, 13px);
+      text-align: center;
+      line-height: 1.7;
+      padding: 0 20px;
+      max-width: 300px;
+    }
+
+    .cover-btn {
+      margin-top: 8px;
+      padding: 14px 40px;
+      background: linear-gradient(135deg, #8B1A1A, #6B0F0F);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .cover-btn:hover::before, .cover-btn:active::before { opacity: 1; }
+    .cover-btn:hover { box-shadow: 0 0 20px rgba(201,168,76,0.3); }
+
+    /* Install prompt */
+    #install-prompt {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #1a0d05, #2a1a08);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      padding: 12px 20px;
+      font-family: 'Crimson Pro', serif;
+      font-size: 14px;
+      z-index: 200;
+      text-align: center;
+      max-width: 320px;
+      width: 90%;
+    }
+    #install-prompt button {
+      background: var(--crimson);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      padding: 6px 16px;
+      cursor: pointer;
+      margin: 8px 4px 0;
+      letter-spacing: 0.08em;
+    }
+
+    /* ========== MAIN APP ========== */
+    #app {
+      position: fixed;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      background: #0a0703;
+    }
+    #app.visible { display: flex; }
+
+    /* ========== TOP BAR ========== */
+    #topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      background: linear-gradient(180deg, #0d0a05 0%, #140e06 100%);
+      border-bottom: 1px solid rgba(201,168,76,0.25);
+      min-height: 56px;
+      position: relative;
+      z-index: 10;
+    }
+
+    #menu-btn {
+      background: none;
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold);
+      width: 36px;
+      height: 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: border-color 0.2s;
+    }
+    #menu-btn span {
+      display: block;
+      width: 18px;
+      height: 1.5px;
+      background: var(--gold);
+      transition: all 0.3s;
+    }
+    #menu-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    #menu-btn.open span:nth-child(2) { opacity: 0; }
+    #menu-btn.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    #topbar-title {
+      flex: 1;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(11px, 3vw, 14px);
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #page-counter {
+      font-family: 'Crimson Pro', serif;
+      font-size: 12px;
+      color: rgba(201,168,76,0.6);
+      flex-shrink: 0;
+      min-width: 48px;
+      text-align: right;
+    }
+
+    /* ========== SIDE MENU ========== */
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 40;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    #overlay.visible { opacity: 1; pointer-events: all; }
+
+    #sidemenu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: min(300px, 85vw);
+      height: 100%;
+      background: linear-gradient(180deg, #0d0a05 0%, #100c06 100%);
+      border-right: 1px solid rgba(201,168,76,0.3);
+      z-index: 50;
+      transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #sidemenu.open { left: 0; }
+
+    .menu-header {
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      text-align: center;
+    }
+    .menu-header img {
+      width: 70px;
+      height: auto;
+      filter: drop-shadow(0 2px 8px rgba(201,168,76,0.2));
+    }
+    .menu-header h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      color: var(--gold);
+      margin-top: 10px;
+      letter-spacing: 0.1em;
+    }
+    .menu-header p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 11px;
+      color: rgba(245,237,214,0.5);
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    .menu-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 0;
+    }
+    .menu-items::-webkit-scrollbar { width: 3px; }
+    .menu-items::-webkit-scrollbar-track { background: transparent; }
+    .menu-items::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 20px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .menu-item:hover, .menu-item.active {
+      background: rgba(201,168,76,0.08);
+      border-left-color: var(--gold);
+    }
+    .menu-item-icon {
+      font-size: 20px;
+      width: 28px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .menu-item-text {
+      flex: 1;
+    }
+    .menu-item-title {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      color: rgba(245,237,214,0.85);
+      letter-spacing: 0.06em;
+    }
+    .menu-item.active .menu-item-title { color: var(--gold); }
+    .menu-item-pages {
+      font-size: 10px;
+      color: rgba(245,237,214,0.35);
+      font-family: 'Crimson Pro', serif;
+      margin-top: 1px;
+    }
+
+    .menu-footer {
+      padding: 14px 20px;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      text-align: center;
+      font-family: 'Crimson Pro', serif;
+      font-size: 10px;
+      color: rgba(245,237,214,0.3);
+      font-style: italic;
+    }
+
+    /* ========== BOOK AREA ========== */
+    #book-area {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(ellipse at center, #1a1005 0%, #0a0703 100%);
+    }
+
+    /* Book shadow and glow */
+    .book-container {
+      position: relative;
+      width: min(540px, 96vw);
+      height: 100%;
+      max-height: 100%;
+      perspective: 1800px;
+    }
+
+    .book-shadow {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 30px;
+      background: radial-gradient(ellipse, rgba(0,0,0,0.7) 0%, transparent 70%);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    /* Page wrapper for 3D effect */
+    .book-pages {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: stretch;
+    }
+
+    /* Individual page */
+    .page {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #F7EDD0 0%, #F0E3C0 40%, #E8D8AA 100%);
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s;
+      overflow: hidden;
+    }
+
+    /* Page texture */
+    .page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    /* Left edge shadow (spine) */
+    .page::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 28px;
+      background: linear-gradient(90deg, rgba(0,0,0,0.15), transparent);
+      pointer-events: none;
+    }
+
+    /* Horizontal lines */
+    .page-lines {
+      position: absolute;
+      inset: 70px 48px 60px 58px;
+      background-image: repeating-linear-gradient(
+        transparent,
+        transparent 28px,
+        rgba(139, 100, 60, 0.12) 28px,
+        rgba(139, 100, 60, 0.12) 29px
+      );
+      pointer-events: none;
+    }
+
+    /* Page number line */
+    .page-number-area {
+      position: absolute;
+      bottom: 16px;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .page-number-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(139,100,60,0.3), transparent);
+    }
+    .page-number-text {
+      font-family: 'Crimson Pro', serif;
+      font-size: 11px;
+      color: rgba(100, 70, 30, 0.5);
+      letter-spacing: 0.05em;
+    }
+
+    /* Page content area */
+    .page-content {
+      position: absolute;
+      inset: 20px 20px 50px 36px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding-right: 8px;
+    }
+    .page-content::-webkit-scrollbar { width: 3px; }
+    .page-content::-webkit-scrollbar-track { background: rgba(139,100,60,0.05); }
+    .page-content::-webkit-scrollbar-thumb { background: rgba(139,100,60,0.25); }
+
+    /* Section title on first page */
+    .section-header {
+      text-align: center;
+      padding: 20px 10px 24px;
+      border-bottom: 1px solid rgba(139,26,26,0.3);
+      margin-bottom: 20px;
+    }
+    .section-roman {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      color: rgba(139,26,26,0.5);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section-icon {
+      font-size: 36px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(16px, 4vw, 22px);
+      font-weight: 700;
+      color: var(--crimson);
+      letter-spacing: 0.05em;
+      line-height: 1.3;
+    }
+    .section-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--crimson), transparent);
+      margin: 12px auto 0;
+    }
+
+    /* Page text */
+    .page-text {
+      font-family: 'Crimson Pro', serif;
+      font-size: clamp(14px, 3.8vw, 17px);
+      color: var(--ink);
+      line-height: 1.75;
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    .page-text p {
+      margin-bottom: 12px;
+    }
+
+    /* Styled headings in content */
+    .content-heading {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(12px, 3vw, 15px);
+      color: var(--crimson);
+      text-align: center;
+      margin: 18px 0 10px;
+      letter-spacing: 0.08em;
+    }
+
+    .content-subheading {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-weight: 600;
+      color: rgba(139,26,26,0.8);
+      font-size: clamp(13px, 3.5vw, 15px);
+      margin: 14px 0 8px;
+    }
+
+    .lector-label {
+      font-weight: 600;
+      color: var(--crimson);
+      font-size: 0.9em;
+    }
+
+    .todos-label {
+      font-weight: 600;
+      color: rgba(30, 50, 100, 0.8);
+      font-size: 0.9em;
+    }
+
+    .verse-ref {
+      font-size: 0.85em;
+      color: rgba(100,70,30,0.6);
+      font-style: italic;
+    }
+
+    /* PAGE TURNING STATES */
+    .page.turning-forward {
+      animation: turnForward 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .page.turning-back {
+      animation: turnBack 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .page.entering-forward {
+      animation: enterForward 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .page.entering-back {
+      animation: enterBack 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes turnForward {
+      0% { transform: rotateY(0deg); box-shadow: 4px 0 30px rgba(0,0,0,0.4); z-index: 5; }
+      50% { transform: rotateY(-90deg); box-shadow: 0 0 60px rgba(0,0,0,0.5); z-index: 5; }
+      100% { transform: rotateY(-180deg); box-shadow: -4px 0 10px rgba(0,0,0,0.1); z-index: 5; }
+    }
+    @keyframes turnBack {
+      0% { transform: rotateY(-180deg); z-index: 5; }
+      50% { transform: rotateY(-90deg); box-shadow: 0 0 60px rgba(0,0,0,0.5); z-index: 5; }
+      100% { transform: rotateY(0deg); box-shadow: 4px 0 20px rgba(0,0,0,0.3); z-index: 5; }
+    }
+    @keyframes enterForward {
+      0% { transform: rotateY(180deg); z-index: 4; }
+      100% { transform: rotateY(0deg); z-index: 4; }
+    }
+    @keyframes enterBack {
+      0% { transform: rotateY(0deg); z-index: 4; }
+      100% { transform: rotateY(180deg); z-index: 4; }
+    }
+
+    /* ========== BOTTOM NAV ========== */
+    #bottomnav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background: linear-gradient(0deg, #0d0a05 0%, #140e06 100%);
+      border-top: 1px solid rgba(201,168,76,0.2);
+      gap: 16px;
+      min-height: 60px;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: 1px solid rgba(201,168,76,0.35);
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      min-width: 90px;
+      justify-content: center;
+    }
+    .nav-btn:hover, .nav-btn:active {
+      background: rgba(201,168,76,0.1);
+      border-color: var(--gold);
+    }
+    .nav-btn:disabled {
+      opacity: 0.25;
+      cursor: default;
+      pointer-events: none;
+    }
+    .nav-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .nav-progress {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 3px;
+      background: rgba(201,168,76,0.15);
+      position: relative;
+      cursor: pointer;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--crimson), var(--gold));
+      transition: width 0.4s ease;
+    }
+
+    .progress-text {
+      font-family: 'Crimson Pro', serif;
+      font-size: 11px;
+      color: rgba(201,168,76,0.5);
+      font-style: italic;
+    }
+
+    /* ========== SWIPE INDICATOR ========== */
+    .swipe-hint {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(201,168,76,0.4);
+      font-family: 'Crimson Pro', serif;
+      font-size: 11px;
+      font-style: italic;
+      pointer-events: none;
+      animation: fadeHint 3s ease forwards;
+      white-space: nowrap;
+    }
+    @keyframes fadeHint {
+      0%, 60% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    /* ========== SECTION TRANSITION ========== */
+    .section-transition {
+      position: fixed;
+      inset: 0;
+      background: #0a0703;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+    .section-transition.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .section-transition-inner {
+      text-align: center;
+    }
+    .section-transition-icon { font-size: 48px; margin-bottom: 16px; }
+    .section-transition-title {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 400px) {
+      .nav-btn { padding: 8px 10px; min-width: 70px; font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- COVER -->
+<div id="cover">
+  <div class="cover-texture"></div>
+  <div class="cover-gold-border"></div>
+  <div class="cover-corner tl"></div>
+  <div class="cover-corner tr"></div>
+  <div class="cover-corner bl"></div>
+  <div class="cover-corner br"></div>
+
+  <div class="cover-content">
+    <img src="icons/logo.png" class="cover-logo" alt="Logo MCC" />
+    <div class="cover-divider"></div>
+    <h1 class="cover-title">Guía del<br>Peregrino</h1>
+    <p class="cover-subtitle">Movimiento de Cursillos de Cristiandad<br>República Dominicana</p>
+    <div class="cover-divider"></div>
+    <p class="cover-verse">
+      "Caminar por Cristo hacia el Padre,<br>
+      a impulsos del Espíritu Santo,<br>
+      con la ayuda de María<br>
+      y de todos los Santos."
+    </p>
+    <button class="cover-btn" onclick="openApp()">
+      ✦ Abrir Guía ✦
+    </button>
+  </div>
+</div>
+
+<!-- INSTALL PROMPT -->
+<div id="install-prompt">
+  <div>📱 Instala esta app en tu dispositivo para usarla sin conexión</div>
+  <button onclick="installApp()">Instalar</button>
+  <button onclick="document.getElementById('install-prompt').style.display='none'">Ahora no</button>
+</div>
+
+<!-- SECTION TRANSITION -->
+<div class="section-transition" id="section-transition">
+  <div class="section-transition-inner">
+    <div class="section-transition-icon" id="st-icon"></div>
+    <div class="section-transition-title" id="st-title"></div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <!-- TOP BAR -->
+  <div id="topbar">
+    <button id="menu-btn" onclick="toggleMenu()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+    <div id="topbar-title">Guía del Peregrino</div>
+    <div id="page-counter">1/1</div>
+  </div>
+
+  <!-- OVERLAY -->
+  <div id="overlay" onclick="closeMenu()"></div>
+
+  <!-- SIDE MENU -->
+  <nav id="sidemenu">
+    <div class="menu-header">
+      <img src="icons/logo.png" alt="MCC" />
+      <h2>Guía del Peregrino</h2>
+      <p>MCC · República Dominicana</p>
+    </div>
+    <div class="menu-items" id="menu-items"></div>
+    <div class="menu-footer">Secretariado Nacional · MCC-RD</div>
+  </nav>
+
+  <!-- BOOK -->
+  <div id="book-area">
+    <div class="book-container">
+      <div class="book-shadow"></div>
+      <div class="book-pages" id="book-pages"></div>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div id="bottomnav">
+    <button class="nav-btn" id="prev-btn" onclick="goToPrev()">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6v12z"/></svg>
+      Anterior
+    </button>
+    <div class="nav-progress">
+      <div class="progress-bar" id="progress-bar" onclick="handleProgressClick(event)">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-text" id="progress-text">Página 1</div>
+    </div>
+    <button class="nav-btn" id="next-btn" onclick="goToNext()">
+      Siguiente
+      <svg viewBox="0 0 24 24"><path d="M9 18V6l6 6-6 6z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script src="content.js"></script>
+<script>
+  // =====================
+  // STATE
+  // =====================
+  let currentSection = 0;
+  let currentPage = 0;
+  let isAnimating = false;
+  let menuOpen = false;
+  let deferredPrompt = null;
+
+  // Build all pages array (flat list with section info)
+  const allPages = [];
+  BOOK_DATA.forEach((section, si) => {
+    section.pages.forEach((page, pi) => {
+      allPages.push({ section: si, page: pi });
+    });
+  });
+
+  function getCurrentGlobalPage() {
+    let idx = 0;
+    for (let si = 0; si < currentSection; si++) idx += BOOK_DATA[si].pages.length;
+    return idx + currentPage;
+  }
+
+  // =====================
+  // FORMAT TEXT
+  // =====================
+  function formatPageText(raw) {
+    const lines = raw.split('\n');
+    let html = '';
+    let inPara = false;
+
+    const ALL_CAPS_RE = /^[A-ZÁÉÍÓÚÜÑ\s\d\(\)\.,:;!?¿¡]+$/;
+    const ROMAN_NUM_RE = /^[IVXivx]+\s*$/;
+
+    lines.forEach(line => {
+      const t = line.trim();
+      if (!t) {
+        if (inPara) { html += '</p>'; inPara = false; }
+        return;
+      }
+
+      // Skip pure roman numeral section headers (they're in the section title)
+      if (ROMAN_NUM_RE.test(t)) return;
+
+      // Headings: ALL_CAPS, short
+      if (ALL_CAPS_RE.test(t) && t.length < 80 && t.length > 2 && !t.includes(':')) {
+        if (inPara) { html += '</p>'; inPara = false; }
+        // Skip if it's exactly the section title
+        html += `<div class="content-heading">${t}</div>`;
+        return;
+      }
+
+      // Lector/Todos pattern
+      let formatted = t;
+      formatted = formatted.replace(/^(Lector:|Todos:|Coro [AB]:)/g, '<span class="lector-label">$1</span>');
+      formatted = formatted.replace(/\((Lucas|Juan|Mateo|Marcos|Hechos|Romanos|Daniel|Apocalipsis|Ezequiel)[^)]+\)/g, '<span class="verse-ref">$&</span>');
+
+      // Numbered items like "    1. TITLE"
+      if (/^\s*\d+\.\s+[A-Z]/.test(line)) {
+        if (inPara) { html += '</p>'; inPara = false; }
+        html += `<div class="content-subheading">${formatted}</div>`;
+        return;
+      }
+
+      // Starred items
+      if (t.startsWith('*') && t.endsWith('*')) {
+        if (inPara) { html += '</p>'; inPara = false; }
+        html += `<div class="content-subheading" style="text-align:center;font-style:italic;">${t.replace(/\*/g,'')}</div>`;
+        return;
+      }
+
+      if (!inPara) { html += '<p>'; inPara = true; }
+      else html += ' ';
+      html += formatted;
+    });
+
+    if (inPara) html += '</p>';
+    return html;
+  }
+
+  // =====================
+  // RENDER PAGE
+  // =====================
+  function createPageEl(sectionIdx, pageIdx) {
+    const section = BOOK_DATA[sectionIdx];
+    const raw = section.pages[pageIdx];
+    const isFirst = pageIdx === 0;
+
+    const page = document.createElement('div');
+    page.className = 'page';
+    page.dataset.section = sectionIdx;
+    page.dataset.page = pageIdx;
+
+    const linesDiv = document.createElement('div');
+    linesDiv.className = 'page-lines';
+    page.appendChild(linesDiv);
+
+    const content = document.createElement('div');
+    content.className = 'page-content';
+
+    if (isFirst) {
+      const romans = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+      content.innerHTML = `
+        <div class="section-header">
+          <div class="section-roman">${romans[sectionIdx]}</div>
+          <span class="section-icon">${section.icon}</span>
+          <div class="section-title">${section.title}</div>
+          <div class="section-divider"></div>
+        </div>
+        <div class="page-text">${formatPageText(raw)}</div>
+      `;
+    } else {
+      content.innerHTML = `<div class="page-text">${formatPageText(raw)}</div>`;
+    }
+
+    page.appendChild(content);
+
+    // Page number
+    const numArea = document.createElement('div');
+    numArea.className = 'page-number-area';
+    const globalNum = (() => {
+      let n = 1;
+      for (let s = 0; s < sectionIdx; s++) n += BOOK_DATA[s].pages.length;
+      return n + pageIdx;
+    })();
+    numArea.innerHTML = `
+      <div class="page-number-line"></div>
+      <div class="page-number-text">— ${globalNum} —</div>
+      <div class="page-number-line"></div>
+    `;
+    page.appendChild(numArea);
+
+    return page;
+  }
+
+  // =====================
+  // RENDER BOOK
+  // =====================
+  function renderCurrentPage(direction = null) {
+    const container = document.getElementById('book-pages');
+
+    if (!direction) {
+      // Initial render
+      container.innerHTML = '';
+      const page = createPageEl(currentSection, currentPage);
+      container.appendChild(page);
+    } else {
+      // Animated turn
+      const oldPage = container.querySelector('.page');
+      const newPage = createPageEl(currentSection, currentPage);
+      container.appendChild(newPage);
+
+      if (direction === 'forward') {
+        oldPage.classList.add('turning-forward');
+        newPage.classList.add('entering-forward');
+        newPage.style.zIndex = '2';
+        oldPage.style.zIndex = '3';
+      } else {
+        newPage.style.transform = 'rotateY(180deg)';
+        oldPage.classList.add('turning-back');
+        newPage.classList.add('entering-back');
+        newPage.style.zIndex = '2';
+        oldPage.style.zIndex = '3';
+      }
+
+      setTimeout(() => {
+        oldPage.remove();
+        newPage.classList.remove('entering-forward', 'entering-back');
+        newPage.style.zIndex = '';
+        newPage.style.transform = '';
+        isAnimating = false;
+      }, 660);
+    }
+
+    updateUI();
+  }
+
+  // =====================
+  // NAVIGATION
+  // =====================
+  function goToNext() {
+    if (isAnimating) return;
+    const section = BOOK_DATA[currentSection];
+
+    if (currentPage < section.pages.length - 1) {
+      isAnimating = true;
+      currentPage++;
+      renderCurrentPage('forward');
+    } else if (currentSection < BOOK_DATA.length - 1) {
+      isAnimating = true;
+      const nextSec = currentSection + 1;
+      showSectionTransition(nextSec, () => {
+        currentSection = nextSec;
+        currentPage = 0;
+        renderCurrentPage('forward');
+      });
+    }
+  }
+
+  function goToPrev() {
+    if (isAnimating) return;
+
+    if (currentPage > 0) {
+      isAnimating = true;
+      currentPage--;
+      renderCurrentPage('back');
+    } else if (currentSection > 0) {
+      isAnimating = true;
+      const prevSec = currentSection - 1;
+      showSectionTransition(prevSec, () => {
+        currentSection = prevSec;
+        currentPage = BOOK_DATA[prevSec].pages.length - 1;
+        renderCurrentPage('back');
+      });
+    }
+  }
+
+  function goToSection(sectionIdx) {
+    closeMenu();
+    if (sectionIdx === currentSection && currentPage === 0) return;
+
+    const direction = sectionIdx > currentSection ||
+      (sectionIdx === currentSection && currentPage > 0) ? 'forward' : 'back';
+
+    showSectionTransition(sectionIdx, () => {
+      currentSection = sectionIdx;
+      currentPage = 0;
+      isAnimating = true;
+      renderCurrentPage(direction);
+    });
+  }
+
+  function showSectionTransition(idx, callback) {
+    const el = document.getElementById('section-transition');
+    document.getElementById('st-icon').textContent = BOOK_DATA[idx].icon;
+    document.getElementById('st-title').textContent = BOOK_DATA[idx].title;
+    el.classList.add('show');
+    setTimeout(() => {
+      el.classList.remove('show');
+      setTimeout(callback, 400);
+    }, 600);
+  }
+
+  // =====================
+  // UPDATE UI
+  // =====================
+  function updateUI() {
+    const section = BOOK_DATA[currentSection];
+    const globalPage = getCurrentGlobalPage();
+    const totalPages = allPages.length;
+
+    document.getElementById('topbar-title').textContent = section.title;
+    document.getElementById('page-counter').textContent =
+      `${currentPage + 1}/${section.pages.length}`;
+
+    const progress = ((globalPage + 1) / totalPages * 100).toFixed(1);
+    document.getElementById('progress-fill').style.width = progress + '%';
+    document.getElementById('progress-text').textContent =
+      `Página ${globalPage + 1} de ${totalPages}`;
+
+    // Prev/next buttons
+    const isFirst = currentSection === 0 && currentPage === 0;
+    const isLast = currentSection === BOOK_DATA.length - 1 &&
+      currentPage === BOOK_DATA[currentSection].pages.length - 1;
+
+    document.getElementById('prev-btn').disabled = isFirst;
+    document.getElementById('next-btn').disabled = isLast;
+
+    // Menu active state
+    document.querySelectorAll('.menu-item').forEach((el, i) => {
+      el.classList.toggle('active', i === currentSection);
+    });
+  }
+
+  function handleProgressClick(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    const targetIdx = Math.floor(pct * allPages.length);
+    const target = allPages[Math.min(targetIdx, allPages.length - 1)];
+    const dir = target.section > currentSection ||
+      (target.section === currentSection && target.page > currentPage) ? 'forward' : 'back';
+
+    currentSection = target.section;
+    currentPage = target.page;
+    isAnimating = true;
+    renderCurrentPage(dir);
+  }
+
+  // =====================
+  // MENU
+  // =====================
+  function buildMenu() {
+    const container = document.getElementById('menu-items');
+    BOOK_DATA.forEach((section, i) => {
+      const el = document.createElement('div');
+      el.className = 'menu-item';
+      el.innerHTML = `
+        <div class="menu-item-icon">${section.icon}</div>
+        <div class="menu-item-text">
+          <div class="menu-item-title">${section.title}</div>
+          <div class="menu-item-pages">${section.pages.length} página${section.pages.length !== 1 ? 's' : ''}</div>
+        </div>
+      `;
+      el.addEventListener('click', () => goToSection(i));
+      container.appendChild(el);
+    });
+  }
+
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+    document.getElementById('sidemenu').classList.toggle('open', menuOpen);
+    document.getElementById('overlay').classList.toggle('visible', menuOpen);
+    document.getElementById('menu-btn').classList.toggle('open', menuOpen);
+  }
+
+  function closeMenu() {
+    menuOpen = false;
+    document.getElementById('sidemenu').classList.remove('open');
+    document.getElementById('overlay').classList.remove('visible');
+    document.getElementById('menu-btn').classList.remove('open');
+  }
+
+  // =====================
+  // SWIPE
+  // =====================
+  let touchStartX = 0, touchStartY = 0;
+  let touchEndX = 0;
+
+  document.getElementById('book-area').addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.getElementById('book-area').addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].clientX;
+    const dx = touchEndX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      if (dx < 0) goToNext();
+      else goToPrev();
+    }
+  }, { passive: true });
+
+  // =====================
+  // COVER / OPEN APP
+  // =====================
+  function openApp() {
+    document.getElementById('cover').classList.add('hidden');
+    setTimeout(() => {
+      document.getElementById('cover').style.display = 'none';
+      document.getElementById('app').classList.add('visible');
+    }, 800);
+
+    // Show swipe hint once
+    if (!localStorage.getItem('swipeHintShown')) {
+      setTimeout(() => {
+        const hint = document.createElement('div');
+        hint.className = 'swipe-hint';
+        hint.textContent = '← Desliza para cambiar página →';
+        document.getElementById('book-area').appendChild(hint);
+        setTimeout(() => hint.remove(), 3500);
+      }, 1500);
+      localStorage.setItem('swipeHintShown', '1');
+    }
+  }
+
+  // =====================
+  // PWA
+  // =====================
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    setTimeout(() => {
+      document.getElementById('install-prompt').style.display = 'block';
+    }, 5000);
+  });
+
+  function installApp() {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => {
+        deferredPrompt = null;
+        document.getElementById('install-prompt').style.display = 'none';
+      });
+    }
+  }
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
+
+  // =====================
+  // KEYBOARD
+  // =====================
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goToNext();
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goToPrev();
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  // =====================
+  // INIT
+  // =====================
+  buildMenu();
+  renderCurrentPage();
+</script>
+</body>
+</html>
