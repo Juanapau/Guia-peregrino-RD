@@ -12,828 +12,640 @@
 <title>Guía del Peregrino – MCC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --crimson: #8B1A1A;
-  --gold: #C9A84C;
-  --parchment: #F5EDD6;
-  --ink: #1A1208;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{
-  height:100%;overflow:hidden;
-  background:#0d0a05;
-  font-family:'Crimson Pro',Georgia,serif;
-  -webkit-tap-highlight-color:transparent;
-  touch-action:none;
-}
+:root{ --cr:#8B1A1A; --go:#C9A84C; --ink:#1A1208; }
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0 }
+html,body{ height:100%; overflow:hidden; background:#0d0a05;
+  font-family:'Crimson Pro',Georgia,serif; -webkit-tap-highlight-color:transparent; touch-action:none }
 
-/* ─── COVER ─────────────────────────── */
-#cover{
-  position:fixed;inset:0;z-index:100;
-  background:radial-gradient(ellipse at 35% 45%,#1c0e06 0%,#0a0703 55%,#050302 100%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  overflow:hidden;transition:opacity .8s ease,transform .8s ease;
-}
-#cover.out{opacity:0;transform:scale(1.04);pointer-events:none}
-.cv-noise{position:absolute;inset:0;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E")}
-.cv-border{position:absolute;inset:14px;pointer-events:none;border:1px solid rgba(201,168,76,.45);box-shadow:inset 0 0 0 6px rgba(201,168,76,.08)}
-.cv-corner{position:absolute;width:36px;height:36px;border-color:var(--gold);border-style:solid;opacity:.65}
-.cv-corner.tl{top:20px;left:20px;border-width:2px 0 0 2px}
-.cv-corner.tr{top:20px;right:20px;border-width:2px 2px 0 0}
-.cv-corner.bl{bottom:20px;left:20px;border-width:0 0 2px 2px}
-.cv-corner.br{bottom:20px;right:20px;border-width:0 2px 2px 0}
-.cv-body{position:relative;display:flex;flex-direction:column;align-items:center;gap:18px;padding:24px;max-width:360px;width:100%}
-.cv-logo{width:min(200px,56vw);height:auto;filter:drop-shadow(0 4px 24px rgba(201,168,76,.35));animation:float 4s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-.cv-rule{width:180px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.cv-title{font-family:'Cinzel',serif;font-size:clamp(26px,7.5vw,38px);font-weight:700;color:var(--gold);text-align:center;letter-spacing:.07em;line-height:1.2;text-shadow:0 2px 22px rgba(201,168,76,.4)}
-.cv-sub{font-family:'Crimson Pro',serif;font-style:italic;color:rgba(245,237,214,.65);font-size:clamp(12px,3.2vw,15px);text-align:center;letter-spacing:.03em}
-.cv-verse{font-family:'Crimson Pro',serif;font-style:italic;color:rgba(245,237,214,.45);font-size:clamp(11px,2.9vw,13px);text-align:center;line-height:1.8;max-width:280px}
-.cv-btn{margin-top:6px;padding:13px 38px;background:linear-gradient(135deg,#8B1A1A,#6B0F0F);border:1px solid var(--gold);color:var(--gold);font-family:'Cinzel',serif;font-size:13px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:box-shadow .3s}
-.cv-btn:hover{box-shadow:0 0 22px rgba(201,168,76,.3)}
+/* ─ COVER ──────────────────────────── */
+#cover{ position:fixed; inset:0; z-index:100;
+  background:radial-gradient(ellipse at 35% 45%,#1c0e06,#0a0703 55%,#050302);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  overflow:hidden; transition:opacity .8s,transform .8s }
+#cover.out{ opacity:0; transform:scale(1.04); pointer-events:none }
+.cv-noise{ position:absolute; inset:0; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E") }
+.cv-brd{ position:absolute; inset:14px; pointer-events:none;
+  border:1px solid rgba(201,168,76,.45); box-shadow:inset 0 0 0 5px rgba(201,168,76,.07) }
+.cv-cor{ position:absolute; width:34px; height:34px; border-color:var(--go); border-style:solid; opacity:.6 }
+.cv-cor.tl{top:20px;left:20px;border-width:2px 0 0 2px} .cv-cor.tr{top:20px;right:20px;border-width:2px 2px 0 0}
+.cv-cor.bl{bottom:20px;left:20px;border-width:0 0 2px 2px} .cv-cor.br{bottom:20px;right:20px;border-width:0 2px 2px 0}
+.cv-body{ position:relative; display:flex; flex-direction:column; align-items:center; gap:16px; padding:24px; max-width:340px; width:100% }
+.cv-logo{ width:min(190px,54vw); filter:drop-shadow(0 4px 22px rgba(201,168,76,.35)); animation:flt 4s ease-in-out infinite }
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.cv-rl{ width:160px; height:1px; background:linear-gradient(90deg,transparent,var(--go),transparent) }
+.cv-ttl{ font-family:'Cinzel',serif; font-size:clamp(25px,7vw,36px); font-weight:700; color:var(--go);
+  text-align:center; letter-spacing:.07em; line-height:1.2; text-shadow:0 2px 20px rgba(201,168,76,.4) }
+.cv-sub{ font-style:italic; color:rgba(245,237,214,.6); font-size:clamp(12px,3vw,14px); text-align:center }
+.cv-vrs{ font-style:italic; color:rgba(245,237,214,.38); font-size:clamp(11px,2.7vw,13px);
+  text-align:center; line-height:1.8; max-width:270px }
+.cv-btn{ margin-top:4px; padding:12px 36px; background:linear-gradient(135deg,#8B1A1A,#6B0F0F);
+  border:1px solid var(--go); color:var(--go); font-family:'Cinzel',serif; font-size:13px;
+  letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition:box-shadow .3s }
+.cv-btn:hover{ box-shadow:0 0 20px rgba(201,168,76,.3) }
 
-/* ─── INSTALL PROMPT ─────────────────── */
-#install-prompt{display:none;position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#1a0d05,#2a1a08);border:1px solid var(--gold);color:rgba(245,237,214,.85);padding:12px 18px;font-family:'Crimson Pro',serif;font-size:13px;z-index:500;text-align:center;width:min(300px,90vw)}
-#install-prompt button{background:var(--crimson);border:1px solid var(--gold);color:var(--gold);font-family:'Cinzel',serif;font-size:11px;padding:5px 14px;cursor:pointer;margin:7px 3px 0;letter-spacing:.07em}
+/* ─ INSTALL ─────────────────────────── */
+#ip{ display:none; position:fixed; bottom:14px; left:50%; transform:translateX(-50%);
+  background:linear-gradient(135deg,#1a0d05,#2a1a08); border:1px solid var(--go);
+  color:rgba(245,237,214,.85); padding:11px 15px; font-size:13px; z-index:500;
+  text-align:center; width:min(280px,90vw) }
+#ip button{ background:var(--cr); border:1px solid var(--go); color:var(--go);
+  font-family:'Cinzel',serif; font-size:11px; padding:5px 12px; cursor:pointer; margin:6px 3px 0; letter-spacing:.07em }
 
-/* ─── SECTION FLASH ──────────────────── */
-#sec-flash{position:fixed;inset:0;z-index:300;background:#0a0703;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s}
-#sec-flash.on{opacity:1;pointer-events:all}
-.sf-inner{text-align:center}
-.sf-icon{font-size:52px;margin-bottom:14px}
-.sf-title{font-family:'Cinzel',serif;font-size:18px;color:var(--gold);letter-spacing:.1em}
+/* ─ SECTION FLASH ───────────────────── */
+#sf{ position:fixed; inset:0; z-index:300; background:#0a0703;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity .35s }
+#sf.on{ opacity:1; pointer-events:all }
+#sf .ico{ font-size:48px; display:block; margin-bottom:11px; text-align:center }
+#sf .ttl{ font-family:'Cinzel',serif; font-size:16px; color:var(--go); letter-spacing:.1em; text-align:center }
 
-/* ─── APP ────────────────────────────── */
-#app{position:fixed;inset:0;display:none;flex-direction:column;background:#0a0703}
-#app.on{display:flex}
+/* ─ APP ─────────────────────────────── */
+#app{ position:fixed; inset:0; display:none; flex-direction:column; background:#0a0703 }
+#app.on{ display:flex }
 
-/* TOP BAR */
-#topbar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:linear-gradient(180deg,#0d0a05,#140e06);border-bottom:1px solid rgba(201,168,76,.22);min-height:52px;z-index:10}
-#menu-btn{background:none;border:1px solid rgba(201,168,76,.4);width:34px;height:34px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer}
-#menu-btn span{display:block;width:17px;height:1.5px;background:var(--gold);transition:all .3s}
-#menu-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
-#menu-btn.open span:nth-child(2){opacity:0}
-#menu-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-#tb-title{flex:1;font-family:'Cinzel',serif;font-size:clamp(10px,2.8vw,13px);color:var(--gold);letter-spacing:.06em;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#tb-pages{font-family:'Crimson Pro',serif;font-size:11px;color:rgba(201,168,76,.55);flex-shrink:0;min-width:44px;text-align:right}
+/* Top bar */
+#tb{ display:flex; align-items:center; gap:10px; padding:9px 13px;
+  background:linear-gradient(180deg,#0d0a05,#140e06); border-bottom:1px solid rgba(201,168,76,.2);
+  min-height:50px; z-index:10 }
+#mb{ background:none; border:1px solid rgba(201,168,76,.4); width:33px; height:33px; flex-shrink:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer }
+#mb span{ display:block; width:16px; height:1.5px; background:var(--go); transition:all .3s }
+#mb.open span:nth-child(1){ transform:translateY(6.5px) rotate(45deg) }
+#mb.open span:nth-child(2){ opacity:0 }
+#mb.open span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg) }
+#tbt{ flex:1; font-family:'Cinzel',serif; font-size:clamp(10px,2.6vw,12.5px); color:var(--go);
+  letter-spacing:.06em; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+#tbp{ font-size:11px; color:rgba(201,168,76,.5); flex-shrink:0; min-width:42px; text-align:right;
+  font-style:italic }
 
-/* SIDE MENU */
-#overlay{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .3s}
-#overlay.on{opacity:1;pointer-events:all}
-#sidemenu{position:fixed;top:0;left:-100%;z-index:50;width:min(290px,84vw);height:100%;background:linear-gradient(180deg,#0d0a05,#100c06);border-right:1px solid rgba(201,168,76,.28);display:flex;flex-direction:column;transition:left .33s cubic-bezier(.4,0,.2,1);overflow:hidden}
-#sidemenu.on{left:0}
-.sm-head{padding:22px 18px 18px;border-bottom:1px solid rgba(201,168,76,.18);text-align:center}
-.sm-head img{width:64px;filter:drop-shadow(0 2px 8px rgba(201,168,76,.2))}
-.sm-head h2{font-family:'Cinzel',serif;font-size:12px;color:var(--gold);margin-top:9px;letter-spacing:.1em}
-.sm-head p{font-family:'Crimson Pro',serif;font-size:10px;color:rgba(245,237,214,.4);margin-top:3px;font-style:italic}
-.sm-list{flex:1;overflow-y:auto;padding:10px 0}
-.sm-list::-webkit-scrollbar{width:2px}
-.sm-list::-webkit-scrollbar-thumb{background:rgba(201,168,76,.25)}
-.sm-item{display:flex;align-items:center;gap:12px;padding:12px 18px;cursor:pointer;border-left:3px solid transparent;transition:all .2s}
-.sm-item:hover,.sm-item.active{background:rgba(201,168,76,.07);border-left-color:var(--gold)}
-.sm-icon{font-size:19px;width:26px;text-align:center;flex-shrink:0}
-.sm-lbl{font-family:'Cinzel',serif;font-size:11px;color:rgba(245,237,214,.8);letter-spacing:.05em}
-.sm-item.active .sm-lbl{color:var(--gold)}
-.sm-pg{font-size:10px;color:rgba(245,237,214,.3);font-family:'Crimson Pro',serif;margin-top:1px}
-.sm-foot{padding:12px 18px;border-top:1px solid rgba(201,168,76,.12);font-family:'Crimson Pro',serif;font-size:10px;color:rgba(245,237,214,.25);font-style:italic;text-align:center}
+/* Side menu */
+#ov{ position:fixed; inset:0; z-index:40; background:rgba(0,0,0,.55); opacity:0; pointer-events:none; transition:opacity .3s }
+#ov.on{ opacity:1; pointer-events:all }
+#sm{ position:fixed; top:0; left:-100%; z-index:50; width:min(285px,82vw); height:100%;
+  background:linear-gradient(180deg,#0d0a05,#100c06); border-right:1px solid rgba(201,168,76,.25);
+  display:flex; flex-direction:column; transition:left .32s cubic-bezier(.4,0,.2,1) }
+#sm.on{ left:0 }
+.smh{ padding:20px 16px 16px; border-bottom:1px solid rgba(201,168,76,.15); text-align:center }
+.smh img{ width:58px; filter:drop-shadow(0 2px 8px rgba(201,168,76,.2)) }
+.smh h2{ font-family:'Cinzel',serif; font-size:11px; color:var(--go); margin-top:8px; letter-spacing:.1em }
+.smh p{ font-size:10px; color:rgba(245,237,214,.35); margin-top:2px; font-style:italic }
+.sml{ flex:1; overflow-y:auto; padding:8px 0 }
+.sml::-webkit-scrollbar{ width:2px }
+.sml::-webkit-scrollbar-thumb{ background:rgba(201,168,76,.2) }
+.smi{ display:flex; align-items:center; gap:11px; padding:11px 16px; cursor:pointer;
+  border-left:3px solid transparent; transition:all .2s }
+.smi:hover,.smi.active{ background:rgba(201,168,76,.06); border-left-color:var(--go) }
+.smi .ic{ font-size:18px; width:24px; text-align:center; flex-shrink:0 }
+.smi .lb{ font-family:'Cinzel',serif; font-size:10.5px; color:rgba(245,237,214,.78); letter-spacing:.05em }
+.smi.active .lb{ color:var(--go) }
+.smi .pg{ font-size:10px; color:rgba(245,237,214,.28); margin-top:1px }
+.smf{ padding:11px 16px; border-top:1px solid rgba(201,168,76,.1);
+  font-size:10px; color:rgba(245,237,214,.22); font-style:italic; text-align:center }
 
-/* ─── BOOK AREA ──────────────────────── */
-#book-area{flex:1;position:relative;overflow:hidden;background:radial-gradient(ellipse at center,#1c1206 0%,#0a0703 100%);display:flex;align-items:center;justify-content:center}
-#book-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+/* ─ BOOK ─────────────────────────────── */
+#ba{ flex:1; position:relative; overflow:hidden;
+  background:radial-gradient(ellipse at center,#1c1206,#0a0703);
+  display:flex; align-items:center; justify-content:center }
+#bw{ position:relative; width:100%; height:100%; }
 
-/* Page element */
-.book-page{
-  position:absolute;
-  background:linear-gradient(160deg,#F8EED2 0%,#F1E4C2 45%,#E9D9AB 100%);
-  border-radius:1px;
-  box-shadow:3px 3px 20px rgba(0,0,0,.6),-1px 0 5px rgba(0,0,0,.2);
-  overflow:hidden;
-}
-/* Spine shadow */
-.book-page::before{content:'';position:absolute;left:0;top:0;bottom:0;width:20px;background:linear-gradient(90deg,rgba(0,0,0,.12),transparent);pointer-events:none;z-index:2}
+/* The page element */
+.pg{ position:absolute; inset:0;
+  background:linear-gradient(158deg,#F9EFD4 0%,#F3E6C6 42%,#EBDAAE 100%);
+  box-shadow:4px 0 18px rgba(0,0,0,.5),-1px 0 4px rgba(0,0,0,.15); overflow:hidden }
+/* Spine shadow left edge */
+.pg::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:16px;
+  background:linear-gradient(90deg,rgba(0,0,0,.09),transparent); pointer-events:none; z-index:1 }
 
-/* Content area — no overflow, no scroll */
-.page-body{
-  position:absolute;
-  /* top padding generous, bottom leaves room for footer */
-  top:0;left:0;right:0;bottom:38px;
-  padding:18px 20px 4px 26px;
-  overflow:hidden;
-}
+/* Content area — absolutely positioned to fill page minus footer */
+.pgc{ position:absolute; top:0; left:0; right:0; bottom:36px;
+  padding:16px 18px 8px 22px; overflow:hidden }
 
-/* Page number footer */
-.page-foot{
-  position:absolute;bottom:0;left:0;right:0;height:38px;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  border-top:1px solid rgba(139,100,60,.15);
-}
-.pf-rule{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(139,100,60,.2),transparent)}
-.pf-num{font-family:'Crimson Pro',serif;font-size:11px;color:rgba(100,70,30,.4);letter-spacing:.04em}
+/* Footer with page number */
+.pgf{ position:absolute; bottom:0; left:0; right:0; height:36px;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  border-top:1px solid rgba(139,100,60,.12) }
+.pfr{ flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(139,100,60,.16),transparent) }
+.pfn{ font-size:11px; color:rgba(100,70,30,.35); letter-spacing:.04em }
 
-/* ─── SECTION HEADER (first page) ───── */
-.sec-hdr{
-  text-align:center;
-  padding:10px 8px 14px;
-  border-bottom:1px solid rgba(139,26,26,.2);
-  margin-bottom:12px;
-}
-.sec-roman{font-family:'Cinzel',serif;font-size:9px;color:rgba(139,26,26,.4);letter-spacing:.25em;margin-bottom:5px;text-transform:uppercase}
-.sec-icon{font-size:30px;display:block;margin-bottom:6px}
-.sec-ttl{font-family:'Cinzel',serif;font-size:clamp(14px,4vw,19px);font-weight:700;color:var(--crimson);letter-spacing:.05em;line-height:1.25}
-.sec-rule{width:44px;height:2px;margin:8px auto 0;background:linear-gradient(90deg,transparent,var(--crimson),transparent)}
+/* Section header (first page only) */
+.sh{ text-align:center; padding:8px 4px 11px; border-bottom:1px solid rgba(139,26,26,.16); margin-bottom:10px }
+.sh-rom{ font-family:'Cinzel',serif; font-size:8.5px; color:rgba(139,26,26,.35); letter-spacing:.28em; margin-bottom:4px }
+.sh-ico{ font-size:26px; display:block; margin-bottom:4px }
+.sh-ttl{ font-family:'Cinzel',serif; font-size:clamp(13px,3.7vw,17px); font-weight:700;
+  color:var(--cr); letter-spacing:.05em; line-height:1.25 }
+.sh-rl{ width:38px; height:2px; margin:7px auto 0; background:linear-gradient(90deg,transparent,var(--cr),transparent) }
 
-/* ─── CONTENT BLOCK TYPES ────────────── */
+/* Typography — all content lives inside .ct */
+.ct{ font-size:clamp(15.5px,4vw,18px); color:var(--ink); line-height:1.58 }
 
-/* Base text container */
-.pg-body{
-  font-family:'Crimson Pro',serif;
-  font-size:clamp(16px,4.2vw,19px);
-  color:var(--ink);
-  line-height:1.6;
-}
+/* Heading block (ALL CAPS title within content) */
+.ct .bh{ font-family:'Cinzel',serif; font-size:clamp(10.5px,2.6vw,13px); color:var(--cr);
+  text-align:center; letter-spacing:.1em; margin:8px 0 4px;
+  padding-bottom:4px; border-bottom:1px solid rgba(139,26,26,.1) }
+/* Subheading (numbered item) */
+.ct .bs{ font-family:'Cinzel',serif; font-size:clamp(10px,2.4vw,12.5px); color:var(--cr);
+  letter-spacing:.07em; margin:7px 0 3px; opacity:.85 }
+/* Plain text */
+.ct .bt{ margin-bottom:8px }
+.ct .bt p{ margin:0 0 4px }
+.ct .bt p:last-child{ margin-bottom:0 }
+/* Liturgical */
+.ct .bl{ margin-bottom:8px; line-height:1.5 }
+.ct .bl .ln{ display:block }
+.ct .bl .ln.co{ padding-left:.9em }
+/* Rubric / instruction */
+.ct .br{ margin-bottom:5px; font-style:italic; color:rgba(80,58,22,.5); font-size:.87em }
+/* Role labels */
+.rl{ font-weight:700; color:var(--cr); font-size:.85em }
+.rt{ font-weight:700; color:rgba(18,35,90,.8); font-size:.85em }
+.rc{ font-weight:700; color:rgba(35,72,18,.8); font-size:.85em }
+/* Scripture ref */
+.rf{ font-size:.82em; color:rgba(100,70,30,.48); font-style:italic }
 
-/* Heading: ALL-CAPS title (not section header) */
-.blk-heading{
-  font-family:'Cinzel',serif;
-  font-size:clamp(12px,3vw,15px);
-  color:var(--crimson);
-  text-align:center;
-  letter-spacing:.1em;
-  margin:10px 0 6px;
-  padding-bottom:5px;
-  border-bottom:1px solid rgba(139,26,26,.15);
-}
+/* The invisible probe for measuring — lives inside #bw so it inherits dimensions */
+#probe{ position:absolute; visibility:hidden; top:0; left:0; pointer-events:none; z-index:-1;
+  bottom:36px; padding:16px 18px 8px 22px; overflow:hidden }
 
-/* Subheading: numbered item */
-.blk-sub{
-  font-family:'Cinzel',serif;
-  font-size:clamp(11px,2.8vw,14px);
-  color:var(--crimson);
-  letter-spacing:.06em;
-  margin:10px 0 5px;
-  opacity:.9;
-}
+/* Curl canvas */
+#cc{ position:absolute; inset:0; z-index:20; pointer-events:none }
 
-/* Merged block: heading + immediate body together */
-.blk-merged{ margin-bottom:10px; }
-.blk-merged .blk-heading,.blk-merged .blk-sub{ margin-top:6px; margin-bottom:5px }
-
-/* Plain text paragraph */
-.blk-text{ margin-bottom:10px }
-.blk-text p{ margin:0 0 6px 0 }
-.blk-text p:last-child{ margin-bottom:0 }
-
-/* Liturgical exchange (Lector / Todos / Coro) */
-.blk-lit{ margin-bottom:10px }
-.blk-lit .role{
-  font-weight:700;
-  color:var(--crimson);
-  font-size:.88em;
-  display:inline;
-}
-.blk-lit .role-todos{
-  font-weight:700;
-  color:rgba(25,45,90,.85);
-  font-size:.88em;
-  display:inline;
-}
-.blk-lit .role-coro{
-  font-weight:700;
-  color:rgba(50,80,30,.85);
-  font-size:.88em;
-  display:inline;
-}
-.blk-lit .lit-line{ display:block; line-height:1.55 }
-.blk-lit .lit-line.continuation{ padding-left:1.2em; }
-
-/* Scripture reference */
-.ref{font-size:.85em;color:rgba(100,70,30,.55);font-style:italic}
-
-/* Instruction / rubric */
-.rubric{
-  font-style:italic;
-  color:rgba(80,60,30,.6);
-  font-size:.88em;
-}
-
-/* ─── PAGE-CURL CANVAS ───────────────── */
-#curl-canvas{position:absolute;inset:0;z-index:20;pointer-events:none}
-
-/* ─── BOTTOM NAV ─────────────────────── */
-#botnav{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:linear-gradient(0deg,#0d0a05,#140e06);border-top:1px solid rgba(201,168,76,.18);gap:12px;min-height:54px}
-.nb{display:flex;align-items:center;gap:5px;background:none;border:1px solid rgba(201,168,76,.32);color:var(--gold);font-family:'Cinzel',serif;font-size:10.5px;letter-spacing:.08em;padding:7px 13px;cursor:pointer;transition:all .2s;min-width:80px;justify-content:center}
-.nb:hover,.nb:active{background:rgba(201,168,76,.09);border-color:var(--gold)}
-.nb:disabled{opacity:.22;pointer-events:none}
-.nb svg{width:13px;height:13px;fill:currentColor}
-.nav-mid{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
-.prog-bar{width:100%;height:3px;background:rgba(201,168,76,.13);cursor:pointer}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--crimson),var(--gold));transition:width .35s ease}
-.prog-lbl{font-family:'Crimson Pro',serif;font-size:11px;color:rgba(201,168,76,.45);font-style:italic}
+/* ─ BOTTOM NAV ──────────────────────── */
+#bn{ display:flex; align-items:center; justify-content:space-between; padding:8px 13px;
+  background:linear-gradient(0deg,#0d0a05,#140e06); border-top:1px solid rgba(201,168,76,.16);
+  gap:11px; min-height:52px }
+.nb{ display:flex; align-items:center; gap:4px; background:none;
+  border:1px solid rgba(201,168,76,.3); color:var(--go); font-family:'Cinzel',serif;
+  font-size:10px; letter-spacing:.08em; padding:7px 12px; cursor:pointer; transition:all .2s;
+  min-width:78px; justify-content:center }
+.nb:hover,.nb:active{ background:rgba(201,168,76,.08); border-color:var(--go) }
+.nb:disabled{ opacity:.18; pointer-events:none }
+.nb svg{ width:13px; height:13px; fill:currentColor }
+.nm{ flex:1; display:flex; flex-direction:column; align-items:center; gap:4px }
+.pb{ width:100%; height:3px; background:rgba(201,168,76,.12); cursor:pointer }
+.pf{ height:100%; background:linear-gradient(90deg,var(--cr),var(--go)); transition:width .35s }
+.pl{ font-size:10.5px; color:rgba(201,168,76,.42); font-style:italic }
 </style>
 </head>
 <body>
 
 <!-- COVER -->
 <div id="cover">
-  <div class="cv-noise"></div><div class="cv-border"></div>
-  <div class="cv-corner tl"></div><div class="cv-corner tr"></div>
-  <div class="cv-corner bl"></div><div class="cv-corner br"></div>
+  <div class="cv-noise"></div><div class="cv-brd"></div>
+  <div class="cv-cor tl"></div><div class="cv-cor tr"></div>
+  <div class="cv-cor bl"></div><div class="cv-cor br"></div>
   <div class="cv-body">
     <img src="icons/logo.png" class="cv-logo" alt="MCC"/>
-    <div class="cv-rule"></div>
-    <h1 class="cv-title">Guía del<br>Peregrino</h1>
+    <div class="cv-rl"></div>
+    <h1 class="cv-ttl">Guía del<br>Peregrino</h1>
     <p class="cv-sub">Movimiento de Cursillos de Cristiandad<br>República Dominicana</p>
-    <div class="cv-rule"></div>
-    <p class="cv-verse">"Caminar por Cristo hacia el Padre,<br>a impulsos del Espíritu Santo,<br>con la ayuda de María y de todos los Santos."</p>
+    <div class="cv-rl"></div>
+    <p class="cv-vrs">"Caminar por Cristo hacia el Padre,<br>a impulsos del Espíritu Santo,<br>con la ayuda de María y de todos los Santos."</p>
     <button class="cv-btn" onclick="openApp()">✦ Abrir Guía ✦</button>
   </div>
 </div>
 
-<!-- INSTALL PROMPT -->
-<div id="install-prompt">
-  📱 Instala esta app para usarla sin conexión<br>
+<div id="ip">📱 Instala para usar sin conexión<br>
   <button onclick="installApp()">Instalar</button>
-  <button onclick="this.closest('#install-prompt').style.display='none'">Ahora no</button>
+  <button onclick="document.getElementById('ip').style.display='none'">No</button>
 </div>
 
-<!-- SECTION FLASH -->
-<div id="sec-flash">
-  <div class="sf-inner"><div class="sf-icon" id="sf-icon"></div><div class="sf-title" id="sf-title"></div></div>
-</div>
+<div id="sf"><div><span class="ico" id="sfi"></span><div class="ttl" id="sft"></div></div></div>
 
-<!-- APP -->
 <div id="app">
-  <div id="topbar">
-    <button id="menu-btn" onclick="toggleMenu()"><span></span><span></span><span></span></button>
-    <div id="tb-title">Guía del Peregrino</div>
-    <div id="tb-pages">1/1</div>
+  <div id="tb">
+    <button id="mb" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <div id="tbt">Guía del Peregrino</div>
+    <div id="tbp">1/1</div>
   </div>
-  <div id="overlay" onclick="closeMenu()"></div>
-  <nav id="sidemenu">
-    <div class="sm-head">
-      <img src="icons/logo.png" alt="MCC"/>
-      <h2>Guía del Peregrino</h2>
-      <p>MCC · República Dominicana</p>
-    </div>
-    <div class="sm-list" id="sm-list"></div>
-    <div class="sm-foot">Secretariado Nacional · MCC-RD</div>
+  <div id="ov" onclick="closeMenu()"></div>
+  <nav id="sm">
+    <div class="smh"><img src="icons/logo.png" alt="MCC"/><h2>Guía del Peregrino</h2><p>MCC · República Dominicana</p></div>
+    <div class="sml" id="sml"></div>
+    <div class="smf">Secretariado Nacional · MCC-RD</div>
   </nav>
-  <div id="book-area">
-    <div id="book-wrap">
-      <canvas id="curl-canvas"></canvas>
+  <div id="ba">
+    <div id="bw">
+      <!-- probe: invisible sibling with identical padding/sizing to .pgc -->
+      <div id="probe" class="ct"></div>
+      <canvas id="cc"></canvas>
     </div>
   </div>
-  <div id="botnav">
-    <button class="nb" id="prev-btn" onclick="navPrev()">
-      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6v12z"/></svg>Anterior
-    </button>
-    <div class="nav-mid">
-      <div class="prog-bar" onclick="handleProg(event)"><div class="prog-fill" id="prog-fill"></div></div>
-      <div class="prog-lbl" id="prog-lbl">Página 1 de 1</div>
+  <div id="bn">
+    <button class="nb" id="prv" onclick="navPrev()"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6v12z"/></svg>Anterior</button>
+    <div class="nm">
+      <div class="pb" onclick="handleProg(event)"><div class="pf" id="pfill"></div></div>
+      <div class="pl" id="plbl">Página 1 de 1</div>
     </div>
-    <button class="nb" id="next-btn" onclick="navNext()">
-      Siguiente<svg viewBox="0 0 24 24"><path d="M9 18V6l6 6-6 6z"/></svg>
-    </button>
+    <button class="nb" id="nxt" onclick="navNext()">Siguiente<svg viewBox="0 0 24 24"><path d="M9 18V6l6 6-6 6z"/></svg></button>
   </div>
 </div>
 
 <script src="content.js"></script>
 <script>
 'use strict';
-const ROMANS = ['I','II','III','IV','V','VI','VII','VIII','IX','X'];
+const ROMANS=['I','II','III','IV','V','VI','VII','VIII','IX','X'];
+const SCREF=/\((Lucas|Juan|Mateo|Marcos|Hechos|Romanos|Daniel|Apocalipsis|Ezequiel|Isaías|Salmo[s]?|Génesis|Corintios|Filipenses|Efesios|Gálatas|Tesalonicenses|Pedro|Santiago|Timoteo|Hebreos|Proverbios|Sabiduría)[^)]*\)/g;
 
-// ═══════════════════════════════════════════
-//  STATE
-// ═══════════════════════════════════════════
-let secIdx=0, pgIdx=0;
-let sectionPages=[], secOffset=[], totalPgCount=0, pages=[];
-let isDragging=false, curlDir=0, curlProg=0, curlRaf=null;
-let dragStartX=0, dragStartY=0, neighborEl=null;
-let menuOpen=false, deferredPrompt=null;
+// ── State ──────────────────────────────────────────────
+let si=0, pi=0;
+let secPages=[];    // secPages[si] = array of rendered HTML strings (one per page)
+let secOff=[];      // global page offset of each section
+let totalPg=0;
+let neighbor=null, dragging=false, cdir=0, cprog=0, craf=null;
+let dragX=0, dragY=0, menuOpen=false, dp=null;
 
-// ═══════════════════════════════════════════
-//  BLOCK → HTML RENDERER
-// ═══════════════════════════════════════════
-const SCRIPTURES = /\((Lucas|Juan|Mateo|Marcos|Hechos|Romanos|Daniel|Apocalipsis|Ezequiel|Isaías|Salmo[s]?|Génesis|Corintios|Filipenses|Efesios|Gálatas|Tesalonicenses|Pedro|Santiago|Timoteo|Hebreos|Proverbios|Eclesiastés|Tobías|Sabiduría|Sirácide)[^)]*\)/g;
+function curPages(){ return secPages[si] }
+function canNext(){ return pi<curPages().length-1 || si<BOOK_DATA.length-1 }
+function canPrev(){ return pi>0 || si>0 }
+function globalN(){ return secOff[si]+pi+1 }
 
-function escHtml(s){
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-function addRef(s){ return s.replace(SCRIPTURES,'<span class="ref">$&</span>'); }
+// ── HTML escaping ──────────────────────────────────────
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+function addRef(s){ return s.replace(SCREF,'<span class="rf">$&</span>') }
 
-function isRubric(line){
-  return /^\(/.test(line) || /^–[^–]+–$/.test(line);
-}
+// ── Render a single chunk to HTML ──────────────────────
+function chunkHTML(c){
+  const t=c.text.trim(); if(!t) return '';
 
-function renderLiturgicalText(raw){
-  // Split on \n and render each line with role styling
-  const lines = raw.split('\n').map(l=>l.trim()).filter(Boolean);
-  let html='';
-  let prevWasRole = false;
-  for(const line of lines){
-    const isLector = /^Lector:\s*/.test(line);
-    const isTodos  = /^Todos:\s*/.test(line);
-    const isCoro   = /^Coro [AB]:\s*/.test(line);
-    const isAnt    = /^Antífona\s*/.test(line);
-    const isRub    = isRubric(line);
-
-    if(isLector){
-      const rest = addRef(escHtml(line.replace(/^Lector:\s*/,'')));
-      html += `<span class="lit-line"><span class="role">Lector: </span>${rest}</span>`;
-    } else if(isTodos){
-      const rest = addRef(escHtml(line.replace(/^Todos:\s*/,'')));
-      html += `<span class="lit-line"><span class="role-todos">Todos: </span>${rest}</span>`;
-    } else if(isCoro){
-      const m = line.match(/^(Coro [AB]):\s*(.*)/);
-      const rest = addRef(escHtml(m?m[2]:line));
-      html += `<span class="lit-line"><span class="role-coro">${m?m[1]:'Coro'}: </span>${rest}</span>`;
-    } else if(isAnt){
-      html += `<span class="lit-line"><strong>Antífona:</strong> ${addRef(escHtml(line.replace(/^Antífona\s*/,'').replace(/^:\s*/,'')))}</span>`;
-    } else if(isRub){
-      html += `<span class="lit-line"><em class="rubric">${escHtml(line)}</em></span>`;
-    } else {
-      html += `<span class="lit-line continuation">${addRef(escHtml(line))}</span>`;
+  if(c.type==='heading'){
+    // Multi-line headings: first line as title, rest as body if mixed
+    const lines=t.split('\n').map(l=>l.trim()).filter(Boolean);
+    const allCaps=lines.every(l=>{ const cl=l.replace(/[\s\d\W]/g,''); return cl===cl.toUpperCase()&&cl.length>0 });
+    if(allCaps){
+      return `<div class="bh">${lines.map(esc).join(' ')}</div>`;
     }
+    // Mixed: first line caps, rest prose
+    return `<div class="bh">${esc(lines[0])}</div><div class="bt"><p>${addRef(esc(lines.slice(1).join(' ')))}</p></div>`;
   }
-  return `<div class="blk-lit">${html}</div>`;
+
+  if(c.type==='subheading'){
+    const m=t.match(/^\s*(\d+)\.\s+(.*)/s);
+    if(m) return `<div class="bs">${m[1]}. ${esc(m[2].replace(/\n/g,' '))}</div>`;
+    return `<div class="bs">${esc(t.replace(/\n/g,' '))}</div>`;
+  }
+
+  if(c.type==='liturgical'){
+    return renderLiturg(t);
+  }
+
+  // text — check if it's a rubric
+  if(/^\(.+\)$/.test(t)||/^–[^–]+–$/.test(t)){
+    return `<div class="br">${esc(t)}</div>`;
+  }
+  return renderText(t);
 }
 
-function renderTextBlock(raw){
-  // Preserve internal line breaks as visual lines (poetry, lists, etc.)
-  const lines = raw.split('\n').map(l=>l.trim()).filter(Boolean);
-  if(lines.length === 1){
-    return `<div class="blk-text"><p>${addRef(escHtml(lines[0]))}</p></div>`;
-  }
-  // Multiple lines: render as <p> with <br> for continuity
-  const content = lines.map(l=>{
-    if(isRubric(l)) return `<em class="rubric">${escHtml(l)}</em>`;
-    return addRef(escHtml(l));
+function renderText(t){
+  const lines=t.split('\n').map(l=>l.trim()).filter(Boolean);
+  const html=lines.map(l=>{
+    if(/^\(.+\)$/.test(l)||/^–/.test(l)) return `<span class="br">${esc(l)}</span>`;
+    return addRef(esc(l));
   }).join('<br>');
-  return `<div class="blk-text"><p>${content}</p></div>`;
+  return `<div class="bt"><p>${html}</p></div>`;
 }
 
-function renderBlock(blk){
-  if(!blk) return '';
-
-  if(blk.type === 'merged'){
-    const hHTML = renderBlock(blk.heading);
-    const bHTML = renderBlock(blk.body);
-    return `<div class="blk-merged">${hHTML}${bHTML}</div>`;
-  }
-
-  if(blk.type === 'heading'){
-    const t = escHtml(blk.text.replace(/\n/g,' ').trim());
-    return `<div class="blk-heading">${t}</div>`;
-  }
-
-  if(blk.type === 'subheading'){
-    const m = blk.text.match(/^\s*(\d+)\.\s+(.*)/s);
-    const t = m ? `${m[1]}. ${escHtml(m[2].replace(/\n/g,' '))}` : escHtml(blk.text);
-    return `<div class="blk-sub">${t}</div>`;
-  }
-
-  if(blk.type === 'liturgical'){
-    return renderLiturgicalText(blk.text);
-  }
-
-  // Plain text
-  const t = blk.text || '';
-  // If it contains role markers even if classified as text, handle it
-  if(/^(Lector:|Todos:|Coro [AB]:)/m.test(t)){
-    return renderLiturgicalText(t);
-  }
-  return renderTextBlock(t);
-}
-
-// ═══════════════════════════════════════════
-//  MEASUREMENT PROBE
-// ═══════════════════════════════════════════
-let probe = null;
-function getProbe(w){
-  if(!probe){
-    probe = document.createElement('div');
-    probe.style.cssText='position:fixed;visibility:hidden;pointer-events:none;z-index:-1;overflow:hidden;top:0;left:0;';
-    probe.className = 'pg-body';
-    // Match exact page-body font settings
-    document.body.appendChild(probe);
-  }
-  probe.style.width = w+'px';
-  probe.style.height = '9999px';
-  return probe;
-}
-
-// ═══════════════════════════════════════════
-//  PAGINATION — measures each block in real DOM
-// ═══════════════════════════════════════════
-function paginate(secData){
-  const wrap = document.getElementById('book-wrap');
-  const W = wrap.clientWidth;
-  const H = wrap.clientHeight;
-
-  // page-body: top=18, bottom=38(foot)+4pad=42, left=26, right=20
-  const bodyW = W - 26 - 20;
-  const bodyH = H - 18 - 42;
-
-  const secI = BOOK_DATA.indexOf(secData);
-
-  // Build and measure section header
-  const hdrEl = document.createElement('div');
-  hdrEl.className = 'sec-hdr';
-  hdrEl.innerHTML = `
-    <div class="sec-roman">${ROMANS[secI]||''}</div>
-    <span class="sec-icon">${secData.icon}</span>
-    <div class="sec-ttl">${secData.title}</div>
-    <div class="sec-rule"></div>`;
-  // Temporarily append to measure
-  hdrEl.style.cssText='position:fixed;visibility:hidden;top:0;left:0;width:'+bodyW+'px';
-  document.body.appendChild(hdrEl);
-  const hdrH = hdrEl.offsetHeight + 12; // 12 = margin-bottom
-  document.body.removeChild(hdrEl);
-  const hdrHTML = hdrEl.outerHTML;
-
-  const pr = getProbe(bodyW);
-  const resultPages = [];
-  const blocks = secData.blocks;
-  let bi = 0;
-  let isFirst = true;
-
-  while(bi < blocks.length){
-    const availH = bodyH - (isFirst ? hdrH : 0);
-    let pageBlocksHTML = '';
-    pr.innerHTML = '';
-    const startBi = bi;
-
-    while(bi < blocks.length){
-      const html = renderBlock(blocks[bi]);
-      if(!html){ bi++; continue; }
-
-      const el = document.createElement('div');
-      el.innerHTML = html;
-      pr.appendChild(el);
-
-      if(pr.scrollHeight > availH){
-        // Overflows
-        if(bi === startBi){
-          // Can't avoid — force include this block alone
-          pageBlocksHTML += html;
-          bi++;
-        } else {
-          pr.removeChild(el);
-        }
-        break;
-      }
-      pageBlocksHTML += html;
-      bi++;
+function renderLiturg(t){
+  const lines=t.split('\n').map(l=>l.trim()).filter(Boolean);
+  let h='';
+  for(const ln of lines){
+    if(/^Lector:\s*/.test(ln)){
+      h+=`<span class="ln"><span class="rl">Lector: </span>${addRef(esc(ln.replace(/^Lector:\s*/,'')))}</span>`;
+    } else if(/^Todos:\s*/.test(ln)){
+      h+=`<span class="ln"><span class="rt">Todos: </span>${addRef(esc(ln.replace(/^Todos:\s*/,'')))}</span>`;
+    } else if(/^(Coro [AB]|Sacerdote):\s*/.test(ln)){
+      const m=ln.match(/^([^:]+):\s*(.*)/s);
+      h+=`<span class="ln"><span class="rc">${esc(m?m[1]:'')}: </span>${addRef(esc(m?m[2]:ln))}</span>`;
+    } else if(/^\(.+\)$/.test(ln)||/^–/.test(ln)){
+      h+=`<span class="ln"><span class="br">${esc(ln)}</span></span>`;
+    } else {
+      h+=`<span class="ln co">${addRef(esc(ln))}</span>`;
     }
-
-    const bodyContent = (isFirst ? hdrHTML : '') +
-      `<div class="pg-body">${pageBlocksHTML}</div>`;
-    resultPages.push(bodyContent);
-    isFirst = false;
   }
-
-  if(resultPages.length === 0) resultPages.push(`<div class="sec-hdr">${hdrHTML}</div>`);
-  return resultPages;
+  return `<div class="bl">${h}</div>`;
 }
 
-// ═══════════════════════════════════════════
-//  PAGE ELEMENT FACTORY
-// ═══════════════════════════════════════════
-function makePageEl(html, gNum){
-  const wrap = document.getElementById('book-wrap');
-  const W = wrap.clientWidth, H = wrap.clientHeight;
-  const el = document.createElement('div');
-  el.className = 'book-page';
-  el.style.cssText = `width:${W}px;height:${H}px`;
-  el.innerHTML = `
-    <div class="page-body">${html}</div>
-    <div class="page-foot">
-      <div class="pf-rule"></div>
-      <div class="pf-num">— ${gNum} —</div>
-      <div class="pf-rule"></div>
-    </div>`;
+// ── Paginator ──────────────────────────────────────────
+// Uses the #probe div (same padding/size as .pgc, lives inside #bw)
+// to measure real rendered heights.
+
+function paginateSection(secData, secI){
+  const probe=document.getElementById('probe');
+  const bw=document.getElementById('bw');
+
+  // Available height = bw height - footer (36px) - padding top(16) - padding bottom(8)
+  // probe already has correct padding via CSS. We just check scrollHeight vs clientHeight
+  const availH = bw.clientHeight - 36; // probe height is set to (bw.height - 36px) via CSS
+
+  // Build section header HTML
+  const hdrHTML=`<div class="sh">
+    <div class="sh-rom">${ROMANS[secI]||''}</div>
+    <span class="sh-ico">${secData.icon}</span>
+    <div class="sh-ttl">${esc(secData.title)}</div>
+    <div class="sh-rl"></div>
+  </div>`;
+
+  // Measure header height
+  probe.innerHTML=hdrHTML;
+  const hdrH=probe.scrollHeight;
+
+  const chunks=secData.chunks;
+  const pages=[];
+  let pageHTML='';
+  let usedH=0;
+  let isFirst=true;
+
+  probe.innerHTML='';
+
+  function startPage(){
+    probe.innerHTML='';
+    if(isFirst){
+      probe.innerHTML=hdrHTML;
+      usedH=hdrH;
+      pageHTML=hdrHTML;
+    } else {
+      usedH=0;
+      pageHTML='';
+    }
+  }
+
+  function closePage(){
+    pages.push(pageHTML);
+    isFirst=false;
+    startPage();
+  }
+
+  startPage();
+
+  for(let ci=0;ci<chunks.length;ci++){
+    const c=chunks[ci];
+    const html=chunkHTML(c);
+    if(!html) continue;
+
+    // Try adding this chunk to the probe
+    const tmp=document.createElement('div');
+    tmp.innerHTML=html;
+    probe.appendChild(tmp);
+    const newH=probe.scrollHeight;
+
+    if(newH > availH && usedH > 0){
+      // Doesn't fit — but handle heading orphan prevention:
+      // If this is a heading/subheading AND it would be the only new thing,
+      // check if next chunk also fits; if not, just let it overflow slightly
+      probe.removeChild(tmp);
+      closePage();
+      // Re-add to new page
+      probe.appendChild(tmp);
+      usedH=probe.scrollHeight;
+      pageHTML+=html;
+
+      // If this is heading, immediately also add next chunk to prevent orphan
+      if(c.type in {heading:1,subheading:1} && ci+1<chunks.length){
+        const nc=chunks[ci+1];
+        const nhtml=chunkHTML(nc);
+        if(nhtml){
+          const tmp2=document.createElement('div');
+          tmp2.innerHTML=nhtml;
+          probe.appendChild(tmp2);
+          if(probe.scrollHeight <= availH){
+            pageHTML+=nhtml;
+            usedH=probe.scrollHeight;
+            ci++;
+          } else {
+            probe.removeChild(tmp2);
+          }
+        }
+      }
+    } else {
+      usedH=newH;
+      pageHTML+=html;
+    }
+  }
+
+  // Close last page
+  if(pageHTML.replace(hdrHTML,'').trim() || pages.length===0){
+    pages.push(pageHTML);
+  }
+
+  return pages;
+}
+
+// ── Build full page DOM element ────────────────────────
+function makePg(secI, pgI){
+  const bw=document.getElementById('bw');
+  const W=bw.clientWidth, H=bw.clientHeight;
+  const html=secPages[secI][pgI];
+  const gn=secOff[secI]+pgI+1;
+  const el=document.createElement('div');
+  el.className='pg';
+  el.innerHTML=`<div class="pgc ct">${html}</div>
+    <div class="pgf"><div class="pfr"></div><div class="pfn">— ${gn} —</div><div class="pfr"></div></div>`;
   return el;
 }
 
-// ═══════════════════════════════════════════
-//  RENDER CURRENT PAGE (instant)
-// ═══════════════════════════════════════════
 function renderPage(){
-  const wrap = document.getElementById('book-wrap');
-  wrap.querySelectorAll('.book-page').forEach(e=>e.remove());
-  const el = makePageEl(pages[pgIdx], gNum());
-  wrap.insertBefore(el, document.getElementById('curl-canvas'));
+  const bw=document.getElementById('bw');
+  bw.querySelectorAll('.pg').forEach(e=>e.remove());
+  bw.insertBefore(makePg(si,pi), document.getElementById('cc'));
   updateUI();
 }
 
-function gNum(){ return secOffset[secIdx]+pgIdx+1; }
-function totalPages(){ return totalPgCount; }
-function canNext(){ return pgIdx<pages.length-1 || secIdx<BOOK_DATA.length-1; }
-function canPrev(){ return pgIdx>0 || secIdx>0; }
-
-// ═══════════════════════════════════════════
-//  PRE-RENDER NEIGHBOR
-// ═══════════════════════════════════════════
+// ── Neighbor (page behind during curl) ────────────────
 function preNeighbor(dir){
   dropNeighbor();
-  let html=null, n=0;
+  let ns,np;
   if(dir===1){
-    if(pgIdx+1<pages.length){ html=pages[pgIdx+1]; n=secOffset[secIdx]+pgIdx+2; }
-    else if(secIdx+1<BOOK_DATA.length){ const s=sectionPages[secIdx+1]; if(s?.length>0){html=s[0];n=secOffset[secIdx+1]+1;} }
+    if(pi+1<curPages().length){ns=si;np=pi+1;}
+    else if(si+1<BOOK_DATA.length){ns=si+1;np=0;}
+    else return;
   } else {
-    if(pgIdx>0){ html=pages[pgIdx-1]; n=secOffset[secIdx]+pgIdx; }
-    else if(secIdx>0){ const sp=sectionPages[secIdx-1]; if(sp?.length>0){const li=sp.length-1;html=sp[li];n=secOffset[secIdx-1]+li+1;} }
+    if(pi>0){ns=si;np=pi-1;}
+    else if(si>0){ns=si-1;np=secPages[si-1].length-1;}
+    else return;
   }
-  if(!html) return;
-  const wrap=document.getElementById('book-wrap');
-  neighborEl=makePageEl(html,n);
-  const cur=wrap.querySelector('.book-page');
-  wrap.insertBefore(neighborEl, cur||document.getElementById('curl-canvas'));
+  const bw=document.getElementById('bw');
+  neighbor=makePg(ns,np);
+  const cur=bw.querySelector('.pg');
+  bw.insertBefore(neighbor, cur||document.getElementById('cc'));
 }
-function dropNeighbor(){ neighborEl?.remove(); neighborEl=null; }
+function dropNeighbor(){ neighbor?.remove(); neighbor=null }
 
-// ═══════════════════════════════════════════
-//  COMMIT NAVIGATION
-// ═══════════════════════════════════════════
 function commit(dir){
   if(dir===1){
-    if(pgIdx+1<pages.length) pgIdx++;
-    else if(secIdx+1<BOOK_DATA.length){ secIdx++; pages=sectionPages[secIdx]; pgIdx=0; }
+    if(pi+1<curPages().length) pi++;
+    else if(si+1<BOOK_DATA.length){ si++;pi=0; }
   } else {
-    if(pgIdx>0) pgIdx--;
-    else if(secIdx>0){ secIdx--; pages=sectionPages[secIdx]; pgIdx=pages.length-1; }
+    if(pi>0) pi--;
+    else if(si>0){ si--;pi=secPages[si].length-1; }
   }
-  const wrap=document.getElementById('book-wrap');
-  wrap.querySelectorAll('.book-page').forEach(el=>{ if(el!==neighborEl) el.remove(); });
-  neighborEl=null;
-  updateUI();
+  const bw=document.getElementById('bw');
+  bw.querySelectorAll('.pg').forEach(el=>{ if(el!==neighbor)el.remove(); });
+  neighbor=null; updateUI();
 }
 
-// ═══════════════════════════════════════════
-//  CANVAS / CURL
-// ═══════════════════════════════════════════
-const canvas=document.getElementById('curl-canvas');
-const ctx=canvas.getContext('2d');
-function resizeCanvas(){
-  const w=document.getElementById('book-wrap');
-  canvas.width=w.clientWidth; canvas.height=w.clientHeight;
-}
+// ── Curl canvas ────────────────────────────────────────
+const cv=document.getElementById('cc'), cx=cv.getContext('2d');
+function resizeCv(){ cv.width=document.getElementById('bw').clientWidth; cv.height=document.getElementById('bw').clientHeight }
 
-function drawCurl(progress, dir){
-  const W=canvas.width, H=canvas.height;
-  ctx.clearRect(0,0,W,H);
-  if(progress<=0) return;
-
+function drawCurl(p,dir){
+  const W=cv.width,H=cv.height; cx.clearRect(0,0,W,H); if(p<=0) return;
   if(dir===1){
-    // Forward: right edge peels back
-    const fx = W - progress*W;
-    const sw = Math.min(55, (W-fx)*0.55);
-    // Shadow on page below
-    const sg=ctx.createLinearGradient(fx-sw,0,fx,0);
-    sg.addColorStop(0,'rgba(0,0,0,0)'); sg.addColorStop(1,'rgba(0,0,0,0.3)');
-    ctx.fillStyle=sg; ctx.fillRect(fx-sw,0,sw,H);
-    // Peel flap
-    ctx.save(); ctx.beginPath(); ctx.rect(fx,0,W-fx,H); ctx.clip();
-    const pg=ctx.createLinearGradient(fx,0,W,0);
-    pg.addColorStop(0,'#BFA870'); pg.addColorStop(0.06,'#D9C090');
-    pg.addColorStop(0.25,'#ECD8AA'); pg.addColorStop(1,'#F8EED2');
-    ctx.fillStyle=pg; ctx.fillRect(fx,0,W-fx,H);
-    // Light highlight at fold
-    const hl=Math.min(18,(W-fx)*0.15);
-    const hg=ctx.createLinearGradient(fx,0,fx+hl,0);
-    hg.addColorStop(0,'rgba(255,252,235,0.55)'); hg.addColorStop(1,'rgba(255,252,235,0)');
-    ctx.fillStyle=hg; ctx.fillRect(fx,0,hl,H);
-    ctx.restore();
-    // Crease
-    ctx.strokeStyle='rgba(100,70,20,0.18)'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(fx,0); ctx.lineTo(fx,H); ctx.stroke();
+    const fx=W-p*W, sw=Math.min(55,fx*.4);
+    const sg=cx.createLinearGradient(fx-sw,0,fx,0);
+    sg.addColorStop(0,'rgba(0,0,0,0)');sg.addColorStop(1,'rgba(0,0,0,.25)');
+    cx.fillStyle=sg;cx.fillRect(fx-sw,0,sw,H);
+    cx.save();cx.beginPath();cx.rect(fx,0,W-fx,H);cx.clip();
+    const pg=cx.createLinearGradient(fx,0,W,0);
+    pg.addColorStop(0,'#B8986A');pg.addColorStop(.07,'#D4B882');pg.addColorStop(.3,'#EBDAA8');pg.addColorStop(1,'#F9EFD4');
+    cx.fillStyle=pg;cx.fillRect(fx,0,W-fx,H);
+    const hl=Math.min(14,(W-fx)*.13);
+    const hg=cx.createLinearGradient(fx,0,fx+hl,0);
+    hg.addColorStop(0,'rgba(255,250,230,.48)');hg.addColorStop(1,'rgba(255,250,230,0)');
+    cx.fillStyle=hg;cx.fillRect(fx,0,hl,H);cx.restore();
+    cx.strokeStyle='rgba(100,68,18,.13)';cx.lineWidth=1;cx.beginPath();cx.moveTo(fx,0);cx.lineTo(fx,H);cx.stroke();
   } else {
-    // Backward: left edge peels
-    const fx = progress*W;
-    const sw = Math.min(55, fx*0.55);
-    const sg=ctx.createLinearGradient(fx,0,fx+sw,0);
-    sg.addColorStop(0,'rgba(0,0,0,0.3)'); sg.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=sg; ctx.fillRect(fx,0,sw,H);
-    ctx.save(); ctx.beginPath(); ctx.rect(0,0,fx,H); ctx.clip();
-    const pg=ctx.createLinearGradient(0,0,fx,0);
-    pg.addColorStop(0,'#F8EED2'); pg.addColorStop(0.75,'#ECD8AA');
-    pg.addColorStop(0.94,'#D9C090'); pg.addColorStop(1,'#BFA870');
-    ctx.fillStyle=pg; ctx.fillRect(0,0,fx,H);
-    const hl=Math.min(18,fx*0.15);
-    const hg=ctx.createLinearGradient(fx-hl,0,fx,0);
-    hg.addColorStop(0,'rgba(255,252,235,0)'); hg.addColorStop(1,'rgba(255,252,235,0.55)');
-    ctx.fillStyle=hg; ctx.fillRect(fx-hl,0,hl,H);
-    ctx.restore();
-    ctx.strokeStyle='rgba(100,70,20,0.18)'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(fx,0); ctx.lineTo(fx,H); ctx.stroke();
+    const fx=p*W, sw=Math.min(55,fx*.4);
+    const sg=cx.createLinearGradient(fx,0,fx+sw,0);
+    sg.addColorStop(0,'rgba(0,0,0,.25)');sg.addColorStop(1,'rgba(0,0,0,0)');
+    cx.fillStyle=sg;cx.fillRect(fx,0,sw,H);
+    cx.save();cx.beginPath();cx.rect(0,0,fx,H);cx.clip();
+    const pg=cx.createLinearGradient(0,0,fx,0);
+    pg.addColorStop(0,'#F9EFD4');pg.addColorStop(.7,'#EBDAA8');pg.addColorStop(.93,'#D4B882');pg.addColorStop(1,'#B8986A');
+    cx.fillStyle=pg;cx.fillRect(0,0,fx,H);
+    const hl=Math.min(14,fx*.13);
+    const hg=cx.createLinearGradient(fx-hl,0,fx,0);
+    hg.addColorStop(0,'rgba(255,250,230,0)');hg.addColorStop(1,'rgba(255,250,230,.48)');
+    cx.fillStyle=hg;cx.fillRect(fx-hl,0,hl,H);cx.restore();
+    cx.strokeStyle='rgba(100,68,18,.13)';cx.lineWidth=1;cx.beginPath();cx.moveTo(fx,0);cx.lineTo(fx,H);cx.stroke();
   }
 }
 
-// ═══════════════════════════════════════════
-//  TOUCH HANDLING
-// ═══════════════════════════════════════════
-const bookArea=document.getElementById('book-area');
-
-bookArea.addEventListener('touchstart',e=>{
-  if(e.touches.length!==1) return;
-  dragStartX=e.touches[0].clientX;
-  dragStartY=e.touches[0].clientY;
-  isDragging=false; curlDir=0; curlProg=0;
+// ── Touch ──────────────────────────────────────────────
+const ba=document.getElementById('ba');
+ba.addEventListener('touchstart',e=>{ if(e.touches.length!==1)return; dragX=e.touches[0].clientX; dragging=false;cdir=0;cprog=0; },{passive:true});
+ba.addEventListener('touchmove',e=>{
+  if(e.touches.length!==1)return;
+  const x=e.touches[0].clientX,y=e.touches[0].clientY;
+  const dx=x-dragX;
+  if(!dragging){
+    const adx=Math.abs(dx);
+    if(adx<8)return;
+    const d=dx<0?1:-1;
+    if(d===1&&!canNext())return;
+    if(d===-1&&!canPrev())return;
+    dragging=true;cdir=d;preNeighbor(d);
+  }
+  cprog=Math.min(Math.abs(x-dragX)/cv.width,.98);
+  cancelAnimationFrame(craf);
+  craf=requestAnimationFrame(()=>drawCurl(cprog,cdir));
+},{passive:true});
+ba.addEventListener('touchend',()=>{
+  if(!dragging)return; dragging=false;
+  const done=cprog>.3, tgt=done?1:0, s=cprog, t0=performance.now(), dur=done?200:160, d=cdir;
+  function go(now){ const t=Math.min((now-t0)/dur,1),e=t<.5?2*t*t:-1+(4-2*t)*t;
+    cprog=s+(tgt-s)*e; drawCurl(cprog,d);
+    if(t<1)craf=requestAnimationFrame(go);
+    else{ cx.clearRect(0,0,cv.width,cv.height);cprog=0; done?commit(d):dropNeighbor(); }
+  }
+  craf=requestAnimationFrame(go);
 },{passive:true});
 
-bookArea.addEventListener('touchmove',e=>{
-  if(e.touches.length!==1) return;
-  const x=e.touches[0].clientX, y=e.touches[0].clientY;
-  const dx=x-dragStartX, dy=y-dragStartY;
-  if(!isDragging){
-    if(Math.abs(dx)<8) return;
-    if(Math.abs(dy)>Math.abs(dx)+6) return; // vertical swipe
-    const dir=dx<0?1:-1;
-    if(dir===1&&!canNext()) return;
-    if(dir===-1&&!canPrev()) return;
-    isDragging=true; curlDir=dir;
-    preNeighbor(dir);
-  }
-  curlProg=Math.min(Math.abs(x-dragStartX)/canvas.width,0.98);
-  cancelAnimationFrame(curlRaf);
-  curlRaf=requestAnimationFrame(()=>drawCurl(curlProg,curlDir));
-},{passive:true});
+// ── Button nav ─────────────────────────────────────────
+function navNext(){if(canNext())flip(1)}
+function navPrev(){if(canPrev())flip(-1)}
+function flip(dir){ preNeighbor(dir); const t0=performance.now(),dur=400;
+  function a(now){ const t=Math.min((now-t0)/dur,1),e=t<.5?2*t*t:-1+(4-2*t)*t;
+    cprog=e;drawCurl(cprog,dir);
+    if(t<1)craf=requestAnimationFrame(a);
+    else{cx.clearRect(0,0,cv.width,cv.height);cprog=0;commit(dir);} }
+  craf=requestAnimationFrame(a); }
 
-bookArea.addEventListener('touchend',e=>{
-  if(!isDragging) return;
-  isDragging=false;
-  const committed=curlProg>0.3;
-  const target=committed?1.0:0.0, start=curlProg;
-  const t0=performance.now(), dur=committed?210:160, dir=curlDir;
-  function animEnd(now){
-    const t=Math.min((now-t0)/dur,1);
-    const e2=t<.5?2*t*t:-1+(4-2*t)*t;
-    curlProg=start+(target-start)*e2;
-    drawCurl(curlProg,dir);
-    if(t<1){ curlRaf=requestAnimationFrame(animEnd); }
-    else {
-      ctx.clearRect(0,0,canvas.width,canvas.height); curlProg=0;
-      if(committed) commit(dir); else dropNeighbor();
-    }
-  }
-  curlRaf=requestAnimationFrame(animEnd);
-},{passive:true});
-
-// ═══════════════════════════════════════════
-//  BUTTON NAVIGATION
-// ═══════════════════════════════════════════
-function navNext(){ if(canNext()) animFlip(1); }
-function navPrev(){ if(canPrev()) animFlip(-1); }
-function animFlip(dir){
-  preNeighbor(dir);
-  const t0=performance.now(), dur=400;
-  function anim(now){
-    const t=Math.min((now-t0)/dur,1);
-    const e=t<.5?2*t*t:-1+(4-2*t)*t;
-    curlProg=e; drawCurl(curlProg,dir);
-    if(t<1) curlRaf=requestAnimationFrame(anim);
-    else { ctx.clearRect(0,0,canvas.width,canvas.height); curlProg=0; commit(dir); }
-  }
-  curlRaf=requestAnimationFrame(anim);
-}
-
-// ═══════════════════════════════════════════
-//  SECTION JUMP
-// ═══════════════════════════════════════════
-function goToSection(idx){
-  closeMenu();
-  if(idx===secIdx&&pgIdx===0) return;
-  const f=document.getElementById('sec-flash');
-  document.getElementById('sf-icon').textContent=BOOK_DATA[idx].icon;
-  document.getElementById('sf-title').textContent=BOOK_DATA[idx].title;
+// ── Section jump ───────────────────────────────────────
+function goSec(idx){ closeMenu(); if(idx===si&&pi===0)return;
+  const f=document.getElementById('sf');
+  document.getElementById('sfi').textContent=BOOK_DATA[idx].icon;
+  document.getElementById('sft').textContent=BOOK_DATA[idx].title;
   f.classList.add('on');
-  setTimeout(()=>{ f.classList.remove('on'); secIdx=idx; pgIdx=0; pages=sectionPages[idx]; renderPage(); },550);
-}
+  setTimeout(()=>{f.classList.remove('on');si=idx;pi=0;renderPage();},500); }
 
-function handleProg(e){
-  const r=e.currentTarget.getBoundingClientRect();
-  const pct=(e.clientX-r.left)/r.width;
-  const tgt=Math.floor(pct*totalPages());
-  let s=BOOK_DATA.length-1;
-  for(let i=0;i<BOOK_DATA.length;i++){ if(secOffset[i]>tgt){s=i-1;break;} }
-  s=Math.max(0,s);
-  const p=Math.max(0,tgt-secOffset[s]);
-  secIdx=s; pages=sectionPages[s]; pgIdx=Math.min(p,pages.length-1);
-  renderPage();
-}
+function handleProg(e){ const r=e.currentTarget.getBoundingClientRect();
+  const pct=(e.clientX-r.left)/r.width, tgt=Math.min(Math.floor(pct*totalPg),totalPg-1);
+  let acc=0;
+  for(let i=0;i<BOOK_DATA.length;i++){ const n=secPages[i].length; if(acc+n>tgt){si=i;pi=tgt-acc;break;} acc+=n; }
+  pi=Math.max(0,Math.min(pi,secPages[si].length-1)); renderPage(); }
 
-// ═══════════════════════════════════════════
-//  UI UPDATE
-// ═══════════════════════════════════════════
+// ── UI ──────────────────────────────────────────────────
 function updateUI(){
-  document.getElementById('tb-title').textContent=BOOK_DATA[secIdx].title;
-  document.getElementById('tb-pages').textContent=`${pgIdx+1}/${pages.length}`;
-  const g=gNum()-1, tp=totalPages();
-  document.getElementById('prog-fill').style.width=((g+1)/tp*100).toFixed(1)+'%';
-  document.getElementById('prog-lbl').textContent=`Página ${g+1} de ${tp}`;
-  document.getElementById('prev-btn').disabled=!canPrev();
-  document.getElementById('next-btn').disabled=!canNext();
-  document.querySelectorAll('.sm-item').forEach((el,i)=>el.classList.toggle('active',i===secIdx));
+  document.getElementById('tbt').textContent=BOOK_DATA[si].title;
+  document.getElementById('tbp').textContent=`${pi+1}/${curPages().length}`;
+  const g=globalN(),tp=totalPg;
+  document.getElementById('pfill').style.width=(g/tp*100).toFixed(1)+'%';
+  document.getElementById('plbl').textContent=`Página ${g} de ${tp}`;
+  document.getElementById('prv').disabled=!canPrev();
+  document.getElementById('nxt').disabled=!canNext();
+  document.querySelectorAll('.smi').forEach((el,i)=>el.classList.toggle('active',i===si));
 }
 
-// ═══════════════════════════════════════════
-//  MENU
-// ═══════════════════════════════════════════
+// ── Menu ───────────────────────────────────────────────
 function buildMenu(){
-  const list=document.getElementById('sm-list');
-  BOOK_DATA.forEach((sec,i)=>{
-    const el=document.createElement('div'); el.className='sm-item';
-    el.innerHTML=`<div class="sm-icon">${sec.icon}</div><div><div class="sm-lbl">${sec.title}</div><div class="sm-pg">${sectionPages[i].length} páginas</div></div>`;
-    el.addEventListener('click',()=>goToSection(i));
-    list.appendChild(el);
+  const l=document.getElementById('sml');
+  BOOK_DATA.forEach((s,i)=>{
+    const el=document.createElement('div');el.className='smi';
+    el.innerHTML=`<div class="ic">${s.icon}</div><div><div class="lb">${esc(s.title)}</div><div class="pg">${secPages[i].length} páginas</div></div>`;
+    el.addEventListener('click',()=>goSec(i));l.appendChild(el);
   });
 }
-function toggleMenu(){
-  menuOpen=!menuOpen;
-  document.getElementById('sidemenu').classList.toggle('on',menuOpen);
-  document.getElementById('overlay').classList.toggle('on',menuOpen);
-  document.getElementById('menu-btn').classList.toggle('open',menuOpen);
-}
-function closeMenu(){
-  menuOpen=false;
-  document.getElementById('sidemenu').classList.remove('on');
-  document.getElementById('overlay').classList.remove('on');
-  document.getElementById('menu-btn').classList.remove('open');
-}
+function toggleMenu(){ menuOpen=!menuOpen; document.getElementById('sm').classList.toggle('on',menuOpen); document.getElementById('ov').classList.toggle('on',menuOpen); document.getElementById('mb').classList.toggle('open',menuOpen); }
+function closeMenu(){ menuOpen=false; document.getElementById('sm').classList.remove('on'); document.getElementById('ov').classList.remove('on'); document.getElementById('mb').classList.remove('open'); }
 
-// ═══════════════════════════════════════════
-//  KEYBOARD
-// ═══════════════════════════════════════════
+// ── Keyboard ───────────────────────────────────────────
 document.addEventListener('keydown',e=>{
-  if(e.key==='ArrowRight'||e.key==='ArrowDown') navNext();
-  else if(e.key==='ArrowLeft'||e.key==='ArrowUp') navPrev();
-  else if(e.key==='Escape') closeMenu();
-});
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')navNext();
+  else if(e.key==='ArrowLeft'||e.key==='ArrowUp')navPrev();
+  else if(e.key==='Escape')closeMenu(); });
 
-// ═══════════════════════════════════════════
-//  COVER OPEN
-// ═══════════════════════════════════════════
+// ── Open cover ─────────────────────────────────────────
 function openApp(){
   document.getElementById('cover').classList.add('out');
   setTimeout(()=>{
     document.getElementById('cover').style.display='none';
     document.getElementById('app').classList.add('on');
-    initBook();
+    init();
   },800);
 }
 
-// ═══════════════════════════════════════════
-//  INIT BOOK
-// ═══════════════════════════════════════════
-function initBook(){
-  resizeCanvas();
-  sectionPages=BOOK_DATA.map(sec=>paginate(sec));
-  secOffset=[]; let off=0;
-  sectionPages.forEach(sp=>{ secOffset.push(off); off+=sp.length; });
-  totalPgCount=off;
-  pages=sectionPages[0];
+// ── Init ───────────────────────────────────────────────
+function init(){
+  resizeCv();
+  // Paginate all sections using DOM measurement
+  secPages=BOOK_DATA.map((s,i)=>paginateSection(s,i));
+  secOff=[];let off=0;
+  secPages.forEach(sp=>{secOff.push(off);off+=sp.length;});
+  totalPg=off;
   buildMenu();
   renderPage();
 }
 
-// ═══════════════════════════════════════════
-//  RESIZE
-// ═══════════════════════════════════════════
-let resizeTimer=null;
+// ── Resize ─────────────────────────────────────────────
+let rt=null;
 window.addEventListener('resize',()=>{
-  clearTimeout(resizeTimer);
-  resizeTimer=setTimeout(()=>{
-    if(!document.getElementById('app').classList.contains('on')) return;
-    probe=null;
-    resizeCanvas();
-    sectionPages=BOOK_DATA.map(sec=>paginate(sec));
-    secOffset=[]; let off=0;
-    sectionPages.forEach(sp=>{ secOffset.push(off); off+=sp.length; });
-    totalPgCount=off;
-    pages=sectionPages[secIdx];
-    pgIdx=Math.min(pgIdx,pages.length-1);
+  clearTimeout(rt);rt=setTimeout(()=>{
+    if(!document.getElementById('app').classList.contains('on'))return;
+    resizeCv();
+    secPages=BOOK_DATA.map((s,i)=>paginateSection(s,i));
+    secOff=[];let off=0;secPages.forEach(sp=>{secOff.push(off);off+=sp.length;});
+    totalPg=off;
+    pi=Math.min(pi,secPages[si].length-1);
     renderPage();
-  },250);
+  },200);
 });
 
-// ═══════════════════════════════════════════
-//  PWA
-// ═══════════════════════════════════════════
-window.addEventListener('beforeinstallprompt',e=>{
-  e.preventDefault(); deferredPrompt=e;
-  setTimeout(()=>{ document.getElementById('install-prompt').style.display='block'; },6000);
-});
-function installApp(){
-  if(!deferredPrompt) return;
-  deferredPrompt.prompt();
-  deferredPrompt.userChoice.then(()=>{ deferredPrompt=null; document.getElementById('install-prompt').style.display='none'; });
-}
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
-}
+// ── PWA ────────────────────────────────────────────────
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;setTimeout(()=>{document.getElementById('ip').style.display='block';},6000);});
+function installApp(){if(!dp)return;dp.prompt();dp.userChoice.then(()=>{dp=null;document.getElementById('ip').style.display='none';});}
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 </script>
 </body>
 </html>
