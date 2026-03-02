@@ -2,10 +2,9 @@ const BOOK_DATA = [
   {
     "title": "Oración de la Mañana",
     "icon": "🌅",
-    "color": "#D4A843",
-    "blocks": [
+    "chunks": [
       {
-        "type": "text",
+        "type": "heading",
         "text": "ORACIONES\nDE LA\nMAÑANA"
       },
       {
@@ -29,15 +28,12 @@ const BOOK_DATA = [
         "text": "Por eso, Señor quiero que mi nuevo día\n-el que TÚ me regalas-\nsea íntegro para Ti, ¡un día lleno de Dios!\n    1. PRIMERA FÓRMULA"
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "OFRECIMIENTO DE OBRAS"
-        },
-        "body": {
-          "type": "text",
-          "text": "(de pie)"
-        }
+        "type": "heading",
+        "text": "OFRECIMIENTO DE OBRAS"
+      },
+      {
+        "type": "text",
+        "text": "(de pie)"
       },
       {
         "type": "liturgical",
@@ -48,26 +44,20 @@ const BOOK_DATA = [
         "text": "Todos:\nUnidos por la gracia a todos los miembros de tu Iglesia Universal te ofrecemos, Señor, nuestro ser y nuestro obrar, nuestro pensar, sentir y querer, a fin de que todo sirva a tu gloria en la obra de la extensión de tu Reino."
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "A LA VIRGEN SANTÍSIMA"
-        },
-        "body": {
-          "type": "liturgical",
-          "text": "Todos:\n¡Señora y Madre mía! yo me ofrezco del todo a Ti. Y, en prueba de mi filial afecto, te consagro en este día mis ojos, mis oídos, mi lengua, mi corazón, en una palabra, todo mi ser. Ya que soy todo tuyo, Madre de bondad, guárdame y defiéndeme como cosa y posesión tuya. Amén."
-        }
+        "type": "heading",
+        "text": "A LA VIRGEN SANTÍSIMA"
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "ÁNGELUS"
-        },
-        "body": {
-          "type": "text",
-          "text": "(En el Tiempo de Pascua se reza el “Regina Coeli” en vez del Ángelus. Pág. 11)"
-        }
+        "type": "liturgical",
+        "text": "Todos:\n¡Señora y Madre mía! yo me ofrezco del todo a Ti. Y, en prueba de mi filial afecto, te consagro en este día mis ojos, mis oídos, mi lengua, mi corazón, en una palabra, todo mi ser. Ya que soy todo tuyo, Madre de bondad, guárdame y defiéndeme como cosa y posesión tuya. Amén."
+      },
+      {
+        "type": "heading",
+        "text": "ÁNGELUS"
+      },
+      {
+        "type": "text",
+        "text": "(En el Tiempo de Pascua se reza el “Regina Coeli” en vez del Ángelus. Pág. 11)"
       },
       {
         "type": "liturgical",
@@ -98,8 +88,12 @@ const BOOK_DATA = [
         "text": "Lector:\nRuega por nosotros, Santa Madre de Dios.\nTodos: \nPara que seamos dignos de alcanzar las promesas de Nuestro Señor Jesucristo."
       },
       {
+        "type": "heading",
+        "text": "ORACIÓN"
+      },
+      {
         "type": "liturgical",
-        "text": "ORACIÓN\nLector:\nInfunde, Señor, tu gracia en nuestros corazones, para que los que hemos conocido, por el anuncio del ángel, la Encarnación de tu Hijo Jesucristo, lleguemos, por su pasión y su cruz, a la gloria de la resurrección. Por el mismo Jesucristo Nuestro Señor.\nTodos:\nAmén."
+        "text": "Lector:\nInfunde, Señor, tu gracia en nuestros corazones, para que los que hemos conocido, por el anuncio del ángel, la Encarnación de tu Hijo Jesucristo, lleguemos, por su pasión y su cruz, a la gloria de la resurrección. Por el mismo Jesucristo Nuestro Señor.\nTodos:\nAmén."
       },
       {
         "type": "liturgical",
@@ -130,15 +124,12 @@ const BOOK_DATA = [
         "text": "Lector:\nOremos.\nOh Dios, que has alegrado al mundo por la resurrección de tu Hijo, Nuestro Señor Jesucristo: concédenos, por la intercesión de la Virgen María, su Madre, llegar a las alegrías de la eternidad. Por el mismo Jesucristo Nuestro Señor.\nTodos:\nAmén.\n    2. SEGUNDA FÓRMULA"
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "LAUDES"
-        },
-        "body": {
-          "type": "liturgical",
-          "text": "Invocación inicial\n(de pie)\nLector:\n Dios mío, ven en mi auxilio.\nTodos:\nSeñor, date prisa en socorrerme."
-        }
+        "type": "heading",
+        "text": "LAUDES"
+      },
+      {
+        "type": "liturgical",
+        "text": "Invocación inicial\n(de pie)\nLector:\n Dios mío, ven en mi auxilio.\nTodos:\nSeñor, date prisa en socorrerme."
       },
       {
         "type": "liturgical",
@@ -265,11 +256,14 @@ const BOOK_DATA = [
   {
     "title": "Meditación",
     "icon": "🕊️",
-    "color": "#7B9EA6",
-    "blocks": [
+    "chunks": [
+      {
+        "type": "heading",
+        "text": "MEDITACION"
+      },
       {
         "type": "text",
-        "text": "MEDITACION\n“El secreto de toda sabiduría –escribió San Agustín– está en conocerte a Ti, Señor, y en conocerme a mí”."
+        "text": "“El secreto de toda sabiduría –escribió San Agustín– está en conocerte a Ti, Señor, y en conocerme a mí”."
       },
       {
         "type": "text",
@@ -304,7 +298,7 @@ const BOOK_DATA = [
         "text": "(sentados)\n–Toma tu libro, tu evangelio, lee y medita.–"
       },
       {
-        "type": "text",
+        "type": "heading",
         "text": "ACCIÓN DE GRACIAS\nDESPUÉS DE LA MEDITACIÓN"
       },
       {
@@ -320,11 +314,14 @@ const BOOK_DATA = [
   {
     "title": "Santa Misa",
     "icon": "✝️",
-    "color": "#8B1A1A",
-    "blocks": [
+    "chunks": [
+      {
+        "type": "heading",
+        "text": "LA\nSANTA MISA\nEL CRISTIANO"
+      },
       {
         "type": "text",
-        "text": "LA\nSANTA MISA\nEL CRISTIANO \ndebe sentir ansias redentoras."
+        "text": "debe sentir ansias redentoras."
       },
       {
         "type": "text",
@@ -351,41 +348,32 @@ const BOOK_DATA = [
         "text": "Recoge tus sacrificios de este día,\nlos pecados de tu pueblo,\nlas ansias de tu familia,\nel anhelo de toda la Humanidad."
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "Y VIVE TU .... SANTA MISA."
-        },
-        "body": {
-          "type": "subheading",
-          "text": "1. YO PECADOR"
-        }
+        "type": "heading",
+        "text": "Y VIVE TU .... SANTA MISA."
+      },
+      {
+        "type": "heading",
+        "text": "1. YO PECADOR"
       },
       {
         "type": "text",
         "text": "Yo confieso ante Dios Todopoderoso y ante ustedes hermanos, que he pecado mucho de pensamiento, palabra, obra y omisión: Por mi culpa, por mi culpa, por mi gran culpa. Por eso ruego a Santa María, siempre Virgen, a los Ángeles, a los Santos y a ustedes hermanos, que intercedan por mí ante Dios, Nuestro Señor."
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "2. GLORIA"
-        },
-        "body": {
-          "type": "text",
-          "text": "Gloria a Dios en el cielo,\ny en la tierra paz a los hombres\nque ama el Señor.\nPor tu inmensa gloria\nte alabamos,\nte bendecimos,\nte adoramos,\nte glorificamos,\nte damos gracias.\nSeñor Dios, Rey Celestial,\nDios Padre Todopoderoso.\nSeñor Hijo único, Jesucristo,\nSeñor Dios, Cordero de Dios,\nHijo del Padre:\nTú que quitas el pecado del mundo,\nten piedad de nosotros;\nTú que quitas el pecado del mundo,\natiende nuestra súplica;\nTú que estás sentado a la derecha \ndel Padre,\nten piedad de nosotros;\nporque sólo Tú eres Santo,\nsólo Tú, Señor,\nsólo Tú Altísimo Jesucristo,\ncon el Espíritu Santo\nen la gloria de Dios Padre.\nAmén."
-        }
+        "type": "heading",
+        "text": "2. GLORIA"
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "3. CREDO"
-        },
-        "body": {
-          "type": "text",
-          "text": "Creo en un solo Dios,\nPadre Todopoderoso,\nCreador de cielo y tierra,\nde todo lo visible y lo invisible."
-        }
+        "type": "text",
+        "text": "Gloria a Dios en el cielo,\ny en la tierra paz a los hombres\nque ama el Señor.\nPor tu inmensa gloria\nte alabamos,\nte bendecimos,\nte adoramos,\nte glorificamos,\nte damos gracias.\nSeñor Dios, Rey Celestial,\nDios Padre Todopoderoso.\nSeñor Hijo único, Jesucristo,\nSeñor Dios, Cordero de Dios,\nHijo del Padre:\nTú que quitas el pecado del mundo,\nten piedad de nosotros;\nTú que quitas el pecado del mundo,\natiende nuestra súplica;\nTú que estás sentado a la derecha \ndel Padre,\nten piedad de nosotros;\nporque sólo Tú eres Santo,\nsólo Tú, Señor,\nsólo Tú Altísimo Jesucristo,\ncon el Espíritu Santo\nen la gloria de Dios Padre.\nAmén."
+      },
+      {
+        "type": "heading",
+        "text": "3. CREDO"
+      },
+      {
+        "type": "text",
+        "text": "Creo en un solo Dios,\nPadre Todopoderoso,\nCreador de cielo y tierra,\nde todo lo visible y lo invisible."
       },
       {
         "type": "text",
@@ -400,44 +388,35 @@ const BOOK_DATA = [
         "text": "Creo en la Iglesia,\nque es una, santa, católica y apostólica.\nConfieso que hay un solo Bautismo\npara el perdón de los pecados.\nEspero la resurrección de los muertos\ny la vida del mundo futuro.\nAmén."
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "4. CREDO APOSTÓLICO"
-        },
-        "body": {
-          "type": "text",
-          "text": "Creo en Dios, PADRE Todopoderoso, \nCreador del cielo y de la tierra.\nCreo en Jesucristo, su único HIJO, \nNuestro Señor,\nque fue concebido por obra y gracia \ndel Espíritu Santo;\nnació de Santa María Virgen,\npadeció bajo el poder de Poncio Pilato;\nfue crucificado, muerto y sepultado;\ndescendió a los infiernos;\nal tercer día resucitó de entre los \nmuertos; subió a los cielos\ny está a la derecha de Dios, Padre \nTodopoderoso;\nDesde allí ha de venir a juzgar a los \nvivos y a los muertos.\nCreo en el ESPIRITU SANTO,\nla Santa Iglesia católica,\nla comunión de los Santos, \nel perdón de los pecados,\nla resurrección de los muertos\ny la vida eterna.\nAmén."
-        }
+        "type": "heading",
+        "text": "4. CREDO APOSTÓLICO"
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "5. SANTO"
-        },
-        "body": {
-          "type": "text",
-          "text": "Santo, Santo, Santo es el Señor,\nDios del Universo.\nLlenos están el cielo y la tierra de tu gloria.\nHosanna en el cielo.\nBendito el que viene en nombre del Señor,\nHosanna en el cielo.\n \n    6. PADRE NUESTRO"
-        }
+        "type": "text",
+        "text": "Creo en Dios, PADRE Todopoderoso, \nCreador del cielo y de la tierra.\nCreo en Jesucristo, su único HIJO, \nNuestro Señor,\nque fue concebido por obra y gracia \ndel Espíritu Santo;\nnació de Santa María Virgen,\npadeció bajo el poder de Poncio Pilato;\nfue crucificado, muerto y sepultado;\ndescendió a los infiernos;\nal tercer día resucitó de entre los \nmuertos; subió a los cielos\ny está a la derecha de Dios, Padre \nTodopoderoso;\nDesde allí ha de venir a juzgar a los \nvivos y a los muertos.\nCreo en el ESPIRITU SANTO,\nla Santa Iglesia católica,\nla comunión de los Santos, \nel perdón de los pecados,\nla resurrección de los muertos\ny la vida eterna.\nAmén."
+      },
+      {
+        "type": "heading",
+        "text": "5. SANTO"
+      },
+      {
+        "type": "text",
+        "text": "Santo, Santo, Santo es el Señor,\nDios del Universo.\nLlenos están el cielo y la tierra de tu gloria.\nHosanna en el cielo.\nBendito el que viene en nombre del Señor,\nHosanna en el cielo.\n \n    6. PADRE NUESTRO"
       },
       {
         "type": "text",
         "text": "Padre Nuestro, que estás en el cielo. \nSantificado sea tu nombre. \nVenga a nosotros tu Reino. \nHágase tu voluntad \nen la tierra como en el cielo.\nDanos hoy nuestro pan de cada día. \nPerdona nuestras ofensas, \ncomo también nosotros perdonamos \na los que nos ofenden. \nNo nos dejes caer en la tentación \ny líbranos del mal."
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "7. CORDERO DE DIOS"
-        },
-        "body": {
-          "type": "liturgical",
-          "text": "Todos:\nCordero de Dios, que quitas el pecado\ndel mundo, ten piedad de nosotros.\nCordero de Dios, que quitas el pecado del\nmundo, ten piedad de nosotros.\nCordero de Dios, que quitas el pecado del\nmundo, danos la paz."
-        }
+        "type": "heading",
+        "text": "7. CORDERO DE DIOS"
       },
       {
-        "type": "text",
+        "type": "liturgical",
+        "text": "Todos:\nCordero de Dios, que quitas el pecado\ndel mundo, ten piedad de nosotros.\nCordero de Dios, que quitas el pecado del\nmundo, ten piedad de nosotros.\nCordero de Dios, que quitas el pecado del\nmundo, danos la paz."
+      },
+      {
+        "type": "liturgical",
         "text": "Sacerdote:\nEste es el Cordero de Dios \nque quita el pecado del mundo.\nDichosos los invitados a la Cena del Señor."
       },
       {
@@ -449,18 +428,18 @@ const BOOK_DATA = [
   {
     "title": "Plegarias a María",
     "icon": "🌹",
-    "color": "#7A4E7D",
-    "blocks": [
+    "chunks": [
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "I V"
-        },
-        "body": {
-          "type": "text",
-          "text": "PLEGARIAS\nA  MARÍA\n“La piedad de la Iglesia hacia la SANTÍSIMA VIRGEN, escribió Pablo VI,\nes un elemento intrínseco del culto cristiano”."
-        }
+        "type": "heading",
+        "text": "I V"
+      },
+      {
+        "type": "heading",
+        "text": "PLEGARIAS\nA  MARÍA"
+      },
+      {
+        "type": "text",
+        "text": "“La piedad de la Iglesia hacia la SANTÍSIMA VIRGEN, escribió Pablo VI,\nes un elemento intrínseco del culto cristiano”."
       },
       {
         "type": "text",
@@ -491,23 +470,23 @@ const BOOK_DATA = [
         "text": "Misterios de Gozo\n(Lunes y Sábado)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "1. La Encarnación del Hijo de Dios.\nEsto dice el Señor: “El Ángel dijo a María: No temas, María, porque has hallado gracia delante de Dios: concebirás en tu seno y darás a luz un Hijo, a quien pondrás por nombre Jesús. María dijo: He aquí la esclava del Señor, hágase en mí según tu palabra”.\n(Lucas 1, 30-38)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "2. La Visitación de María Santísima.\nEsto dice el Señor: “María se puso en camino y se fue aprisa a la montaña, a una ciudad de Judá, y entró en casa de Zacarías, y saludó a Isabel”.\n(Lucas 1, 39)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "3. El Nacimiento de Nuestro Señor Jesucristo.\nEsto dice el Señor: “(María) dio a luz a su Hijo Primogénito, y lo envolvió en pañales, y lo acostó en un pesebre, por no haber sitio para ellos en el mesón”.\n(Lucas 2, 7)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "4. La Presentación del Hijo de Dios en el Templo.\nEsto dice el Señor: “En cuanto se cumplieron los días de la purificación, según la Ley de Moisés, lo llevaron (a Jesús) a Jerusalén, para presentarlo al Señor ... y para ofrecer en sacrificio, según lo prescrito en la Ley del Señor, un par de tórtolas o de pichones”.\n(Lucas 1, 22-24)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "5. El Niño Jesús, perdido y hallado en el\nTemplo.\nEsto dice el Señor: “Sus padres iban cada año a Jerusalén en la fiesta de Pascua. Cuando (Jesús) tenía doce años, se quedó en Jerusalén, sin que sus padres lo echasen de ver ... \n... Le buscaron entre parientes y conocidos, y, al no hallarle, se volvieron a Jerusalén en busca suya. Al cabo de tres días le hallaron en el templo, sentado en medio de los doctores, oyéndoles y preguntándoles”.\n(Lucas 2, 41-46)"
       },
       {
@@ -515,23 +494,23 @@ const BOOK_DATA = [
         "text": "Misterios de Dolor\n(Martes y Viernes)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "1. La Oración de Jesús en el Huerto de Getsemaní.\nEsto dice el Señor: “Jesús salió y, según costumbre, se fue al Monte de los Olivos, y le siguieron también sus discípulos. Llegados allí, les dijo: Oren, para que no caigan en tentación. Se apartó de ellos como a un tiro de piedra y puesto de rodillas, oraba diciendo: Padre, si quieres, aparta de Mí este cáliz, pero que no se haga mi voluntad, sino la tuya. Y sudó como gruesas gotas de sangre, que corrían hasta la tierra”.\n(Lucas 22, 39-44)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "2. La Flagelación de Cristo, atado a la columna.\nEsto dice el Señor: “Tomó entonces Pilato a Jesús y mandó a azotarlo”.\n(Juan 19, 1)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "3. La Coronación de espinas.\nEsto dice el Señor: “Los soldados, tejiendo una Corona de espinas, se la pusieron en la cabeza; le vistieron un manto de color púrpura y acercándose a Él, le decían: Salve, Rey de los Judíos, y le daban bofetadas”.\n(Juan 19, 2-3)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "4. Jesús con la Cruz a cuestas.\nEsto dice el Señor: “Después de haberse divertido con Él (con Jesús), le quitaron el manto, le pusieron sus vestidos, y lo llevaron a crucificar. Al salir, encontraron a un hombre de Cirene, de nombre Simón, al cual obligaron a que llevase la cruz hasta el sitio llamado Gólgota”.\n(Mateo 27, 31-33)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "5. La Crucifixión y muerte del Redentor.\nEsto dice el Señor: “Le crucificaron y con Él a otros dos: uno a cada lado, y Jesús en medio ... Estaban, junto a la cruz de Jesús, su Madre y la hermana de su Madre, María la de Cleofás, y María Magdalena. Jesús, viendo a su Madre, y al discípulo que amaba, que estaba allí, dijo a la Madre: Mujer, he ahí a tu hijo. Luego dijo al discípulo: He ahí a tu Madre... E inclinando la cabeza, entregó el Espíritu”.\n(Juan 19, 18-25, 26 y 30)"
       },
       {
@@ -539,23 +518,23 @@ const BOOK_DATA = [
         "text": "Misterios de Gloria\n(Miércoles y Domingo)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "1. La Resurrección de Nuestro Señor Jesucristo.\nEsto dice el Señor: “Sobrevino un gran terremoto, pues un Ángel del Señor bajó del cielo, y acercándose removió la piedra del sepulcro, y se sentó sobre ella ... de miedo de él temblaron los guardias, y se quedaron como muertos. El Ángel, dirigiéndose a las mujeres dijo: No teman, pues sé que buscan a Jesús el Crucificado. No está aquí: Ha resucitado”.\n(Mateo 28, 2-6)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "2. La Ascensión de Jesucristo al Cielo.\nEsto dice el Señor: “Jesús llevó a sus discípulos cerca de Betania, y levantando sus manos, les bendijo, y mientras les bendecía se alejaba de ellos y era llevado al cielo. Ellos se postraron ante Él, y se volvieron a Jerusalén con gran gozo”.\n(Lucas 24, 50-52)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "3. La Venida del Espíritu Santo el día de Pentecostés.\nEsto dice el Señor: “Cuando llegó el día de Pentecostés, estaban todos juntos en un mismo lugar: Se produjo de repente un ruido como el de un viento impetuoso. Aparecieron como divididas, lenguas de fuego, que se posaron sobre cada uno de ellos, quedando todos llenos del Espíritu Santo”.\n(Hechos de los Apóstoles 2, 1-4)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "4. La Asunción de la Santísima Virgen María en cuerpo y alma  al Cielo.\nEsto dice el Señor: “María dijo: Mi alma proclama la grandeza del Señor ... Desde ahora me felicitarán todas las generaciones,  por que el Poderoso ha hecho obras grandes en mí ... Y su misericordia llega a sus fieles de generación en generación”.\n(Lucas 1, 46-48 y 50)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "5. La Coronación de María Santísima como Reina y Señora de Cielo y tierra.\nEsto dice el Señor: “Apareció en el cielo una señal grande: una mujer envuelta en el sol, con la luna debajo de sus pies, y sobre la cabeza una Corona de doce estrellas”.\n(Apocalipsis 12,1)"
       },
       {
@@ -563,35 +542,32 @@ const BOOK_DATA = [
         "text": "Misterios de Luz\n(Jueves)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "1. El Bautismo de Jesús en el Jordán.\nEsto dice el Señor: “Una vez bautizado,  Jesús salió del agua. En ese momento se  abrieron los cielos y vio al Espíritu de Dios  que bajaba como una paloma y se posaba  sobre Él. Al mismo tiempo se oyó una  voz del cielo que decía: Este es mi Hijo, el Amado; este es mi Elegido”.\n(Mateo 3, 16-17)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "2. La Autorrevelación de Jesús en las Bodas de Caná.\nEsto dice el Señor: “Se celebraba una boda en Caná de Galilea ... Sucedió que se terminó el vino preparado para la boda ... Entonces la Madre de Jesús le dijo: No tienen vino. Jesús le dijo: Mujer, aún no ha llegado mi hora. María dijo a los sirvientes: Hagan lo que Él les diga ... Jesús dijo: Llenen de agua esos recipientes. Y los llenaron hasta el borde. Saquen ahora y llévenle al mayordomo. Después de probar el agua convertida en vino, el mayordomo dijo: Todo el mundo sirve al principio el vino mejor, y cuando todos ya han bebido bastante les dan el de menos calidad; pero tú has dejado el mejor vino para el final. Así, en Caná de Galilea, comenzó Jesús sus signos, manifestó su gloria y creyeron sus discípulos en Él”.\n(Juan 2, 1-11)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "3. El Anuncio del Reino de Dios llamando a la Conversión.\nEsto dice el Señor: “Después que tomaron preso a Juan, Jesús fue a Galilea y empezó a proclamar la Buena Nueva de Dios. Decía: El tiempo se ha cumplido, el Reino de Dios está cerca. Conviértanse y crean en la Buena Nueva”.\n(Marcos 1, 14-15)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "4. La Transfiguración de Jesús.\nEsto dice el Señor: “Jesús tomó consigo a Pedro, a Santiago y a Juan y los llevó a un monte alto. A la vista de ellos su aspecto cambió completamente. Incluso sus ropas se volvieron resplandecientes ... Y se le aparecieron Elías y Moisés, que conversaban con Jesús. Pedro tomó la palabra: Maestro ¡qué bueno es que estemos aquí! Levantemos tres chozas: una para Ti, otra para Moisés y otra para Elías ... En eso se formó una nube que los cubrió con su sombra y desde la nube llegaron estas palabras: Este es mi Hijo, el Amado, escúchenlo”.\n(Lucas 9, 2-7)"
       },
       {
-        "type": "text",
+        "type": "subheading",
         "text": "5. La Institución de la Eucaristía.\nEsto dice el Señor: “Mientras comían, Jesús tomó pan, pronunció la bendición, lo partió y lo dio a sus discípulos diciendo: Tomen y coman; esto es mi cuerpo. Después tomó una copa, dio gracias y se la pasó diciendo: Beban todos de ella: Esto es mi sangre, la sangre de la Alianza, que es derramada, para el perdón de los pecados”.\n(Mateo 26, 26-28)"
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "LETANÍA DE MARÍA SANTÍSIMA"
-        },
-        "body": {
-          "type": "liturgical",
-          "text": "Lector:\tTodos:\nSeñor, ten piedad\tSeñor, ten piedad\nCristo, ten piedad\tCristo, ten piedad\nSeñor, ten piedad\tSeñor, ten piedad\nCristo, óyenos\tCristo, óyenos\nCristo, escúchanos\tCristo, escúchanos"
-        }
+        "type": "heading",
+        "text": "LETANÍA DE MARÍA SANTÍSIMA"
+      },
+      {
+        "type": "liturgical",
+        "text": "Lector:\tTodos:\nSeñor, ten piedad\tSeñor, ten piedad\nCristo, ten piedad\tCristo, ten piedad\nSeñor, ten piedad\tSeñor, ten piedad\nCristo, óyenos\tCristo, óyenos\nCristo, escúchanos\tCristo, escúchanos"
       },
       {
         "type": "text",
@@ -622,63 +598,58 @@ const BOOK_DATA = [
         "text": "Lector:\nOremos.\nTe pedimos, Señor que nosotros, tus siervos, gocemos siempre de salud de alma y cuerpo; y por la intercesión gloriosa de Santa María, siempre Virgen, líbranos de las tristezas de este mundo, y concédenos las alegrías del cielo. Por Jesucristo nuestro Señor. Amén."
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "OTRAS ORACIONES MARIANAS"
-        },
-        "body": {
-          "type": "subheading",
-          "text": "1. SALVE REGINA"
-        }
+        "type": "heading",
+        "text": "OTRAS ORACIONES MARIANAS"
+      },
+      {
+        "type": "heading",
+        "text": "1. SALVE REGINA"
       },
       {
         "type": "text",
         "text": "Dios te salve, Reina y Madre de misericordia, vida dulzura y esperanza nuestra, Dios te salve, a Ti llamamos los desterrados hijos de Eva; a Ti suspiramos, gimiendo y llorando en este valle de lágrimas. Ea, pues, Señora abogada nuestra, vuelve a nosotros esos tus ojos misericordiosos. Y después de este destierro muéstranos a Jesús, fruto bendito de tu vientre. ¡Oh clementísima! ¡Oh piadosa! ¡Oh dulce siempre Virgen María! Ruega por nosotros, Santa Madre de Dios, para que seamos dignos de alcanzar las promesas de Nuestro Señor Jesucristo. Amén."
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "2. ORACIÓN DE SAN BERNARDO"
-        },
-        "body": {
-          "type": "text",
-          "text": "Acuérdate, oh piadosísima Virgen María, que jamás se ha oído decir que ninguno de los que han acudido a tu protección, implorando tu asistencia, y reclamando tu auxilio, haya sido abandonado de Ti. Animado con esta confianza, a Ti también acudo, oh Virgen, Madre de las vírgenes, y, aunque gimiendo bajo el peso de mis pecados, me atrevo a presentarme ante tu presencia soberana. No desoigas, Madre de Dios, mis súplicas; ante bien, escúchalas propicia, y dígnate acogerlas favorablemente. Amén."
-        }
+        "type": "heading",
+        "text": "2. ORACIÓN DE SAN BERNARDO"
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "3. MAGNIFICAT\n(Lucas 1, 46-55)"
-        },
-        "body": {
-          "type": "text",
-          "text": "Proclama mi alma la grandeza del Señor, se alegra mi espíritu en Dios, mi Salvador, porque ha mirado la humillación de su esclava.\nDesde ahora me felicitarán todas las generaciones, porque el Poderoso ha hecho obras grandes por mí; su nombre es Santo y su misericordia llega a sus fieles de generación en generación.\nEl hace proezas con su brazo: Dispersa a los soberbios de corazón; derriba del trono a los poderosos; y enaltece a los humildes, a los hambrientos los colma de bienes, y a los ricos los despide vacíos.\nAuxilia a Israel, su siervo, acordándose de la misericordia -como lo había prometido a nuestros padres- en favor de Abrahán y su descendencia para siempre.\nGloria al Padre, y al Hijo, y al Espíritu Santo. Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén."
-        }
+        "type": "text",
+        "text": "Acuérdate, oh piadosísima Virgen María, que jamás se ha oído decir que ninguno de los que han acudido a tu protección, implorando tu asistencia, y reclamando tu auxilio, haya sido abandonado de Ti. Animado con esta confianza, a Ti también acudo, oh Virgen, Madre de las vírgenes, y, aunque gimiendo bajo el peso de mis pecados, me atrevo a presentarme ante tu presencia soberana. No desoigas, Madre de Dios, mis súplicas; ante bien, escúchalas propicia, y dígnate acogerlas favorablemente. Amén."
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "5. BAJO TU AMPARO"
-        },
-        "body": {
-          "type": "text",
-          "text": "Bajo tu amparo nos acogemos, Santa Madre de Dios; no desoigas la oración de tus hijos necesitados; líbranos de todo peligro, oh siempre Virgen gloriosa y bendita."
-        }
+        "type": "heading",
+        "text": "3. MAGNIFICAT"
+      },
+      {
+        "type": "text",
+        "text": "(Lucas 1, 46-55)"
+      },
+      {
+        "type": "text",
+        "text": "Proclama mi alma la grandeza del Señor, se alegra mi espíritu en Dios, mi Salvador, porque ha mirado la humillación de su esclava.\nDesde ahora me felicitarán todas las generaciones, porque el Poderoso ha hecho obras grandes por mí; su nombre es Santo y su misericordia llega a sus fieles de generación en generación.\nEl hace proezas con su brazo: Dispersa a los soberbios de corazón; derriba del trono a los poderosos; y enaltece a los humildes, a los hambrientos los colma de bienes, y a los ricos los despide vacíos.\nAuxilia a Israel, su siervo, acordándose de la misericordia -como lo había prometido a nuestros padres- en favor de Abrahán y su descendencia para siempre.\nGloria al Padre, y al Hijo, y al Espíritu Santo. Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén."
+      },
+      {
+        "type": "heading",
+        "text": "5. BAJO TU AMPARO"
+      },
+      {
+        "type": "text",
+        "text": "Bajo tu amparo nos acogemos, Santa Madre de Dios; no desoigas la oración de tus hijos necesitados; líbranos de todo peligro, oh siempre Virgen gloriosa y bendita."
       }
     ]
   },
   {
     "title": "Oración de la Noche",
     "icon": "🌙",
-    "color": "#1A3A5C",
-    "blocks": [
+    "chunks": [
+      {
+        "type": "heading",
+        "text": "ORACIONES\nDE LA\nNOCHE"
+      },
       {
         "type": "text",
-        "text": "ORACIONES\nDE LA\nNOCHE\nEs hora de dar por concluido este día: \n¡GRACIAS, SEÑOR!"
+        "text": "Es hora de dar por concluido este día: \n¡GRACIAS, SEÑOR!"
       },
       {
         "type": "text",
@@ -713,8 +684,12 @@ const BOOK_DATA = [
         "text": "Examen de Conciencia\n(sentados)"
       },
       {
+        "type": "heading",
+        "text": "JESUCRISTO TE HABLA"
+      },
+      {
         "type": "liturgical",
-        "text": "JESUCRISTO TE HABLA\nLector:\n¿Cómo fueron hoy tus relaciones personales Conmigo? ¿Me buscaste en la oración... en la Eucaristía ...? ¿Te acercaste a alcanzar mi perdón en el Sacramento de la Confesión?"
+        "text": "Lector:\n¿Cómo fueron hoy tus relaciones personales Conmigo? ¿Me buscaste en la oración... en la Eucaristía ...? ¿Te acercaste a alcanzar mi perdón en el Sacramento de la Confesión?"
       },
       {
         "type": "text",
@@ -741,19 +716,20 @@ const BOOK_DATA = [
         "text": "¿En qué momento te has sentido hoy más cerca de Mí?"
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "HÁBLALE TÚ AL SEÑOR"
-        },
-        "body": {
-          "type": "text",
-          "text": "(Silencio)"
-        }
+        "type": "heading",
+        "text": "HÁBLALE TÚ AL SEÑOR"
+      },
+      {
+        "type": "text",
+        "text": "(Silencio)"
+      },
+      {
+        "type": "heading",
+        "text": "ACTO DE CONTRICIÓN"
       },
       {
         "type": "liturgical",
-        "text": "ACTO DE CONTRICIÓN\n(de pie)\nTodos:\nYo confieso ante Dios Todopoderoso y ante ustedes hermanos, que he pecado mucho de pensamiento, palabra, obra y omisión: Por mi culpa, por mi culpa, por mi gran culpa. Por eso ruego a Santa María, siempre Virgen, a los Ángeles, a los Santos y a ustedes hermanos, que intercedan por mí ante Dios, Nuestro Señor."
+        "text": "(de pie)\nTodos:\nYo confieso ante Dios Todopoderoso y ante ustedes hermanos, que he pecado mucho de pensamiento, palabra, obra y omisión: Por mi culpa, por mi culpa, por mi gran culpa. Por eso ruego a Santa María, siempre Virgen, a los Ángeles, a los Santos y a ustedes hermanos, que intercedan por mí ante Dios, Nuestro Señor."
       },
       {
         "type": "liturgical",
@@ -772,8 +748,12 @@ const BOOK_DATA = [
         "text": "Gloria al Padre, \ngloria al Hijo, \ngloria al Espíritu Santo. \nPor los siglos de los siglos.\nAmén."
       },
       {
+        "type": "heading",
+        "text": "SALMODIA"
+      },
+      {
         "type": "liturgical",
-        "text": "SALMODIA\n(sentados)\nAntífona\nLector:\nAl amparo del Altísimo no temo el espanto nocturno."
+        "text": "(sentados)\nAntífona\nLector:\nAl amparo del Altísimo no temo el espanto nocturno."
       },
       {
         "type": "text",
@@ -836,18 +816,18 @@ const BOOK_DATA = [
   {
     "title": "Hora Apostólica",
     "icon": "🔥",
-    "color": "#8B4513",
-    "blocks": [
+    "chunks": [
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "V I"
-        },
-        "body": {
-          "type": "text",
-          "text": "HORA\nAPOSTÓLICA\nLa HORA APOSTÓLICA es un momento\nde audiencia con Jesucristo, en que un grupo de cristianos nos empeñamos en que Él nos conquiste.\nY procuramos con Él la salvación del mundo, ante el Sagrario, que es la tienda que Él\nha puesto entre nosotros."
-        }
+        "type": "heading",
+        "text": "V I"
+      },
+      {
+        "type": "heading",
+        "text": "HORA\nAPOSTÓLICA"
+      },
+      {
+        "type": "text",
+        "text": "La HORA APOSTÓLICA es un momento\nde audiencia con Jesucristo, en que un grupo de cristianos nos empeñamos en que Él nos conquiste.\nY procuramos con Él la salvación del mundo, ante el Sagrario, que es la tienda que Él\nha puesto entre nosotros."
       },
       {
         "type": "text",
@@ -866,15 +846,12 @@ const BOOK_DATA = [
         "text": "Recemos juntos esta ..."
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "HORA APOSTÓLICA"
-        },
-        "body": {
-          "type": "text",
-          "text": "I  Presentación al Señor"
-        }
+        "type": "heading",
+        "text": "HORA APOSTÓLICA"
+      },
+      {
+        "type": "text",
+        "text": "I  Presentación al Señor"
       },
       {
         "type": "liturgical",
@@ -1121,18 +1098,14 @@ const BOOK_DATA = [
   {
     "title": "Vía Crucis",
     "icon": "⛪",
-    "color": "#2D5A27",
-    "blocks": [
+    "chunks": [
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "V I I"
-        },
-        "body": {
-          "type": "heading",
-          "text": "VIA CRUCIS"
-        }
+        "type": "heading",
+        "text": "V I I"
+      },
+      {
+        "type": "heading",
+        "text": "VIA CRUCIS"
       },
       {
         "type": "text",
@@ -1783,18 +1756,14 @@ const BOOK_DATA = [
   {
     "title": "Sacramento de la Confesión",
     "icon": "🕯️",
-    "color": "#4A4A6A",
-    "blocks": [
+    "chunks": [
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "V I I I"
-        },
-        "body": {
-          "type": "text",
-          "text": "SACRAMENTO\nDE LA\nCONFESIÓN"
-        }
+        "type": "heading",
+        "text": "V I I I"
+      },
+      {
+        "type": "heading",
+        "text": "SACRAMENTO\nDE LA\nCONFESIÓN"
       },
       {
         "type": "text",
@@ -1829,121 +1798,98 @@ const BOOK_DATA = [
   {
     "title": "Oraciones Varias",
     "icon": "📖",
-    "color": "#5A4A3A",
-    "blocks": [
+    "chunks": [
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "I X"
-        },
-        "body": {
-          "type": "text",
-          "text": "ORACIONES\nVARIAS\n    1. ALMA DE CRISTO"
-        }
+        "type": "heading",
+        "text": "I X"
+      },
+      {
+        "type": "heading",
+        "text": "ORACIONES\nVARIAS\n    1. ALMA DE CRISTO"
       },
       {
         "type": "liturgical",
         "text": "Lector:\tTodos:\nAlma de Cristo,\tsantifícame.\nCuerpo de Cristo,\tsálvame.\nSangre de Cristo, \tembriágame.\nAgua del costado de Cristo,\tlávame.\nPasión de Cristo,\tconfórtame.\n¡Oh buen Jesús,\tóyeme!\nDentro de tus llagas,\tescóndeme.\nNo permitas\t\tque me aparte de Ti.\nDel maligno enemigo,\tdefiéndeme.\nEn la hora de mi muerte, \tllámame.\nY mándame ir a Ti,\t\tpara que con tus santos te alabe,\nPor los siglos de los siglos.\tAmén."
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "2. CÁNTICO DE LOS TRES JÓVENES\n(Daniel 3, 52-90)"
-        },
-        "body": {
-          "type": "liturgical",
-          "text": "Coro A\nBendigan al Señor, canten su gloria,\ntodas las obras de su mano excelsa:\nAlaben su virtud, canten su nombre,\nen la presente edad y en las eternas.\nCoro B\nAlaben al Señor, ángeles santos,\nque a su trono asisten con reverencia.\nBendigan al Señor, cielos hermosos,\ncon todo lo que abrazan en su esfera.\nCoro A\nBendigan al Señor todas las aguas,\nque tienen sobre el cielo residencia;\nvirtudes del Señor, bendigan todas,\nsu soberana e invencible fuerza.\nCoro B\nBendigan al Señor el sol y la luna,\ncon brillantes destellos e influencia.\nBendíganle también con sus luces\nbrillantes y magníficas estrellas.\nCoro A\nBendigan al Señor, blancos rocíos;\nbendígale también, la lluvia fresca.\nBendigan al Señor todos los vientos,\nque son ministros de su Omnipotencia.\nCoro B\nBendigan al Señor, fuego y calores,\nque en el verano desecan la tierra;\nBendigan al Señor, fríos terribles,\nque el agua cuajan y la nieve hielan.\nCoro A\nBendigan al Señor, nieblas y escarchas,\nque de los montes coronan las crestas.\nBendigan al Señor, días y noches,\nya turbadas estén o ya serenas.\nCoro B\nBendigan al Señor en todo tiempo,\na todas horas, luces y tinieblas.\nBendigan al Señor, nubes opacas,\nque al relámpago dan su luz funesta.\nCoro A\nBendíganle la tierra y sus espacios,\ndel Señor alabando sus grandezas,\ny exaltando su nombre soberano,\na todo lo que el hombre alcanzar pueda.\nCoro B\nBendigan al Señor, montes soberbios,\ncon los amenos cerros y florestas,\ny todo lo que crece y se produce,\ncomo las flores, plantas y las hierbas.\nCoro A\nBendigan al Señor, fuentes sonoras,\nque nacen entre flores y entre arenas.\nBendigan al Señor, mares y ríos,\ncuyas aguas las naves atraviesan.\nCoro B\nBendigan al Señor cuanto en las aguas,\nvive desde la ostra a la ballena.\nBendigan al Señor todas las aves,\nque vuelan por los aires, tan ligeras.\nCoro A\nBendigan al Señor todos los brutos,\ntodos los animales y las fieras.\nBendigan al Señor todos los hombres,\ny alaben todos su bondad eterna.\nCoro B\nQue a su Dios Israel, tierno, bendiga,\ncante su gloria, alabe su grandeza,\nmás allá de los siglos de los siglos,\ny cuantos siglos no haya ni haber pueda.\nCoro A\nBendigan al Señor sus sacerdotes;\nBendíganle sus siervos con terneza;\nBendíganle también, almas virtuosas,\ny los que humildes, con amor le ruegan.\nCoro B\nBendíganle, Ananías, Azarías\ny Misael, que a todos los liberta.\nAlaben todos y canten su gloria\ndesde ahora a la vida sempiterna.\nCoro A\nBendigamos al Padre con el Hijo,\ny al Amor de Ambos, Trinidad suprema.\nCelebremos la gloria del Dios solo,\ntrino en persona, único en esencia.\nTodos:\nBendito eres, Señor, en lo más alto,\nde la sublime y celestial esfera.\nQue sobre todo seas siempre amado,\ny que ensalzado por los siglos seas."
-        }
+        "type": "heading",
+        "text": "2. CÁNTICO DE LOS TRES JÓVENES"
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "3. ORACIÓN POR LOS QUE NO CONOCEN A CRISTO"
-        },
-        "body": {
-          "type": "text",
-          "text": "Señor Jesucristo: Tú, que, en los momentos más angustiosos de tu Pasión, manifestaste una sed ardorosa de almas, haz que se comunique a nosotros aquella tu sed.\nDanos luz para formarnos en el conocimiento de tu Palabra, y fuerza para colaborar en la predicación de ella, en todos los momentos de nuestra vida, a fin de que llevemos a Ti, a través de tu Iglesia y por intermedio de tu Santa Madre, tantas almas como viven alejadas de la Verdad, para que contigo, por Ti y en Ti, se reconcilien con tu Eterno Padre, en unión del cual, y con el Espíritu Santo, vives y reinas por eternidad de eternidades. Amén."
-        }
+        "type": "text",
+        "text": "(Daniel 3, 52-90)"
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "4. ORACIÓN DE LA PAZ\n(San Francisco de Asís)"
-        },
-        "body": {
-          "type": "text",
-          "text": "Señor, hazme instrumento de tu paz.\nDonde haya odio, siembre yo amor.\nDonde haya injuria, perdón.\nDonde haya duda, fe.\nDonde haya desaliento, esperanza.\nDonde haya sombra, luz.\nDonde haya tristeza, alegría.\n¡Oh Divino Maestro! \nConcédeme que no busque ser\nconsolado, sino consolar,\nque no busque ser comprendido,\nsino comprender,\nque no busque ser amado, sino amar.\nPorque dando es como recibimos,\nperdonando es como tu nos perdona\ny muriendo en Ti es como nacemos a la \nVida Eterna. Amén."
-        }
+        "type": "liturgical",
+        "text": "Coro A\nBendigan al Señor, canten su gloria,\ntodas las obras de su mano excelsa:\nAlaben su virtud, canten su nombre,\nen la presente edad y en las eternas.\nCoro B\nAlaben al Señor, ángeles santos,\nque a su trono asisten con reverencia.\nBendigan al Señor, cielos hermosos,\ncon todo lo que abrazan en su esfera.\nCoro A\nBendigan al Señor todas las aguas,\nque tienen sobre el cielo residencia;\nvirtudes del Señor, bendigan todas,\nsu soberana e invencible fuerza.\nCoro B\nBendigan al Señor el sol y la luna,\ncon brillantes destellos e influencia.\nBendíganle también con sus luces\nbrillantes y magníficas estrellas.\nCoro A\nBendigan al Señor, blancos rocíos;\nbendígale también, la lluvia fresca.\nBendigan al Señor todos los vientos,\nque son ministros de su Omnipotencia.\nCoro B\nBendigan al Señor, fuego y calores,\nque en el verano desecan la tierra;\nBendigan al Señor, fríos terribles,\nque el agua cuajan y la nieve hielan.\nCoro A\nBendigan al Señor, nieblas y escarchas,\nque de los montes coronan las crestas.\nBendigan al Señor, días y noches,\nya turbadas estén o ya serenas.\nCoro B\nBendigan al Señor en todo tiempo,\na todas horas, luces y tinieblas.\nBendigan al Señor, nubes opacas,\nque al relámpago dan su luz funesta.\nCoro A\nBendíganle la tierra y sus espacios,\ndel Señor alabando sus grandezas,\ny exaltando su nombre soberano,\na todo lo que el hombre alcanzar pueda.\nCoro B\nBendigan al Señor, montes soberbios,\ncon los amenos cerros y florestas,\ny todo lo que crece y se produce,\ncomo las flores, plantas y las hierbas.\nCoro A\nBendigan al Señor, fuentes sonoras,\nque nacen entre flores y entre arenas.\nBendigan al Señor, mares y ríos,\ncuyas aguas las naves atraviesan.\nCoro B\nBendigan al Señor cuanto en las aguas,\nvive desde la ostra a la ballena.\nBendigan al Señor todas las aves,\nque vuelan por los aires, tan ligeras.\nCoro A\nBendigan al Señor todos los brutos,\ntodos los animales y las fieras.\nBendigan al Señor todos los hombres,\ny alaben todos su bondad eterna.\nCoro B\nQue a su Dios Israel, tierno, bendiga,\ncante su gloria, alabe su grandeza,\nmás allá de los siglos de los siglos,\ny cuantos siglos no haya ni haber pueda.\nCoro A\nBendigan al Señor sus sacerdotes;\nBendíganle sus siervos con terneza;\nBendíganle también, almas virtuosas,\ny los que humildes, con amor le ruegan.\nCoro B\nBendíganle, Ananías, Azarías\ny Misael, que a todos los liberta.\nAlaben todos y canten su gloria\ndesde ahora a la vida sempiterna.\nCoro A\nBendigamos al Padre con el Hijo,\ny al Amor de Ambos, Trinidad suprema.\nCelebremos la gloria del Dios solo,\ntrino en persona, único en esencia.\nTodos:\nBendito eres, Señor, en lo más alto,\nde la sublime y celestial esfera.\nQue sobre todo seas siempre amado,\ny que ensalzado por los siglos seas."
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "5. ORACIÓN POR LOS ENFERMOS"
-        },
-        "body": {
-          "type": "text",
-          "text": "Tú quisiste, Señor, que tu Hijo Unigénito soportara nuestras debilidades, para poner de manifiesto el valor de la enfermedad y la paciencia; escucha ahora las plegarias que te dirigimos por nuestros hermanos enfermos, y concede a cuantos se hallan sometidos al dolor, la aflicción o la enfermedad, la gracia de sentirse elegidos entre aquellos que tu Hijo ha llamado dichosos, y de saberse unidos a la Pasión de Cristo por la redención del mundo. Por Jesucristo Nuestro Señor. Amén."
-        }
+        "type": "heading",
+        "text": "3. ORACIÓN POR LOS QUE NO CONOCEN A CRISTO"
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "6. ORACIÓN POR LOS DIFUNTOS"
-        },
-        "body": {
-          "type": "text",
-          "text": "Oh Dios, gloria de los fieles y vida de los justos: nosotros, los redimidos por la muerte y resurrección de tu Hijo, te pedimos que acojas con bondad a tus siervos difuntos, y pues creyeron en la resurrección futura, merezcan alcanzar los gozos de la eterna bienaventuranza. Por Jesucristo Nuestro Señor. Amén.\n–Dales, Señor, el descanso eterno.\n–Y brille para ellos la luz perpetua. Amén."
-        }
+        "type": "text",
+        "text": "Señor Jesucristo: Tú, que, en los momentos más angustiosos de tu Pasión, manifestaste una sed ardorosa de almas, haz que se comunique a nosotros aquella tu sed.\nDanos luz para formarnos en el conocimiento de tu Palabra, y fuerza para colaborar en la predicación de ella, en todos los momentos de nuestra vida, a fin de que llevemos a Ti, a través de tu Iglesia y por intermedio de tu Santa Madre, tantas almas como viven alejadas de la Verdad, para que contigo, por Ti y en Ti, se reconcilien con tu Eterno Padre, en unión del cual, y con el Espíritu Santo, vives y reinas por eternidad de eternidades. Amén."
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "7. ORACIÓN POR LA  ESCUELA DE DIRIGENTES"
-        },
-        "body": {
-          "type": "text",
-          "text": "¡Señor! Los miembros de la Escuela de Dirigentes, te pedimos con toda sinceridad, que esta obra del Movimiento de Cursillos de Cristiandad, tenga siempre la autenticidad y la lozanía que señala la rectitud de su\nmétodo.\nQue los que hemos sido escogidos por Ti, como Dirigentes, obremos con ilusión, la caridad y la entrega que exige el verdadero apostolado, cargando siempre la cruz del deber, de las incomprensiones, de las humillaciones y del fracaso aparente.\nQue, si hemos aceptado esta responsabilidad\nen la Escuela, no olvidemos que es para servirte a Ti y a los demás.\nQue nunca nos busquemos a nosotros mismos, ni en nuestras opiniones ni en nuestros actuaciones.\nQue siempre procuremos la eficacia de tu obra. \nQue seamos inquebrantablemente fieles a tu Iglesia y amemos con respeto la persona de nuestro Obispo.\nQue no haya entre nosotros desunión, discordias, envidias ni falsos celos.\nTe pedimos por los hermanos que han vivido la experiencia del cursillo, y que más alejados estén de Ti. Inspíranos la manera apostólica de hacer algo por ellos. Que estén siempre presentes en nuestras oraciones.\nDanos luz, para ver siempre la realidad de esta obra, caridad para juzgarla y entrega apostólica para mejorarla.\nTe lo pedimos por Cristo Nuestro Señor.\nAmén."
-        }
+        "type": "heading",
+        "text": "4. ORACIÓN DE LA PAZ"
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "8. BENDICIÓN DE LOS ALIMENTOS"
-        },
-        "body": {
-          "type": "text",
-          "text": "Bendícenos Señor a nosotros \ny estos alimentos que vamos a comer, \nbendice las manos que los han preparado, \nda pan a los que tienen hambre, \ny hambre y sed de ti a los que tenemos pan.\nPor Jesucristo Nuestro Señor. Amén."
-        }
+        "type": "text",
+        "text": "(San Francisco de Asís)"
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "9. ACCION DE GRACIAS DESPUÉS DE LA COMIDA"
-        },
-        "body": {
-          "type": "text",
-          "text": "–Alaben al Señor porque es bueno,\n–porque es eterna su misericordia.\nTe damos gracias Padre por estos alimentos que nos ha dado, y bendecimos tu nombre. Que siempre te sirvamos con amor y alegría; y admítenos un día a tu mesa celestial. Amén."
-        }
+        "type": "text",
+        "text": "Señor, hazme instrumento de tu paz.\nDonde haya odio, siembre yo amor.\nDonde haya injuria, perdón.\nDonde haya duda, fe.\nDonde haya desaliento, esperanza.\nDonde haya sombra, luz.\nDonde haya tristeza, alegría.\n¡Oh Divino Maestro! \nConcédeme que no busque ser\nconsolado, sino consolar,\nque no busque ser comprendido,\nsino comprender,\nque no busque ser amado, sino amar.\nPorque dando es como recibimos,\nperdonando es como tu nos perdona\ny muriendo en Ti es como nacemos a la \nVida Eterna. Amén."
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "subheading",
-          "text": "10. BENDICIÓN CON EL SANTÍSIMO SACRAMENTO"
-        },
-        "body": {
-          "type": "text",
-          "text": "(de rodillas)\nCanto de adoración"
-        }
+        "type": "heading",
+        "text": "5. ORACIÓN POR LOS ENFERMOS"
+      },
+      {
+        "type": "text",
+        "text": "Tú quisiste, Señor, que tu Hijo Unigénito soportara nuestras debilidades, para poner de manifiesto el valor de la enfermedad y la paciencia; escucha ahora las plegarias que te dirigimos por nuestros hermanos enfermos, y concede a cuantos se hallan sometidos al dolor, la aflicción o la enfermedad, la gracia de sentirse elegidos entre aquellos que tu Hijo ha llamado dichosos, y de saberse unidos a la Pasión de Cristo por la redención del mundo. Por Jesucristo Nuestro Señor. Amén."
+      },
+      {
+        "type": "heading",
+        "text": "6. ORACIÓN POR LOS DIFUNTOS"
+      },
+      {
+        "type": "text",
+        "text": "Oh Dios, gloria de los fieles y vida de los justos: nosotros, los redimidos por la muerte y resurrección de tu Hijo, te pedimos que acojas con bondad a tus siervos difuntos, y pues creyeron en la resurrección futura, merezcan alcanzar los gozos de la eterna bienaventuranza. Por Jesucristo Nuestro Señor. Amén.\n–Dales, Señor, el descanso eterno.\n–Y brille para ellos la luz perpetua. Amén."
+      },
+      {
+        "type": "heading",
+        "text": "7. ORACIÓN POR LA  ESCUELA DE DIRIGENTES"
+      },
+      {
+        "type": "text",
+        "text": "¡Señor! Los miembros de la Escuela de Dirigentes, te pedimos con toda sinceridad, que esta obra del Movimiento de Cursillos de Cristiandad, tenga siempre la autenticidad y la lozanía que señala la rectitud de su\nmétodo.\nQue los que hemos sido escogidos por Ti, como Dirigentes, obremos con ilusión, la caridad y la entrega que exige el verdadero apostolado, cargando siempre la cruz del deber, de las incomprensiones, de las humillaciones y del fracaso aparente.\nQue, si hemos aceptado esta responsabilidad\nen la Escuela, no olvidemos que es para servirte a Ti y a los demás.\nQue nunca nos busquemos a nosotros mismos, ni en nuestras opiniones ni en nuestros actuaciones.\nQue siempre procuremos la eficacia de tu obra. \nQue seamos inquebrantablemente fieles a tu Iglesia y amemos con respeto la persona de nuestro Obispo.\nQue no haya entre nosotros desunión, discordias, envidias ni falsos celos.\nTe pedimos por los hermanos que han vivido la experiencia del cursillo, y que más alejados estén de Ti. Inspíranos la manera apostólica de hacer algo por ellos. Que estén siempre presentes en nuestras oraciones.\nDanos luz, para ver siempre la realidad de esta obra, caridad para juzgarla y entrega apostólica para mejorarla.\nTe lo pedimos por Cristo Nuestro Señor.\nAmén."
+      },
+      {
+        "type": "heading",
+        "text": "8. BENDICIÓN DE LOS ALIMENTOS"
+      },
+      {
+        "type": "text",
+        "text": "Bendícenos Señor a nosotros \ny estos alimentos que vamos a comer, \nbendice las manos que los han preparado, \nda pan a los que tienen hambre, \ny hambre y sed de ti a los que tenemos pan.\nPor Jesucristo Nuestro Señor. Amén."
+      },
+      {
+        "type": "heading",
+        "text": "9. ACCION DE GRACIAS DESPUÉS DE LA COMIDA"
+      },
+      {
+        "type": "text",
+        "text": "–Alaben al Señor porque es bueno,\n–porque es eterna su misericordia.\nTe damos gracias Padre por estos alimentos que nos ha dado, y bendecimos tu nombre. Que siempre te sirvamos con amor y alegría; y admítenos un día a tu mesa celestial. Amén."
+      },
+      {
+        "type": "heading",
+        "text": "10. BENDICIÓN CON EL SANTÍSIMO SACRAMENTO"
+      },
+      {
+        "type": "text",
+        "text": "(de rodillas)\nCanto de adoración"
       },
       {
         "type": "liturgical",
@@ -1970,15 +1916,12 @@ const BOOK_DATA = [
         "text": "Recuerdos de mi peregrinar\nRecuerdos de mi peregrinar\nRecuerdos de mi peregrinar\nRecuerdos de mi peregrinar\nRecuerdos de mi peregrinar"
       },
       {
-        "type": "merged",
-        "heading": {
-          "type": "heading",
-          "text": "DE COLORES"
-        },
-        "body": {
-          "type": "text",
-          "text": "De colores,\nDe colores se visten los campos\nen la primavera;\nDe colores, de colores son los pajarillos\nque vienen de fuera;\nDe colores, de colores es el arcoiris\nque vemos lucir,\nY por eso los grandes amores\nde muchos colores, me gustan a mí.\nY por eso los grandes ..."
-        }
+        "type": "heading",
+        "text": "DE COLORES"
+      },
+      {
+        "type": "text",
+        "text": "De colores,\nDe colores se visten los campos\nen la primavera;\nDe colores, de colores son los pajarillos\nque vienen de fuera;\nDe colores, de colores es el arcoiris\nque vemos lucir,\nY por eso los grandes amores\nde muchos colores, me gustan a mí.\nY por eso los grandes ..."
       },
       {
         "type": "text",
