@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#8B1A1A" />
-  <meta name="description" content="Guía del Peregrino - Movimiento de Cursillos de Cristiandad, República Dominicana" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Guía del Peregrino" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png" />
-  <title>Guía del Peregrino – MCC República Dominicana</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <meta name="theme-color" content="#8B1A1A"/>
+  <meta name="description" content="Guía del Peregrino - Movimiento de Cursillos de Cristiandad, República Dominicana"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Guía del Peregrino"/>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="apple-touch-icon" href="icons/icon-192.png"/>
+  <title>Guía del Peregrino – MCC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet"/>
 
   <style>
     :root {
@@ -22,1249 +21,801 @@
       --gold: #C9A84C;
       --gold-light: #E8C96A;
       --parchment: #F5EDD6;
-      --parchment-dark: #E8D9B5;
       --ink: #1A1208;
-      --ink-soft: #2C2010;
-      --shadow-deep: rgba(0,0,0,0.7);
-      --shadow-medium: rgba(0,0,0,0.4);
-      --cover-dark: #0d0a05;
     }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      height: 100%;
-      overflow: hidden;
+      height: 100%; overflow: hidden;
       background: #0d0a05;
       font-family: 'Crimson Pro', Georgia, serif;
       -webkit-tap-highlight-color: transparent;
+      touch-action: none;
     }
 
-    /* ========== COVER SCREEN ========== */
+    /* ─── COVER ─────────────────────────────────────── */
     #cover {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(ellipse at 30% 40%, #1a0d05 0%, #0a0703 60%, #050302 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      position: fixed; inset: 0; z-index: 100;
+      background: radial-gradient(ellipse at 35% 45%, #1c0e06 0%, #0a0703 55%, #050302 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
       overflow: hidden;
+      transition: opacity .8s ease, transform .8s ease;
     }
+    #cover.out { opacity: 0; transform: scale(1.04); pointer-events: none; }
 
-    #cover.hidden {
-      opacity: 0;
-      transform: scale(1.05);
-      pointer-events: none;
+    .cv-noise {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
     }
+    .cv-border { position: absolute; inset: 14px; pointer-events: none; border: 1px solid rgba(201,168,76,.45); box-shadow: inset 0 0 0 6px rgba(201,168,76,.08); }
+    .cv-corner { position: absolute; width: 36px; height: 36px; border-color: var(--gold); border-style: solid; opacity: .65; }
+    .cv-corner.tl { top:20px;left:20px;border-width:2px 0 0 2px; }
+    .cv-corner.tr { top:20px;right:20px;border-width:2px 2px 0 0; }
+    .cv-corner.bl { bottom:20px;left:20px;border-width:0 0 2px 2px; }
+    .cv-corner.br { bottom:20px;right:20px;border-width:0 2px 2px 0; }
 
-    .cover-texture {
-      position: absolute;
-      inset: 0;
-      background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23000'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%23ffffff08'/%3E%3Ccircle cx='3' cy='3' r='0.5' fill='%23ffffff05'/%3E%3C/svg%3E");
-    }
+    .cv-body { position: relative; display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 24px; max-width: 360px; width: 100%; }
+    .cv-logo { width: min(210px,58vw); height:auto; filter: drop-shadow(0 4px 24px rgba(201,168,76,.35)); animation: float 4s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+    .cv-rule { width:180px; height:1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .cv-title { font-family: 'Cinzel', serif; font-size: clamp(26px,7.5vw,38px); font-weight: 700; color: var(--gold); text-align: center; letter-spacing:.07em; line-height:1.2; text-shadow: 0 2px 22px rgba(201,168,76,.4); }
+    .cv-sub { font-family: 'Crimson Pro', serif; font-style: italic; color: rgba(245,237,214,.65); font-size: clamp(12px,3.2vw,15px); text-align: center; letter-spacing:.03em; }
+    .cv-verse { font-family: 'IM Fell English', serif; font-style:italic; color: rgba(245,237,214,.45); font-size: clamp(10px,2.8vw,12px); text-align:center; line-height:1.75; max-width:280px; }
+    .cv-btn { margin-top:6px; padding:13px 38px; background: linear-gradient(135deg, #8B1A1A, #6B0F0F); border: 1px solid var(--gold); color: var(--gold); font-family:'Cinzel',serif; font-size:13px; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; transition: box-shadow .3s; }
+    .cv-btn:hover { box-shadow: 0 0 22px rgba(201,168,76,.3); }
 
-    .cover-gold-border {
-      position: absolute;
-      inset: 12px;
-      border: 2px solid;
-      border-image: linear-gradient(135deg, #C9A84C, #6B4C1A, #C9A84C, #6B4C1A, #C9A84C) 1;
-      pointer-events: none;
-    }
-    .cover-gold-border::before {
-      content: '';
-      position: absolute;
-      inset: 6px;
-      border: 1px solid rgba(201,168,76,0.3);
-    }
+    /* ─── INSTALL PROMPT ──────────────────────────── */
+    #install-prompt { display:none; position:fixed; bottom:16px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#1a0d05,#2a1a08); border:1px solid var(--gold); color:rgba(245,237,214,.85); padding:12px 18px; font-family:'Crimson Pro',serif; font-size:13px; z-index:500; text-align:center; width:min(300px,90vw); }
+    #install-prompt button { background:var(--crimson); border:1px solid var(--gold); color:var(--gold); font-family:'Cinzel',serif; font-size:11px; padding:5px 14px; cursor:pointer; margin:7px 3px 0; letter-spacing:.07em; }
 
-    /* Corner ornaments */
-    .cover-corner {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      border-color: var(--gold);
-      border-style: solid;
-      opacity: 0.7;
-    }
-    .cover-corner.tl { top: 18px; left: 18px; border-width: 2px 0 0 2px; }
-    .cover-corner.tr { top: 18px; right: 18px; border-width: 2px 2px 0 0; }
-    .cover-corner.bl { bottom: 18px; left: 18px; border-width: 0 0 2px 2px; }
-    .cover-corner.br { bottom: 18px; right: 18px; border-width: 0 2px 2px 0; }
+    /* ─── SECTION FLASH ──────────────────────────── */
+    #sec-flash { position:fixed; inset:0; z-index:300; background:#0a0703; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .35s; }
+    #sec-flash.on { opacity:1; pointer-events:all; }
+    .sf-inner { text-align:center; }
+    .sf-icon { font-size:52px; margin-bottom:14px; }
+    .sf-title { font-family:'Cinzel',serif; font-size:18px; color:var(--gold); letter-spacing:.1em; }
 
-    .cover-content {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-      padding: 20px;
-      max-width: 380px;
-      width: 100%;
-    }
+    /* ─── APP SHELL ──────────────────────────────── */
+    #app { position:fixed; inset:0; display:none; flex-direction:column; background:#0a0703; }
+    #app.on { display:flex; }
 
-    .cover-logo {
-      width: min(220px, 60vw);
-      height: auto;
-      filter: drop-shadow(0 4px 20px rgba(201,168,76,0.3));
-      animation: float 4s ease-in-out infinite;
-    }
+    /* TOP BAR */
+    #topbar { display:flex; align-items:center; gap:10px; padding:9px 14px; background:linear-gradient(180deg,#0d0a05,#140e06); border-bottom:1px solid rgba(201,168,76,.22); min-height:52px; z-index:10; }
+    #menu-btn { background:none; border:1px solid rgba(201,168,76,.4); width:34px; height:34px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; }
+    #menu-btn span { display:block; width:17px; height:1.5px; background:var(--gold); transition:all .3s; }
+    #menu-btn.open span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+    #menu-btn.open span:nth-child(2){ opacity:0; }
+    #menu-btn.open span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+    #tb-title { flex:1; font-family:'Cinzel',serif; font-size:clamp(10px,2.8vw,13px); color:var(--gold); letter-spacing:.06em; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    #tb-pages { font-family:'Crimson Pro',serif; font-size:11px; color:rgba(201,168,76,.55); flex-shrink:0; min-width:44px; text-align:right; }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
+    /* SIDE MENU */
+    #overlay { position:fixed; inset:0; z-index:40; background:rgba(0,0,0,.55); opacity:0; pointer-events:none; transition:opacity .3s; }
+    #overlay.on { opacity:1; pointer-events:all; }
+    #sidemenu { position:fixed; top:0; left:-100%; z-index:50; width:min(290px,84vw); height:100%; background:linear-gradient(180deg,#0d0a05,#100c06); border-right:1px solid rgba(201,168,76,.28); display:flex; flex-direction:column; transition:left .33s cubic-bezier(.4,0,.2,1); overflow:hidden; }
+    #sidemenu.on { left:0; }
+    .sm-head { padding:22px 18px 18px; border-bottom:1px solid rgba(201,168,76,.18); text-align:center; }
+    .sm-head img { width:64px; filter:drop-shadow(0 2px 8px rgba(201,168,76,.2)); }
+    .sm-head h2 { font-family:'Cinzel',serif; font-size:12px; color:var(--gold); margin-top:9px; letter-spacing:.1em; }
+    .sm-head p { font-family:'Crimson Pro',serif; font-size:10px; color:rgba(245,237,214,.4); margin-top:3px; font-style:italic; }
+    .sm-list { flex:1; overflow-y:auto; padding:10px 0; }
+    .sm-list::-webkit-scrollbar { width:2px; }
+    .sm-list::-webkit-scrollbar-thumb { background:rgba(201,168,76,.25); }
+    .sm-item { display:flex; align-items:center; gap:12px; padding:12px 18px; cursor:pointer; border-left:3px solid transparent; transition:all .2s; }
+    .sm-item:hover,.sm-item.active { background:rgba(201,168,76,.07); border-left-color:var(--gold); }
+    .sm-icon { font-size:19px; width:26px; text-align:center; flex-shrink:0; }
+    .sm-lbl { font-family:'Cinzel',serif; font-size:11px; color:rgba(245,237,214,.8); letter-spacing:.05em; }
+    .sm-item.active .sm-lbl { color:var(--gold); }
+    .sm-pg { font-size:10px; color:rgba(245,237,214,.3); font-family:'Crimson Pro',serif; margin-top:1px; }
+    .sm-foot { padding:12px 18px; border-top:1px solid rgba(201,168,76,.12); font-family:'Crimson Pro',serif; font-size:10px; color:rgba(245,237,214,.25); font-style:italic; text-align:center; }
 
-    .cover-divider {
-      width: 200px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
+    /* ─── BOOK AREA ──────────────────────────────── */
+    #book-area { flex:1; position:relative; overflow:hidden; background:radial-gradient(ellipse at center, #1c1206 0%, #0a0703 100%); display:flex; align-items:center; justify-content:center; }
+    #book-wrap { position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
 
-    .cover-title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(28px, 8vw, 40px);
-      font-weight: 700;
-      color: var(--gold);
-      text-align: center;
-      letter-spacing: 0.08em;
-      text-shadow: 0 2px 20px rgba(201,168,76,0.4);
-      line-height: 1.2;
-    }
+    /* Page element */
+    .book-page { position:absolute; background:linear-gradient(160deg,#F7EDD0 0%,#F0E3C0 45%,#E8D8AA 100%); border-radius:1px; box-shadow: 3px 3px 20px rgba(0,0,0,.6), -1px 0 5px rgba(0,0,0,.2); overflow:hidden; display:flex; flex-direction:column; }
+    .book-page::before { content:''; position:absolute; left:0; top:0; bottom:0; width:22px; background:linear-gradient(90deg,rgba(0,0,0,.13),transparent); pointer-events:none; z-index:2; }
 
-    .cover-subtitle {
-      font-family: 'Crimson Pro', serif;
-      font-style: italic;
-      color: rgba(245,237,214,0.7);
-      font-size: clamp(13px, 3.5vw, 16px);
-      text-align: center;
-      letter-spacing: 0.04em;
-    }
+    /* Ruled lines */
+    .page-rules { position:absolute; inset:56px 36px 48px 44px; background-image:repeating-linear-gradient(transparent, transparent 27px, rgba(139,100,60,.1) 27px, rgba(139,100,60,.1) 28px); pointer-events:none; }
 
-    .cover-verse {
-      font-family: 'IM Fell English', serif;
-      font-style: italic;
-      color: rgba(245,237,214,0.55);
-      font-size: clamp(11px, 3vw, 13px);
-      text-align: center;
-      line-height: 1.7;
-      padding: 0 20px;
-      max-width: 300px;
-    }
+    /* Content — NO overflow/scroll */
+    .page-body { position:absolute; inset:0; padding:18px 22px 44px 30px; overflow:hidden; }
 
-    .cover-btn {
-      margin-top: 8px;
-      padding: 14px 40px;
-      background: linear-gradient(135deg, #8B1A1A, #6B0F0F);
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-family: 'Cinzel', serif;
-      font-size: 14px;
-      letter-spacing: 0.12em;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-transform: uppercase;
-      position: relative;
-      overflow: hidden;
-    }
-    .cover-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(201,168,76,0.15), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .cover-btn:hover::before, .cover-btn:active::before { opacity: 1; }
-    .cover-btn:hover { box-shadow: 0 0 20px rgba(201,168,76,0.3); }
+    /* Page number footer */
+    .page-foot { position:absolute; bottom:0; left:0; right:0; height:40px; display:flex; align-items:center; justify-content:center; gap:10px; }
+    .pf-rule { flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(139,100,60,.25),transparent); }
+    .pf-num { font-family:'Crimson Pro',serif; font-size:11px; color:rgba(100,70,30,.45); letter-spacing:.04em; }
 
-    /* Install prompt */
-    #install-prompt {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #1a0d05, #2a1a08);
-      border: 1px solid var(--gold);
-      color: var(--gold-light);
-      padding: 12px 20px;
-      font-family: 'Crimson Pro', serif;
-      font-size: 14px;
-      z-index: 200;
-      text-align: center;
-      max-width: 320px;
-      width: 90%;
-    }
-    #install-prompt button {
-      background: var(--crimson);
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-family: 'Cinzel', serif;
-      font-size: 12px;
-      padding: 6px 16px;
-      cursor: pointer;
-      margin: 8px 4px 0;
-      letter-spacing: 0.08em;
-    }
+    /* Section header on first page */
+    .sec-hdr { text-align:center; padding:14px 8px 18px; border-bottom:1px solid rgba(139,26,26,.25); margin-bottom:14px; }
+    .sec-roman { font-family:'Cinzel',serif; font-size:10px; color:rgba(139,26,26,.45); letter-spacing:.22em; margin-bottom:6px; }
+    .sec-icon { font-size:32px; display:block; margin-bottom:8px; }
+    .sec-ttl { font-family:'Cinzel',serif; font-size:clamp(14px,3.8vw,19px); font-weight:700; color:var(--crimson); letter-spacing:.05em; line-height:1.25; }
+    .sec-rule { width:50px; height:2px; margin:10px auto 0; background:linear-gradient(90deg,transparent,var(--crimson),transparent); }
 
-    /* ========== MAIN APP ========== */
-    #app {
-      position: fixed;
-      inset: 0;
-      display: none;
-      flex-direction: column;
-      background: #0a0703;
-    }
-    #app.visible { display: flex; }
+    /* Text typography */
+    .pg-text { font-family:'Crimson Pro',serif; font-size:clamp(13.5px,3.6vw,16.5px); color:var(--ink); line-height:1.72; text-align:justify; }
+    .pg-text p { margin-bottom:10px; }
+    .h2 { font-family:'Cinzel',serif; font-size:clamp(11px,2.8vw,13.5px); color:var(--crimson); text-align:center; margin:14px 0 8px; letter-spacing:.08em; }
+    .h3 { font-family:'Crimson Pro',serif; font-weight:600; font-style:italic; color:rgba(139,26,26,.8); font-size:clamp(12px,3.2vw,14.5px); margin:11px 0 6px; }
+    .lbl-l { font-weight:700; color:var(--crimson); }
+    .lbl-t { font-weight:700; color:rgba(30,50,110,.8); }
+    .ref { font-size:.84em; color:rgba(100,70,30,.58); font-style:italic; }
 
-    /* ========== TOP BAR ========== */
-    #topbar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 16px;
-      background: linear-gradient(180deg, #0d0a05 0%, #140e06 100%);
-      border-bottom: 1px solid rgba(201,168,76,0.25);
-      min-height: 56px;
-      position: relative;
-      z-index: 10;
-    }
+    /* ─── PAGE-CURL CANVAS ──────────────────────── */
+    #curl-canvas { position:absolute; inset:0; z-index:20; pointer-events:none; }
 
-    #menu-btn {
-      background: none;
-      border: 1px solid rgba(201,168,76,0.4);
-      color: var(--gold);
-      width: 36px;
-      height: 36px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: border-color 0.2s;
-    }
-    #menu-btn span {
-      display: block;
-      width: 18px;
-      height: 1.5px;
-      background: var(--gold);
-      transition: all 0.3s;
-    }
-    #menu-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    #menu-btn.open span:nth-child(2) { opacity: 0; }
-    #menu-btn.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-    #topbar-title {
-      flex: 1;
-      font-family: 'Cinzel', serif;
-      font-size: clamp(11px, 3vw, 14px);
-      color: var(--gold);
-      letter-spacing: 0.06em;
-      text-align: center;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    #page-counter {
-      font-family: 'Crimson Pro', serif;
-      font-size: 12px;
-      color: rgba(201,168,76,0.6);
-      flex-shrink: 0;
-      min-width: 48px;
-      text-align: right;
-    }
-
-    /* ========== SIDE MENU ========== */
-    #overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 40;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-    #overlay.visible { opacity: 1; pointer-events: all; }
-
-    #sidemenu {
-      position: fixed;
-      top: 0;
-      left: -100%;
-      width: min(300px, 85vw);
-      height: 100%;
-      background: linear-gradient(180deg, #0d0a05 0%, #100c06 100%);
-      border-right: 1px solid rgba(201,168,76,0.3);
-      z-index: 50;
-      transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    #sidemenu.open { left: 0; }
-
-    .menu-header {
-      padding: 24px 20px 20px;
-      border-bottom: 1px solid rgba(201,168,76,0.2);
-      text-align: center;
-    }
-    .menu-header img {
-      width: 70px;
-      height: auto;
-      filter: drop-shadow(0 2px 8px rgba(201,168,76,0.2));
-    }
-    .menu-header h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 13px;
-      color: var(--gold);
-      margin-top: 10px;
-      letter-spacing: 0.1em;
-    }
-    .menu-header p {
-      font-family: 'Crimson Pro', serif;
-      font-size: 11px;
-      color: rgba(245,237,214,0.5);
-      margin-top: 4px;
-      font-style: italic;
-    }
-
-    .menu-items {
-      flex: 1;
-      overflow-y: auto;
-      padding: 12px 0;
-    }
-    .menu-items::-webkit-scrollbar { width: 3px; }
-    .menu-items::-webkit-scrollbar-track { background: transparent; }
-    .menu-items::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); }
-
-    .menu-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 13px 20px;
-      cursor: pointer;
-      border-left: 3px solid transparent;
-      transition: all 0.2s;
-      position: relative;
-    }
-    .menu-item:hover, .menu-item.active {
-      background: rgba(201,168,76,0.08);
-      border-left-color: var(--gold);
-    }
-    .menu-item-icon {
-      font-size: 20px;
-      width: 28px;
-      text-align: center;
-      flex-shrink: 0;
-    }
-    .menu-item-text {
-      flex: 1;
-    }
-    .menu-item-title {
-      font-family: 'Cinzel', serif;
-      font-size: 12px;
-      color: rgba(245,237,214,0.85);
-      letter-spacing: 0.06em;
-    }
-    .menu-item.active .menu-item-title { color: var(--gold); }
-    .menu-item-pages {
-      font-size: 10px;
-      color: rgba(245,237,214,0.35);
-      font-family: 'Crimson Pro', serif;
-      margin-top: 1px;
-    }
-
-    .menu-footer {
-      padding: 14px 20px;
-      border-top: 1px solid rgba(201,168,76,0.15);
-      text-align: center;
-      font-family: 'Crimson Pro', serif;
-      font-size: 10px;
-      color: rgba(245,237,214,0.3);
-      font-style: italic;
-    }
-
-    /* ========== BOOK AREA ========== */
-    #book-area {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(ellipse at center, #1a1005 0%, #0a0703 100%);
-    }
-
-    /* Book shadow and glow */
-    .book-container {
-      position: relative;
-      width: min(540px, 96vw);
-      height: 100%;
-      max-height: 100%;
-      perspective: 1800px;
-    }
-
-    .book-shadow {
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 30px;
-      background: radial-gradient(ellipse, rgba(0,0,0,0.7) 0%, transparent 70%);
-      filter: blur(8px);
-      pointer-events: none;
-    }
-
-    /* Page wrapper for 3D effect */
-    .book-pages {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: stretch;
-    }
-
-    /* Individual page */
-    .page {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(160deg, #F7EDD0 0%, #F0E3C0 40%, #E8D8AA 100%);
-      transform-origin: left center;
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
-      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s;
-      overflow: hidden;
-    }
-
-    /* Page texture */
-    .page::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      opacity: 0.5;
-    }
-
-    /* Left edge shadow (spine) */
-    .page::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 28px;
-      background: linear-gradient(90deg, rgba(0,0,0,0.15), transparent);
-      pointer-events: none;
-    }
-
-    /* Horizontal lines */
-    .page-lines {
-      position: absolute;
-      inset: 70px 48px 60px 58px;
-      background-image: repeating-linear-gradient(
-        transparent,
-        transparent 28px,
-        rgba(139, 100, 60, 0.12) 28px,
-        rgba(139, 100, 60, 0.12) 29px
-      );
-      pointer-events: none;
-    }
-
-    /* Page number line */
-    .page-number-area {
-      position: absolute;
-      bottom: 16px;
-      left: 0;
-      right: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-    }
-    .page-number-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(139,100,60,0.3), transparent);
-    }
-    .page-number-text {
-      font-family: 'Crimson Pro', serif;
-      font-size: 11px;
-      color: rgba(100, 70, 30, 0.5);
-      letter-spacing: 0.05em;
-    }
-
-    /* Page content area */
-    .page-content {
-      position: absolute;
-      inset: 20px 20px 50px 36px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      -webkit-overflow-scrolling: touch;
-      padding-right: 8px;
-    }
-    .page-content::-webkit-scrollbar { width: 3px; }
-    .page-content::-webkit-scrollbar-track { background: rgba(139,100,60,0.05); }
-    .page-content::-webkit-scrollbar-thumb { background: rgba(139,100,60,0.25); }
-
-    /* Section title on first page */
-    .section-header {
-      text-align: center;
-      padding: 20px 10px 24px;
-      border-bottom: 1px solid rgba(139,26,26,0.3);
-      margin-bottom: 20px;
-    }
-    .section-roman {
-      font-family: 'Cinzel', serif;
-      font-size: 11px;
-      color: rgba(139,26,26,0.5);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .section-icon {
-      font-size: 36px;
-      display: block;
-      margin-bottom: 10px;
-    }
-    .section-title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(16px, 4vw, 22px);
-      font-weight: 700;
-      color: var(--crimson);
-      letter-spacing: 0.05em;
-      line-height: 1.3;
-    }
-    .section-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--crimson), transparent);
-      margin: 12px auto 0;
-    }
-
-    /* Page text */
-    .page-text {
-      font-family: 'Crimson Pro', serif;
-      font-size: clamp(14px, 3.8vw, 17px);
-      color: var(--ink);
-      line-height: 1.75;
-      text-align: justify;
-      hyphens: auto;
-    }
-
-    .page-text p {
-      margin-bottom: 12px;
-    }
-
-    /* Styled headings in content */
-    .content-heading {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(12px, 3vw, 15px);
-      color: var(--crimson);
-      text-align: center;
-      margin: 18px 0 10px;
-      letter-spacing: 0.08em;
-    }
-
-    .content-subheading {
-      font-family: 'Crimson Pro', serif;
-      font-style: italic;
-      font-weight: 600;
-      color: rgba(139,26,26,0.8);
-      font-size: clamp(13px, 3.5vw, 15px);
-      margin: 14px 0 8px;
-    }
-
-    .lector-label {
-      font-weight: 600;
-      color: var(--crimson);
-      font-size: 0.9em;
-    }
-
-    .todos-label {
-      font-weight: 600;
-      color: rgba(30, 50, 100, 0.8);
-      font-size: 0.9em;
-    }
-
-    .verse-ref {
-      font-size: 0.85em;
-      color: rgba(100,70,30,0.6);
-      font-style: italic;
-    }
-
-    /* PAGE TURNING STATES */
-    .page.turning-forward {
-      animation: turnForward 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-    .page.turning-back {
-      animation: turnBack 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-    .page.entering-forward {
-      animation: enterForward 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-    .page.entering-back {
-      animation: enterBack 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    @keyframes turnForward {
-      0% { transform: rotateY(0deg); box-shadow: 4px 0 30px rgba(0,0,0,0.4); z-index: 5; }
-      50% { transform: rotateY(-90deg); box-shadow: 0 0 60px rgba(0,0,0,0.5); z-index: 5; }
-      100% { transform: rotateY(-180deg); box-shadow: -4px 0 10px rgba(0,0,0,0.1); z-index: 5; }
-    }
-    @keyframes turnBack {
-      0% { transform: rotateY(-180deg); z-index: 5; }
-      50% { transform: rotateY(-90deg); box-shadow: 0 0 60px rgba(0,0,0,0.5); z-index: 5; }
-      100% { transform: rotateY(0deg); box-shadow: 4px 0 20px rgba(0,0,0,0.3); z-index: 5; }
-    }
-    @keyframes enterForward {
-      0% { transform: rotateY(180deg); z-index: 4; }
-      100% { transform: rotateY(0deg); z-index: 4; }
-    }
-    @keyframes enterBack {
-      0% { transform: rotateY(0deg); z-index: 4; }
-      100% { transform: rotateY(180deg); z-index: 4; }
-    }
-
-    /* ========== BOTTOM NAV ========== */
-    #bottomnav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-      background: linear-gradient(0deg, #0d0a05 0%, #140e06 100%);
-      border-top: 1px solid rgba(201,168,76,0.2);
-      gap: 16px;
-      min-height: 60px;
-    }
-
-    .nav-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: none;
-      border: 1px solid rgba(201,168,76,0.35);
-      color: var(--gold);
-      font-family: 'Cinzel', serif;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      padding: 8px 16px;
-      cursor: pointer;
-      transition: all 0.2s;
-      min-width: 90px;
-      justify-content: center;
-    }
-    .nav-btn:hover, .nav-btn:active {
-      background: rgba(201,168,76,0.1);
-      border-color: var(--gold);
-    }
-    .nav-btn:disabled {
-      opacity: 0.25;
-      cursor: default;
-      pointer-events: none;
-    }
-    .nav-btn svg {
-      width: 14px;
-      height: 14px;
-      fill: currentColor;
-    }
-
-    .nav-progress {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 3px;
-      background: rgba(201,168,76,0.15);
-      position: relative;
-      cursor: pointer;
-    }
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--crimson), var(--gold));
-      transition: width 0.4s ease;
-    }
-
-    .progress-text {
-      font-family: 'Crimson Pro', serif;
-      font-size: 11px;
-      color: rgba(201,168,76,0.5);
-      font-style: italic;
-    }
-
-    /* ========== SWIPE INDICATOR ========== */
-    .swipe-hint {
-      position: absolute;
-      bottom: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: rgba(201,168,76,0.4);
-      font-family: 'Crimson Pro', serif;
-      font-size: 11px;
-      font-style: italic;
-      pointer-events: none;
-      animation: fadeHint 3s ease forwards;
-      white-space: nowrap;
-    }
-    @keyframes fadeHint {
-      0%, 60% { opacity: 1; }
-      100% { opacity: 0; }
-    }
-
-    /* ========== SECTION TRANSITION ========== */
-    .section-transition {
-      position: fixed;
-      inset: 0;
-      background: #0a0703;
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s;
-    }
-    .section-transition.show {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .section-transition-inner {
-      text-align: center;
-    }
-    .section-transition-icon { font-size: 48px; margin-bottom: 16px; }
-    .section-transition-title {
-      font-family: 'Cinzel', serif;
-      font-size: 18px;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-    }
-
-    /* ========== RESPONSIVE ========== */
-    @media (max-width: 400px) {
-      .nav-btn { padding: 8px 10px; min-width: 70px; font-size: 10px; }
-    }
+    /* ─── BOTTOM NAV ─────────────────────────────── */
+    #botnav { display:flex; align-items:center; justify-content:space-between; padding:8px 16px; background:linear-gradient(0deg,#0d0a05,#140e06); border-top:1px solid rgba(201,168,76,.18); gap:14px; min-height:56px; }
+    .nb { display:flex; align-items:center; gap:5px; background:none; border:1px solid rgba(201,168,76,.32); color:var(--gold); font-family:'Cinzel',serif; font-size:10.5px; letter-spacing:.08em; padding:7px 14px; cursor:pointer; transition:all .2s; min-width:82px; justify-content:center; }
+    .nb:hover,.nb:active { background:rgba(201,168,76,.09); border-color:var(--gold); }
+    .nb:disabled { opacity:.22; pointer-events:none; }
+    .nb svg { width:13px; height:13px; fill:currentColor; }
+    .nav-mid { flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; }
+    .prog-bar { width:100%; height:3px; background:rgba(201,168,76,.13); cursor:pointer; }
+    .prog-fill { height:100%; background:linear-gradient(90deg,var(--crimson),var(--gold)); transition:width .35s ease; }
+    .prog-lbl { font-family:'Crimson Pro',serif; font-size:11px; color:rgba(201,168,76,.45); font-style:italic; }
   </style>
 </head>
 <body>
 
 <!-- COVER -->
 <div id="cover">
-  <div class="cover-texture"></div>
-  <div class="cover-gold-border"></div>
-  <div class="cover-corner tl"></div>
-  <div class="cover-corner tr"></div>
-  <div class="cover-corner bl"></div>
-  <div class="cover-corner br"></div>
-
-  <div class="cover-content">
-    <img src="icons/logo.png" class="cover-logo" alt="Logo MCC" />
-    <div class="cover-divider"></div>
-    <h1 class="cover-title">Guía del<br>Peregrino</h1>
-    <p class="cover-subtitle">Movimiento de Cursillos de Cristiandad<br>República Dominicana</p>
-    <div class="cover-divider"></div>
-    <p class="cover-verse">
-      "Caminar por Cristo hacia el Padre,<br>
-      a impulsos del Espíritu Santo,<br>
-      con la ayuda de María<br>
-      y de todos los Santos."
-    </p>
-    <button class="cover-btn" onclick="openApp()">
-      ✦ Abrir Guía ✦
-    </button>
+  <div class="cv-noise"></div>
+  <div class="cv-border"></div>
+  <div class="cv-corner tl"></div><div class="cv-corner tr"></div>
+  <div class="cv-corner bl"></div><div class="cv-corner br"></div>
+  <div class="cv-body">
+    <img src="icons/logo.png" class="cv-logo" alt="Logo MCC"/>
+    <div class="cv-rule"></div>
+    <h1 class="cv-title">Guía del<br>Peregrino</h1>
+    <p class="cv-sub">Movimiento de Cursillos de Cristiandad<br>República Dominicana</p>
+    <div class="cv-rule"></div>
+    <p class="cv-verse">"Caminar por Cristo hacia el Padre,<br>a impulsos del Espíritu Santo,<br>con la ayuda de María<br>y de todos los Santos."</p>
+    <button class="cv-btn" onclick="openApp()">✦ Abrir Guía ✦</button>
   </div>
 </div>
 
 <!-- INSTALL PROMPT -->
 <div id="install-prompt">
-  <div>📱 Instala esta app en tu dispositivo para usarla sin conexión</div>
+  📱 Instala esta app para usarla sin conexión<br>
   <button onclick="installApp()">Instalar</button>
-  <button onclick="document.getElementById('install-prompt').style.display='none'">Ahora no</button>
+  <button onclick="this.closest('#install-prompt').style.display='none'">Ahora no</button>
 </div>
 
-<!-- SECTION TRANSITION -->
-<div class="section-transition" id="section-transition">
-  <div class="section-transition-inner">
-    <div class="section-transition-icon" id="st-icon"></div>
-    <div class="section-transition-title" id="st-title"></div>
+<!-- SECTION FLASH -->
+<div id="sec-flash">
+  <div class="sf-inner">
+    <div class="sf-icon" id="sf-icon"></div>
+    <div class="sf-title" id="sf-title"></div>
   </div>
 </div>
 
-<!-- MAIN APP -->
+<!-- APP -->
 <div id="app">
-  <!-- TOP BAR -->
   <div id="topbar">
-    <button id="menu-btn" onclick="toggleMenu()" aria-label="Menú">
-      <span></span><span></span><span></span>
-    </button>
-    <div id="topbar-title">Guía del Peregrino</div>
-    <div id="page-counter">1/1</div>
+    <button id="menu-btn" onclick="toggleMenu()" aria-label="Menú"><span></span><span></span><span></span></button>
+    <div id="tb-title">Guía del Peregrino</div>
+    <div id="tb-pages">1/1</div>
   </div>
-
-  <!-- OVERLAY -->
   <div id="overlay" onclick="closeMenu()"></div>
-
-  <!-- SIDE MENU -->
   <nav id="sidemenu">
-    <div class="menu-header">
-      <img src="icons/logo.png" alt="MCC" />
+    <div class="sm-head">
+      <img src="icons/logo.png" alt="MCC"/>
       <h2>Guía del Peregrino</h2>
       <p>MCC · República Dominicana</p>
     </div>
-    <div class="menu-items" id="menu-items"></div>
-    <div class="menu-footer">Secretariado Nacional · MCC-RD</div>
+    <div class="sm-list" id="sm-list"></div>
+    <div class="sm-foot">Secretariado Nacional · MCC-RD</div>
   </nav>
-
-  <!-- BOOK -->
   <div id="book-area">
-    <div class="book-container">
-      <div class="book-shadow"></div>
-      <div class="book-pages" id="book-pages"></div>
+    <div id="book-wrap">
+      <canvas id="curl-canvas"></canvas>
     </div>
   </div>
-
-  <!-- BOTTOM NAV -->
-  <div id="bottomnav">
-    <button class="nav-btn" id="prev-btn" onclick="goToPrev()">
-      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6v12z"/></svg>
-      Anterior
+  <div id="botnav">
+    <button class="nb" id="prev-btn" onclick="navPrev()">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6v12z"/></svg>Anterior
     </button>
-    <div class="nav-progress">
-      <div class="progress-bar" id="progress-bar" onclick="handleProgressClick(event)">
-        <div class="progress-fill" id="progress-fill"></div>
-      </div>
-      <div class="progress-text" id="progress-text">Página 1</div>
+    <div class="nav-mid">
+      <div class="prog-bar" onclick="handleProg(event)"><div class="prog-fill" id="prog-fill"></div></div>
+      <div class="prog-lbl" id="prog-lbl">Página 1 de 1</div>
     </div>
-    <button class="nav-btn" id="next-btn" onclick="goToNext()">
-      Siguiente
-      <svg viewBox="0 0 24 24"><path d="M9 18V6l6 6-6 6z"/></svg>
+    <button class="nb" id="next-btn" onclick="navNext()">
+      Siguiente<svg viewBox="0 0 24 24"><path d="M9 18V6l6 6-6 6z"/></svg>
     </button>
   </div>
 </div>
 
 <script src="content.js"></script>
 <script>
-  // =====================
-  // STATE
-  // =====================
-  let currentSection = 0;
-  let currentPage = 0;
-  let isAnimating = false;
-  let menuOpen = false;
-  let deferredPrompt = null;
+'use strict';
 
-  // Build all pages array (flat list with section info)
-  const allPages = [];
-  BOOK_DATA.forEach((section, si) => {
-    section.pages.forEach((page, pi) => {
-      allPages.push({ section: si, page: pi });
-    });
-  });
+// ══════════════════════════════════════════
+// CONSTANTS
+// ══════════════════════════════════════════
+const ROMANS = ['I','II','III','IV','V','VI','VII','VIII','IX','X'];
 
-  function getCurrentGlobalPage() {
-    let idx = 0;
-    for (let si = 0; si < currentSection; si++) idx += BOOK_DATA[si].pages.length;
-    return idx + currentPage;
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+let secIdx = 0, pgIdx = 0;
+let sectionPages = [];   // sectionPages[sec] = ['html',...] per page
+let secPageOffset = [];  // global page start index of each section
+let allPageCount  = 0;
+let pages = [];          // alias to sectionPages[secIdx]
+
+// curl / drag
+let isDragging   = false;
+let curlDir      = 0;    // +1 forward, -1 back
+let curlProgress = 0;    // 0..1
+let curlRaf      = null;
+let dragStartX   = 0;
+let neighborEl   = null;
+
+// ══════════════════════════════════════════
+// TEXT FORMATTING
+// ══════════════════════════════════════════
+const ALL_CAPS_RE = /^[A-ZÁÉÍÓÚÜÑ\s\d\(\)\.,;:!?¿¡"]+$/;
+const ROMAN_RE    = /^[IVXivx\s]+$/;
+
+function formatParagraph(raw) {
+  const t = raw.trim();
+  if (!t || ROMAN_RE.test(t)) return '';
+
+  let s = t
+    .replace(/\((Lucas|Juan|Mateo|Marcos|Hechos|Romanos|Daniel|Apocalipsis|Ezequiel|Isaías|Salmo[s]?)[^)]+\)/g,
+             '<span class="ref">$&</span>')
+    .replace(/^(Lector:|Todos:|Coro [AB]:)\s*/g, '<span class="lbl-l">$1</span> ');
+
+  if (/^\s*\d+\.\s+[A-ZÁÉÍÓÚ]/.test(raw)) return `<div class="h3">${s}</div>`;
+
+  if (ALL_CAPS_RE.test(t) && t.length >= 3 && t.length < 80) {
+    return `<div class="h2">${s}</div>`;
+  }
+  return `<p>${s}</p>`;
+}
+
+// ══════════════════════════════════════════
+// MEASURE DIV  (hidden, for height probing)
+// ══════════════════════════════════════════
+let mv = null;
+function getMv(w, h) {
+  if (!mv) {
+    mv = document.createElement('div');
+    mv.style.cssText = 'position:fixed;visibility:hidden;pointer-events:none;z-index:-1;overflow:hidden;';
+    document.body.appendChild(mv);
+  }
+  mv.style.width  = w + 'px';
+  mv.style.height = h + 'px';
+  return mv;
+}
+
+// ══════════════════════════════════════════
+// PAGINATION — splits paragraphs into pages
+// that physically fit in the page-body area
+// ══════════════════════════════════════════
+function paginate(secData) {
+  const wrap = document.getElementById('book-wrap');
+  const W = wrap.clientWidth;
+  const H = wrap.clientHeight;
+
+  // page-body padding: top=18, right=22, bottom=44(foot), left=30
+  const bodyW = W - 30 - 22;
+  const bodyH = H - 18 - 44;
+
+  const secI = BOOK_DATA.indexOf(secData);
+
+  // Build section header HTML and measure its rendered height
+  const hdrHTML = `
+    <div class="sec-hdr">
+      <div class="sec-roman">${ROMANS[secI] || ''}</div>
+      <span class="sec-icon">${secData.icon}</span>
+      <div class="sec-ttl">${secData.title}</div>
+      <div class="sec-rule"></div>
+    </div>`;
+
+  const probe = getMv(bodyW, bodyH * 5); // tall container to measure freely
+  probe.innerHTML = hdrHTML;
+  probe.className = '';
+  probe.style.fontFamily = "'Crimson Pro', Georgia, serif";
+  const hdrH = probe.scrollHeight;
+
+  const result = [];
+  const paras  = secData.paragraphs;
+  let pi = 0;
+  let isFirst = true;
+
+  while (pi < paras.length) {
+    const maxH  = bodyH - (isFirst ? hdrH + 14 : 0); // 14 = margin-bottom of hdr
+    let pageHTML = isFirst ? hdrHTML : '';
+
+    // Use a probe to accumulate paragraph HTML and check height
+    probe.style.width  = bodyW + 'px';
+    probe.style.height = '9999px';
+    probe.className = 'pg-text';
+    probe.innerHTML = '';
+    probe.style.fontFamily = '';
+
+    const startPi = pi;
+    let lastFitPi = pi;
+
+    while (pi < paras.length) {
+      const html = formatParagraph(paras[pi]);
+      if (!html) { pi++; continue; }
+      probe.insertAdjacentHTML('beforeend', html);
+      if (probe.scrollHeight > maxH) {
+        // This paragraph causes overflow
+        if (pi === startPi) {
+          // Force-include even if it overflows (single too-long para)
+          pi++;
+        } else {
+          // Remove it
+          probe.lastElementChild && probe.lastElementChild.remove();
+        }
+        break;
+      }
+      lastFitPi = pi;
+      pi++;
+    }
+
+    pageHTML += `<div class="pg-text">${probe.innerHTML}</div>`;
+    result.push(pageHTML);
+    isFirst = false;
   }
 
-  // =====================
-  // FORMAT TEXT
-  // =====================
-  function formatPageText(raw) {
-    const lines = raw.split('\n');
-    let html = '';
-    let inPara = false;
+  if (result.length === 0) result.push(hdrHTML);
+  return result;
+}
 
-    const ALL_CAPS_RE = /^[A-ZÁÉÍÓÚÜÑ\s\d\(\)\.,:;!?¿¡]+$/;
-    const ROMAN_NUM_RE = /^[IVXivx]+\s*$/;
+// ══════════════════════════════════════════
+// CREATE PAGE DOM ELEMENT
+// ══════════════════════════════════════════
+function makePageEl(html, gNum) {
+  const wrap = document.getElementById('book-wrap');
+  const W = wrap.clientWidth;
+  const H = wrap.clientHeight;
+  const el = document.createElement('div');
+  el.className = 'book-page';
+  el.style.width  = W + 'px';
+  el.style.height = H + 'px';
+  el.innerHTML = `
+    <div class="page-rules"></div>
+    <div class="page-body">${html}</div>
+    <div class="page-foot">
+      <div class="pf-rule"></div>
+      <div class="pf-num">— ${gNum} —</div>
+      <div class="pf-rule"></div>
+    </div>`;
+  return el;
+}
 
-    lines.forEach(line => {
-      const t = line.trim();
-      if (!t) {
-        if (inPara) { html += '</p>'; inPara = false; }
-        return;
-      }
+// ══════════════════════════════════════════
+// RENDER CURRENT PAGE (instant)
+// ══════════════════════════════════════════
+function renderPage() {
+  const wrap = document.getElementById('book-wrap');
+  wrap.querySelectorAll('.book-page').forEach(e => e.remove());
+  const el = makePageEl(pages[pgIdx], globalNum());
+  wrap.insertBefore(el, document.getElementById('curl-canvas'));
+  updateUI();
+}
 
-      // Skip pure roman numeral section headers (they're in the section title)
-      if (ROMAN_NUM_RE.test(t)) return;
+function globalNum() {
+  return secPageOffset[secIdx] + pgIdx + 1;
+}
+function totalPages() { return allPageCount; }
+function canNext() {
+  return pgIdx < pages.length - 1 || secIdx < BOOK_DATA.length - 1;
+}
+function canPrev() {
+  return pgIdx > 0 || secIdx > 0;
+}
 
-      // Headings: ALL_CAPS, short
-      if (ALL_CAPS_RE.test(t) && t.length < 80 && t.length > 2 && !t.includes(':')) {
-        if (inPara) { html += '</p>'; inPara = false; }
-        // Skip if it's exactly the section title
-        html += `<div class="content-heading">${t}</div>`;
-        return;
-      }
+// ══════════════════════════════════════════
+// PRE-RENDER NEIGHBOR (page behind current)
+// ══════════════════════════════════════════
+function preNeighbor(dir) {
+  dropNeighbor();
+  let html = null, gn = 0;
+  if (dir === 1) {
+    if (pgIdx + 1 < pages.length) {
+      html = pages[pgIdx + 1]; gn = secPageOffset[secIdx] + pgIdx + 2;
+    } else if (secIdx + 1 < BOOK_DATA.length) {
+      const ns = secIdx + 1;
+      if (sectionPages[ns]?.length > 0) { html = sectionPages[ns][0]; gn = secPageOffset[ns] + 1; }
+    }
+  } else {
+    if (pgIdx > 0) {
+      html = pages[pgIdx - 1]; gn = secPageOffset[secIdx] + pgIdx;
+    } else if (secIdx > 0) {
+      const ps = secIdx - 1;
+      const sp = sectionPages[ps];
+      if (sp?.length > 0) { const li = sp.length - 1; html = sp[li]; gn = secPageOffset[ps] + li + 1; }
+    }
+  }
+  if (!html) return;
+  const wrap = document.getElementById('book-wrap');
+  neighborEl = makePageEl(html, gn);
+  const cur = wrap.querySelector('.book-page');
+  wrap.insertBefore(neighborEl, cur || document.getElementById('curl-canvas'));
+}
 
-      // Lector/Todos pattern
-      let formatted = t;
-      formatted = formatted.replace(/^(Lector:|Todos:|Coro [AB]:)/g, '<span class="lector-label">$1</span>');
-      formatted = formatted.replace(/\((Lucas|Juan|Mateo|Marcos|Hechos|Romanos|Daniel|Apocalipsis|Ezequiel)[^)]+\)/g, '<span class="verse-ref">$&</span>');
+function dropNeighbor() {
+  neighborEl?.remove();
+  neighborEl = null;
+}
 
-      // Numbered items like "    1. TITLE"
-      if (/^\s*\d+\.\s+[A-Z]/.test(line)) {
-        if (inPara) { html += '</p>'; inPara = false; }
-        html += `<div class="content-subheading">${formatted}</div>`;
-        return;
-      }
+// ══════════════════════════════════════════
+// COMMIT NAVIGATION after curl completes
+// ══════════════════════════════════════════
+function commit(dir) {
+  if (dir === 1) {
+    if (pgIdx + 1 < pages.length) { pgIdx++; }
+    else if (secIdx + 1 < BOOK_DATA.length) { secIdx++; pages = sectionPages[secIdx]; pgIdx = 0; }
+  } else {
+    if (pgIdx > 0) { pgIdx--; }
+    else if (secIdx > 0) { secIdx--; pages = sectionPages[secIdx]; pgIdx = pages.length - 1; }
+  }
+  // Promote neighbor as current page
+  const wrap = document.getElementById('book-wrap');
+  wrap.querySelectorAll('.book-page').forEach(el => { if (el !== neighborEl) el.remove(); });
+  neighborEl = null;
+  updateUI();
+}
 
-      // Starred items
-      if (t.startsWith('*') && t.endsWith('*')) {
-        if (inPara) { html += '</p>'; inPara = false; }
-        html += `<div class="content-subheading" style="text-align:center;font-style:italic;">${t.replace(/\*/g,'')}</div>`;
-        return;
-      }
+// ══════════════════════════════════════════
+// CANVAS / CURL DRAWING
+// ══════════════════════════════════════════
+const canvas = document.getElementById('curl-canvas');
+const ctx = canvas.getContext('2d');
 
-      if (!inPara) { html += '<p>'; inPara = true; }
-      else html += ' ';
-      html += formatted;
-    });
+function resizeCanvas() {
+  const wrap = document.getElementById('book-wrap');
+  canvas.width  = wrap.clientWidth;
+  canvas.height = wrap.clientHeight;
+}
 
-    if (inPara) html += '</p>';
-    return html;
+/**
+ * Draws the page-curl overlay on the canvas.
+ * dir = +1 → forward (right-to-left peel)
+ * dir = -1 → backward (left-to-right peel)
+ * progress = 0..1
+ */
+function drawCurl(progress, dir) {
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+  if (progress <= 0) return;
+
+  if (dir === 1) {
+    // Forward: the current page peels from the right edge
+    const foldX = W - progress * W;    // x position of fold crease
+    const shadow = Math.min(50, (W - foldX) * 0.5);
+
+    // Shadow cast on the revealed page underneath
+    const sg = ctx.createLinearGradient(foldX - shadow, 0, foldX, 0);
+    sg.addColorStop(0, 'rgba(0,0,0,0)');
+    sg.addColorStop(1, 'rgba(0,0,0,0.28)');
+    ctx.fillStyle = sg;
+    ctx.fillRect(foldX - shadow, 0, shadow, H);
+
+    // Peel flap: from foldX to right edge
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(foldX, 0, W - foldX, H);
+    ctx.clip();
+
+    // Parchment fill — lighter at right (front), darker at fold (back is showing)
+    const pg = ctx.createLinearGradient(foldX, 0, W, 0);
+    pg.addColorStop(0,   '#C8AE80');   // darker at fold — underside tint
+    pg.addColorStop(0.08,'#E0C898');
+    pg.addColorStop(0.35,'#EED9B0');
+    pg.addColorStop(1,   '#F7EDD0');
+    ctx.fillStyle = pg;
+    ctx.fillRect(foldX, 0, W - foldX, H);
+
+    // Highlight strip along fold (catching the light)
+    const hl = Math.min(20, (W - foldX) * 0.18);
+    const hg = ctx.createLinearGradient(foldX, 0, foldX + hl, 0);
+    hg.addColorStop(0, 'rgba(255,255,240,0.5)');
+    hg.addColorStop(1, 'rgba(255,255,240,0)');
+    ctx.fillStyle = hg;
+    ctx.fillRect(foldX, 0, hl, H);
+
+    ctx.restore();
+
+    // Crease line
+    ctx.strokeStyle = 'rgba(90,55,15,0.22)';
+    ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(foldX, 0); ctx.lineTo(foldX, H); ctx.stroke();
+
+  } else {
+    // Backward: current page peels from the left edge
+    const foldX = progress * W;
+    const shadow = Math.min(50, foldX * 0.5);
+
+    const sg = ctx.createLinearGradient(foldX, 0, foldX + shadow, 0);
+    sg.addColorStop(0, 'rgba(0,0,0,0.28)');
+    sg.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = sg;
+    ctx.fillRect(foldX, 0, shadow, H);
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, 0, foldX, H);
+    ctx.clip();
+
+    const pg = ctx.createLinearGradient(0, 0, foldX, 0);
+    pg.addColorStop(0,   '#F7EDD0');
+    pg.addColorStop(0.65,'#EED9B0');
+    pg.addColorStop(0.92,'#E0C898');
+    pg.addColorStop(1,   '#C8AE80');
+    ctx.fillStyle = pg;
+    ctx.fillRect(0, 0, foldX, H);
+
+    const hl = Math.min(20, foldX * 0.18);
+    const hg = ctx.createLinearGradient(foldX - hl, 0, foldX, 0);
+    hg.addColorStop(0, 'rgba(255,255,240,0)');
+    hg.addColorStop(1, 'rgba(255,255,240,0.5)');
+    ctx.fillStyle = hg;
+    ctx.fillRect(foldX - hl, 0, hl, H);
+
+    ctx.restore();
+
+    ctx.strokeStyle = 'rgba(90,55,15,0.22)';
+    ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(foldX, 0); ctx.lineTo(foldX, H); ctx.stroke();
+  }
+}
+
+// ══════════════════════════════════════════
+// TOUCH  —  real-time curl following finger
+// ══════════════════════════════════════════
+const bookArea = document.getElementById('book-area');
+
+bookArea.addEventListener('touchstart', e => {
+  if (e.touches.length !== 1) return;
+  dragStartX   = e.touches[0].clientX;
+  isDragging   = false;
+  curlDir      = 0;
+  curlProgress = 0;
+}, { passive: true });
+
+bookArea.addEventListener('touchmove', e => {
+  if (e.touches.length !== 1) return;
+  const x  = e.touches[0].clientX;
+  const y  = e.touches[0].clientY;
+  const dx = x - dragStartX;
+  const dy = y - (e.touches[0].clientY); // same touch, dy=0 by construction
+
+  if (!isDragging) {
+    const adx = Math.abs(x - dragStartX);
+    const ady = Math.abs(y - e.touches[0].clientY);  // 0 here, use stored start
+    if (adx < 8) return;
+    // determine direction from sign of dx
+    const dir = dx < 0 ? 1 : -1;
+    if (dir === 1 && !canNext()) return;
+    if (dir === -1 && !canPrev()) return;
+    isDragging = true;
+    curlDir    = dir;
+    preNeighbor(dir);
   }
 
-  // =====================
-  // RENDER PAGE
-  // =====================
-  function createPageEl(sectionIdx, pageIdx) {
-    const section = BOOK_DATA[sectionIdx];
-    const raw = section.pages[pageIdx];
-    const isFirst = pageIdx === 0;
+  const adx = Math.abs(x - dragStartX);
+  curlProgress = Math.min(adx / canvas.width, 0.98);
 
-    const page = document.createElement('div');
-    page.className = 'page';
-    page.dataset.section = sectionIdx;
-    page.dataset.page = pageIdx;
+  cancelAnimationFrame(curlRaf);
+  curlRaf = requestAnimationFrame(() => drawCurl(curlProgress, curlDir));
+}, { passive: true });
 
-    const linesDiv = document.createElement('div');
-    linesDiv.className = 'page-lines';
-    page.appendChild(linesDiv);
+// Store touchstart Y for the vertical check
+let dragStartY = 0;
+bookArea.addEventListener('touchstart', e => {
+  dragStartY = e.touches[0].clientY;
+}, { passive: true, capture: true });
 
-    const content = document.createElement('div');
-    content.className = 'page-content';
+bookArea.addEventListener('touchmove', e => {
+  // Vertical scroll guard — if more vertical than horizontal, cancel drag
+  if (isDragging) return; // already decided
+  const adx = Math.abs(e.touches[0].clientX - dragStartX);
+  const ady = Math.abs(e.touches[0].clientY - dragStartY);
+  if (ady > adx + 6) { isDragging = false; }  // vertical wins
+}, { passive: true, capture: true });
 
-    if (isFirst) {
-      const romans = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
-      content.innerHTML = `
-        <div class="section-header">
-          <div class="section-roman">${romans[sectionIdx]}</div>
-          <span class="section-icon">${section.icon}</span>
-          <div class="section-title">${section.title}</div>
-          <div class="section-divider"></div>
-        </div>
-        <div class="page-text">${formatPageText(raw)}</div>
-      `;
+bookArea.addEventListener('touchend', e => {
+  if (!isDragging) return;
+  isDragging = false;
+
+  const committed = curlProgress > 0.3;
+  const target    = committed ? 1.0 : 0.0;
+  const start     = curlProgress;
+  const t0        = performance.now();
+  const dur       = committed ? 200 : 160;
+  const dir       = curlDir;
+
+  function animFinish(now) {
+    const t = Math.min((now - t0) / dur, 1);
+    const e = t < .5 ? 2*t*t : -1+(4-2*t)*t; // ease in-out quad
+    curlProgress = start + (target - start) * e;
+    drawCurl(curlProgress, dir);
+    if (t < 1) {
+      curlRaf = requestAnimationFrame(animFinish);
     } else {
-      content.innerHTML = `<div class="page-text">${formatPageText(raw)}</div>`;
-    }
-
-    page.appendChild(content);
-
-    // Page number
-    const numArea = document.createElement('div');
-    numArea.className = 'page-number-area';
-    const globalNum = (() => {
-      let n = 1;
-      for (let s = 0; s < sectionIdx; s++) n += BOOK_DATA[s].pages.length;
-      return n + pageIdx;
-    })();
-    numArea.innerHTML = `
-      <div class="page-number-line"></div>
-      <div class="page-number-text">— ${globalNum} —</div>
-      <div class="page-number-line"></div>
-    `;
-    page.appendChild(numArea);
-
-    return page;
-  }
-
-  // =====================
-  // RENDER BOOK
-  // =====================
-  function renderCurrentPage(direction = null) {
-    const container = document.getElementById('book-pages');
-
-    if (!direction) {
-      // Initial render
-      container.innerHTML = '';
-      const page = createPageEl(currentSection, currentPage);
-      container.appendChild(page);
-    } else {
-      // Animated turn
-      const oldPage = container.querySelector('.page');
-      const newPage = createPageEl(currentSection, currentPage);
-      container.appendChild(newPage);
-
-      if (direction === 'forward') {
-        oldPage.classList.add('turning-forward');
-        newPage.classList.add('entering-forward');
-        newPage.style.zIndex = '2';
-        oldPage.style.zIndex = '3';
-      } else {
-        newPage.style.transform = 'rotateY(180deg)';
-        oldPage.classList.add('turning-back');
-        newPage.classList.add('entering-back');
-        newPage.style.zIndex = '2';
-        oldPage.style.zIndex = '3';
-      }
-
-      setTimeout(() => {
-        oldPage.remove();
-        newPage.classList.remove('entering-forward', 'entering-back');
-        newPage.style.zIndex = '';
-        newPage.style.transform = '';
-        isAnimating = false;
-      }, 660);
-    }
-
-    updateUI();
-  }
-
-  // =====================
-  // NAVIGATION
-  // =====================
-  function goToNext() {
-    if (isAnimating) return;
-    const section = BOOK_DATA[currentSection];
-
-    if (currentPage < section.pages.length - 1) {
-      isAnimating = true;
-      currentPage++;
-      renderCurrentPage('forward');
-    } else if (currentSection < BOOK_DATA.length - 1) {
-      isAnimating = true;
-      const nextSec = currentSection + 1;
-      showSectionTransition(nextSec, () => {
-        currentSection = nextSec;
-        currentPage = 0;
-        renderCurrentPage('forward');
-      });
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      curlProgress = 0;
+      if (committed) commit(dir);
+      else dropNeighbor();
     }
   }
+  curlRaf = requestAnimationFrame(animFinish);
+}, { passive: true });
 
-  function goToPrev() {
-    if (isAnimating) return;
+// ══════════════════════════════════════════
+// BUTTON NAV  — animated flip
+// ══════════════════════════════════════════
+function navNext() { if (canNext()) animFlip(1); }
+function navPrev() { if (canPrev()) animFlip(-1); }
 
-    if (currentPage > 0) {
-      isAnimating = true;
-      currentPage--;
-      renderCurrentPage('back');
-    } else if (currentSection > 0) {
-      isAnimating = true;
-      const prevSec = currentSection - 1;
-      showSectionTransition(prevSec, () => {
-        currentSection = prevSec;
-        currentPage = BOOK_DATA[prevSec].pages.length - 1;
-        renderCurrentPage('back');
-      });
-    }
+function animFlip(dir) {
+  preNeighbor(dir);
+  const t0 = performance.now(), dur = 400;
+  function anim(now) {
+    const t = Math.min((now - t0) / dur, 1);
+    const e = t < .5 ? 2*t*t : -1+(4-2*t)*t;
+    curlProgress = e;
+    drawCurl(curlProgress, dir);
+    if (t < 1) curlRaf = requestAnimationFrame(anim);
+    else { ctx.clearRect(0,0,canvas.width,canvas.height); curlProgress=0; commit(dir); }
   }
+  curlRaf = requestAnimationFrame(anim);
+}
 
-  function goToSection(sectionIdx) {
-    closeMenu();
-    if (sectionIdx === currentSection && currentPage === 0) return;
+// ══════════════════════════════════════════
+// SECTION JUMP
+// ══════════════════════════════════════════
+function goToSection(idx) {
+  closeMenu();
+  if (idx === secIdx && pgIdx === 0) return;
+  const flash = document.getElementById('sec-flash');
+  document.getElementById('sf-icon').textContent  = BOOK_DATA[idx].icon;
+  document.getElementById('sf-title').textContent = BOOK_DATA[idx].title;
+  flash.classList.add('on');
+  setTimeout(() => {
+    flash.classList.remove('on');
+    secIdx = idx; pgIdx = 0; pages = sectionPages[idx];
+    renderPage();
+  }, 550);
+}
 
-    const direction = sectionIdx > currentSection ||
-      (sectionIdx === currentSection && currentPage > 0) ? 'forward' : 'back';
+// Progress bar
+function handleProg(e) {
+  const r = e.currentTarget.getBoundingClientRect();
+  const pct = (e.clientX - r.left) / r.width;
+  const target = Math.floor(pct * totalPages());
+  let s = BOOK_DATA.length - 1;
+  for (let i = 0; i < BOOK_DATA.length; i++) { if (secPageOffset[i] > target) { s = i-1; break; } }
+  s = Math.max(0, s);
+  const p = Math.max(0, target - secPageOffset[s]);
+  secIdx = s; pages = sectionPages[s]; pgIdx = Math.min(p, pages.length-1);
+  renderPage();
+}
 
-    showSectionTransition(sectionIdx, () => {
-      currentSection = sectionIdx;
-      currentPage = 0;
-      isAnimating = true;
-      renderCurrentPage(direction);
-    });
-  }
+// ══════════════════════════════════════════
+// UI UPDATE
+// ══════════════════════════════════════════
+function updateUI() {
+  document.getElementById('tb-title').textContent  = BOOK_DATA[secIdx].title;
+  document.getElementById('tb-pages').textContent  = `${pgIdx+1}/${pages.length}`;
+  const gp = globalNum()-1, tp = totalPages();
+  document.getElementById('prog-fill').style.width = ((gp+1)/tp*100).toFixed(1)+'%';
+  document.getElementById('prog-lbl').textContent  = `Página ${gp+1} de ${tp}`;
+  document.getElementById('prev-btn').disabled = !canPrev();
+  document.getElementById('next-btn').disabled = !canNext();
+  document.querySelectorAll('.sm-item').forEach((el,i) => el.classList.toggle('active', i===secIdx));
+}
 
-  function showSectionTransition(idx, callback) {
-    const el = document.getElementById('section-transition');
-    document.getElementById('st-icon').textContent = BOOK_DATA[idx].icon;
-    document.getElementById('st-title').textContent = BOOK_DATA[idx].title;
-    el.classList.add('show');
-    setTimeout(() => {
-      el.classList.remove('show');
-      setTimeout(callback, 400);
-    }, 600);
-  }
-
-  // =====================
-  // UPDATE UI
-  // =====================
-  function updateUI() {
-    const section = BOOK_DATA[currentSection];
-    const globalPage = getCurrentGlobalPage();
-    const totalPages = allPages.length;
-
-    document.getElementById('topbar-title').textContent = section.title;
-    document.getElementById('page-counter').textContent =
-      `${currentPage + 1}/${section.pages.length}`;
-
-    const progress = ((globalPage + 1) / totalPages * 100).toFixed(1);
-    document.getElementById('progress-fill').style.width = progress + '%';
-    document.getElementById('progress-text').textContent =
-      `Página ${globalPage + 1} de ${totalPages}`;
-
-    // Prev/next buttons
-    const isFirst = currentSection === 0 && currentPage === 0;
-    const isLast = currentSection === BOOK_DATA.length - 1 &&
-      currentPage === BOOK_DATA[currentSection].pages.length - 1;
-
-    document.getElementById('prev-btn').disabled = isFirst;
-    document.getElementById('next-btn').disabled = isLast;
-
-    // Menu active state
-    document.querySelectorAll('.menu-item').forEach((el, i) => {
-      el.classList.toggle('active', i === currentSection);
-    });
-  }
-
-  function handleProgressClick(e) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const pct = (e.clientX - rect.left) / rect.width;
-    const targetIdx = Math.floor(pct * allPages.length);
-    const target = allPages[Math.min(targetIdx, allPages.length - 1)];
-    const dir = target.section > currentSection ||
-      (target.section === currentSection && target.page > currentPage) ? 'forward' : 'back';
-
-    currentSection = target.section;
-    currentPage = target.page;
-    isAnimating = true;
-    renderCurrentPage(dir);
-  }
-
-  // =====================
-  // MENU
-  // =====================
-  function buildMenu() {
-    const container = document.getElementById('menu-items');
-    BOOK_DATA.forEach((section, i) => {
-      const el = document.createElement('div');
-      el.className = 'menu-item';
-      el.innerHTML = `
-        <div class="menu-item-icon">${section.icon}</div>
-        <div class="menu-item-text">
-          <div class="menu-item-title">${section.title}</div>
-          <div class="menu-item-pages">${section.pages.length} página${section.pages.length !== 1 ? 's' : ''}</div>
-        </div>
-      `;
-      el.addEventListener('click', () => goToSection(i));
-      container.appendChild(el);
-    });
-  }
-
-  function toggleMenu() {
-    menuOpen = !menuOpen;
-    document.getElementById('sidemenu').classList.toggle('open', menuOpen);
-    document.getElementById('overlay').classList.toggle('visible', menuOpen);
-    document.getElementById('menu-btn').classList.toggle('open', menuOpen);
-  }
-
-  function closeMenu() {
-    menuOpen = false;
-    document.getElementById('sidemenu').classList.remove('open');
-    document.getElementById('overlay').classList.remove('visible');
-    document.getElementById('menu-btn').classList.remove('open');
-  }
-
-  // =====================
-  // SWIPE
-  // =====================
-  let touchStartX = 0, touchStartY = 0;
-  let touchEndX = 0;
-
-  document.getElementById('book-area').addEventListener('touchstart', e => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  document.getElementById('book-area').addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].clientX;
-    const dx = touchEndX - touchStartX;
-    const dy = e.changedTouches[0].clientY - touchStartY;
-
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-      if (dx < 0) goToNext();
-      else goToPrev();
-    }
-  }, { passive: true });
-
-  // =====================
-  // COVER / OPEN APP
-  // =====================
-  function openApp() {
-    document.getElementById('cover').classList.add('hidden');
-    setTimeout(() => {
-      document.getElementById('cover').style.display = 'none';
-      document.getElementById('app').classList.add('visible');
-    }, 800);
-
-    // Show swipe hint once
-    if (!localStorage.getItem('swipeHintShown')) {
-      setTimeout(() => {
-        const hint = document.createElement('div');
-        hint.className = 'swipe-hint';
-        hint.textContent = '← Desliza para cambiar página →';
-        document.getElementById('book-area').appendChild(hint);
-        setTimeout(() => hint.remove(), 3500);
-      }, 1500);
-      localStorage.setItem('swipeHintShown', '1');
-    }
-  }
-
-  // =====================
-  // PWA
-  // =====================
-  window.addEventListener('beforeinstallprompt', e => {
-    e.preventDefault();
-    deferredPrompt = e;
-    setTimeout(() => {
-      document.getElementById('install-prompt').style.display = 'block';
-    }, 5000);
+// ══════════════════════════════════════════
+// MENU
+// ══════════════════════════════════════════
+let menuOpen = false;
+function buildMenu() {
+  const list = document.getElementById('sm-list');
+  BOOK_DATA.forEach((sec, i) => {
+    const el = document.createElement('div');
+    el.className = 'sm-item';
+    el.innerHTML = `<div class="sm-icon">${sec.icon}</div><div><div class="sm-lbl">${sec.title}</div><div class="sm-pg">${sectionPages[i].length} páginas</div></div>`;
+    el.addEventListener('click', () => goToSection(i));
+    list.appendChild(el);
   });
+}
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById('sidemenu').classList.toggle('on', menuOpen);
+  document.getElementById('overlay').classList.toggle('on', menuOpen);
+  document.getElementById('menu-btn').classList.toggle('open', menuOpen);
+}
+function closeMenu() {
+  menuOpen = false;
+  document.getElementById('sidemenu').classList.remove('on');
+  document.getElementById('overlay').classList.remove('on');
+  document.getElementById('menu-btn').classList.remove('open');
+}
 
-  function installApp() {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(() => {
-        deferredPrompt = null;
-        document.getElementById('install-prompt').style.display = 'none';
-      });
-    }
-  }
+// ══════════════════════════════════════════
+// KEYBOARD
+// ══════════════════════════════════════════
+document.addEventListener('keydown', e => {
+  if (e.key==='ArrowRight'||e.key==='ArrowDown') navNext();
+  else if (e.key==='ArrowLeft'||e.key==='ArrowUp') navPrev();
+  else if (e.key==='Escape') closeMenu();
+});
 
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js').catch(() => {});
-    });
-  }
+// ══════════════════════════════════════════
+// COVER OPEN
+// ══════════════════════════════════════════
+function openApp() {
+  document.getElementById('cover').classList.add('out');
+  setTimeout(() => {
+    document.getElementById('cover').style.display = 'none';
+    document.getElementById('app').classList.add('on');
+    initBook();
+  }, 800);
+}
 
-  // =====================
-  // KEYBOARD
-  // =====================
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goToNext();
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goToPrev();
-    if (e.key === 'Escape') closeMenu();
-  });
-
-  // =====================
-  // INIT
-  // =====================
+// ══════════════════════════════════════════
+// INIT BOOK
+// ══════════════════════════════════════════
+function initBook() {
+  resizeCanvas();
+  // Paginate all sections (measured against actual DOM size)
+  sectionPages = BOOK_DATA.map(sec => paginate(sec));
+  // Compute global page offsets
+  secPageOffset = []; let off = 0;
+  sectionPages.forEach(sp => { secPageOffset.push(off); off += sp.length; });
+  allPageCount = off;
+  pages = sectionPages[0];
   buildMenu();
-  renderCurrentPage();
+  renderPage();
+}
+
+// ══════════════════════════════════════════
+// RESIZE HANDLER
+// ══════════════════════════════════════════
+let resizeTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (!document.getElementById('app').classList.contains('on')) return;
+    mv = null;
+    resizeCanvas();
+    sectionPages = BOOK_DATA.map(sec => paginate(sec));
+    secPageOffset = []; let off = 0;
+    sectionPages.forEach(sp => { secPageOffset.push(off); off += sp.length; });
+    allPageCount = off;
+    pages = sectionPages[secIdx];
+    pgIdx = Math.min(pgIdx, pages.length-1);
+    renderPage();
+  }, 250);
+});
+
+// ══════════════════════════════════════════
+// PWA
+// ══════════════════════════════════════════
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault(); deferredPrompt = e;
+  setTimeout(() => { document.getElementById('install-prompt').style.display='block'; }, 6000);
+});
+function installApp() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(() => { deferredPrompt=null; document.getElementById('install-prompt').style.display='none'; });
+}
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
 </script>
 </body>
 </html>
