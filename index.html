@@ -111,20 +111,29 @@ html,body{ height:100%; overflow:hidden; background:#0d0a05;
   display:flex; align-items:center; justify-content:center }
 #bw{ position:relative; width:100%; height:100%; }
 
-/* The page element */
-.pg{ position:absolute; inset:0;
+/* The page element - flex column, explicit size set by JS */
+.pg{ position:absolute; display:flex; flex-direction:column;
   background:linear-gradient(158deg,#F9EFD4 0%,#F3E6C6 42%,#EBDAAE 100%);
   box-shadow:4px 0 18px rgba(0,0,0,.5),-1px 0 4px rgba(0,0,0,.15); overflow:hidden }
 /* Spine shadow left edge */
 .pg::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:16px;
   background:linear-gradient(90deg,rgba(0,0,0,.09),transparent); pointer-events:none; z-index:1 }
 
-/* Content area — absolutely positioned to fill page minus footer */
-.pgc{ position:absolute; top:0; left:0; right:0; bottom:36px;
-  padding:16px 18px 8px 22px; overflow:hidden }
+/* Page uses flex column so content+footer fill the whole page */
+.pg{ display:flex !important; flex-direction:column; }
 
-/* Footer with page number */
-.pgf{ position:absolute; bottom:0; left:0; right:0; height:36px;
+/* Content area: grows to fill space above footer, centers content vertically */
+.pgc{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;   /* equal top/bottom margin automatically */
+  padding:0 18px 0 22px;
+  overflow:hidden;
+}
+
+/* Footer */
+.pgf{ flex-shrink:0; height:36px;
   display:flex; align-items:center; justify-content:center; gap:8px;
   border-top:1px solid rgba(139,100,60,.12) }
 .pfr{ flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(139,100,60,.16),transparent) }
@@ -165,9 +174,10 @@ html,body{ height:100%; overflow:hidden; background:#0d0a05;
 /* Scripture ref */
 .rf{ font-size:.82em; color:rgba(100,70,30,.48); font-style:italic }
 
-/* The invisible probe for measuring — lives inside #bw so it inherits dimensions */
-#probe{ position:absolute; visibility:hidden; top:0; left:0; pointer-events:none; z-index:-1;
-  bottom:36px; padding:16px 18px 8px 22px; overflow:hidden }
+/* Probe: same width and padding as .pgc, height = page minus footer */
+#probe{ position:absolute; visibility:hidden; top:0; left:0; right:0;
+  pointer-events:none; z-index:-1;
+  padding:0 18px 0 22px; overflow:hidden }
 
 /* Curl canvas */
 #cc{ position:absolute; inset:0; z-index:20; pointer-events:none }
@@ -335,9 +345,14 @@ function paginateSection(secData, secI){
   const probe=document.getElementById('probe');
   const bw=document.getElementById('bw');
 
-  // Available height = bw height - footer (36px) - padding top(16) - padding bottom(8)
-  // probe already has correct padding via CSS. We just check scrollHeight vs clientHeight
-  const availH = bw.clientHeight - 36; // probe height is set to (bw.height - 36px) via CSS
+  // Page height minus: footer(36) + minimum margin top+bottom (24px each = 48px total)
+  // This ensures the centered content always has breathing room on both sides
+  const MIN_MARGIN = 24; // px, applied top AND bottom
+  const FOOTER = 36;
+  const availH = bw.clientHeight - FOOTER - (MIN_MARGIN * 2);
+
+  // Set probe height to availH so scrollHeight overflow is correctly detected
+  probe.style.height = availH + 'px';
 
   // Build section header HTML
   const hdrHTML=`<div class="sh">
@@ -440,6 +455,7 @@ function makePg(secI, pgI){
   const gn=secOff[secI]+pgI+1;
   const el=document.createElement('div');
   el.className='pg';
+  el.style.cssText=`width:${W}px;height:${H}px`;
   el.innerHTML=`<div class="pgc ct">${html}</div>
     <div class="pgf"><div class="pfr"></div><div class="pfn">— ${gn} —</div><div class="pfr"></div></div>`;
   return el;
